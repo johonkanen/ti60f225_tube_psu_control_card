@@ -1,0 +1,542 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Print Checklist and Guidelines</title><link href="Print%20Checklist%20and%20Guidelines_files/bootstrap_8J_7.css" rel="stylesheet"><link rel="stylesheet" type="text/css" href="Print%20Checklist%20and%20Guidelines_files/efx-styles-print_8J_7.css"></head><body><div id="guide"><img src="Print%20Checklist%20and%20Guidelines_files/efinix-logo_8J_7.svg" alt="Efinix Logo" width="150px"><h1>Hardware Design Checklist and Guidelines: <br>Ti60 F225 FPGA, SPI Active Parallel (x4) Configuration</h1>
+<a name="power"></a><div id="ck_Power"><h2 class="checklist">Power Pin Checklist</h2><table class="table-striped body-table"><tbody><tr><th>Check</th><th>Pin Name</th><th>Package Pins</th><th>Description</th></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>My system uses the recommended number of decoupling capacitors. <a href="#pwr_decoup">See guideline</a>.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>I have used the power estimator to ensure that the system power requirements are met.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>My system follows the power-up sequence. <a href="#power_up">See guideline.</a>
+</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>My system follows the connection requirements for unused resources and features. <a href="#unused_resources">See guideline</a>.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VCC</td><td width="25%" class="text-center">E13 G7 G9 H6 H8 J7 J9 M3 </td><td>The core power supply voltage is 0.95 V +/- 30 mV or 0.85 V +/- 30 mV.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VCCAUX</td><td width="25%" class="text-center">D4 E11 L4 M11 </td><td>The auxiliary power supply is 1.8 V +/- 50 mV.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VCCA_xx</td><td width="25%" class="text-center">E5 G10 L10 L5 </td><td><span class="glyphicon glyphicon-unchecked"></span>The PLL analog power supply voltage is 0.95 V +/- 30 mV or 0.85 V +/- 30 mV. 
+
+<br><span class="glyphicon glyphicon-unchecked"></span> The PLL analog power supply has a separate filtering circuit.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VCCIO33</td><td width="25%" class="text-center">B13 B4 N15 P4 </td><td>The HVIO bank power supply is 1.8 V, 2.5 V, 3.0 V, or 3.3 V.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VCCIOxx</td><td width="25%" class="text-center">C11 C7 D2 D6 D9 F14 F4 G12 J11 J4 L14 L2 N11 N5 N7 N9 </td><td><span class="glyphicon glyphicon-unchecked"></span>The HSIO bank power supply to HSIO configured as GPIO is 1.2 V, 1.35 V, 1.5 V, or 1.8 V.
+
+<br><span class="glyphicon glyphicon-unchecked"></span> The HSIO bank power supply to HSIO configured as LVDS is 1.8 V. 
+
+<br><span class="glyphicon glyphicon-unchecked"></span>  The HSIO bank power supply to HSIO configured as MIPI lane is 1.2 V. 
+
+<br><span class="glyphicon glyphicon-unchecked"></span>  The HSIO bank power supply matches the external configuration interfaces.
+
+<br><span class="glyphicon glyphicon-unchecked"></span>  The system does not mix different I/O voltages in the same bank.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VQPS_GND</td><td width="25%" class="text-center">G6 </td><td>VQPS_GND must always stay low unless you are blowing the security fuses. <a href="#fuse_programming_ti60">See guideline.</a></td></tr></tbody></table></div><a name="Power"></a><h2>Power Pin General Guidelines</h2><div id="pwr_decoup" class="line-bottom a_scroll_fix"><a name="pwr_decoup"></a><h3>Recommended Decoupling Capacitors</h3>
+
+<p>When designing your board, Efinix recommends that you place the decoupling capacitors as close as possible to the power pins.</p>
+
+<title>Recommended Decoupling Capacitors</title><table class="table-striped body-table">
+            
+        <tbody><tr>
+            <th>Power Supply</th>
+            <th>100 uF</th>
+            <th>47 uF</th>
+            <th>10 uF</th>
+            <th>4.7 uF</th>
+            <th>1 uF</th>
+            <th>0.1 uF</th>
+            <th>0.01 uF</th>
+            <th>1 nF</th>
+        </tr>
+
+        <tr>
+            <td>VCC</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>5</td>
+            <td>5</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>VCCA (1) (2)</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>VQPS</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>VCCAUX</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>VCCIO (1) (2)</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>VCCIO33 (1) (2)</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+</tbody></table>
+
+<p><b>Notes:</b>
+<br>1. The number of recommended decoupling capacitors for each bank.
+<br>2. For merged banks, multiply the recommended number of decoupling capacitors by the number of merged banks. (e.g., if the merged bank is 4A_4B, there are 2 merged banks; multiply the number of recommended decoupling capacitors by 2.)</p></div><div id="power_up" class="line-bottom a_scroll_fix"><a name="power_up"></a><h3>Power Up Sequence</h3>
+<p class="text-center"><img style="width: 50%;" src="Print%20Checklist%20and%20Guidelines_files/titanium-power-up-ti60_8J_7.svg"></p>
+<ol>
+<li>Power-up VCC and VCCA_xx first.</li>
+
+<li>When VCC and VCCA_xx are stable, power-up all VCCIO and VCCAUX. There is no specific timing delay between the VCCIO pins<div class="note important note_important" id="concept_onc_4nq_k5b__d31e127"><span class="note__title">Important:</span> Ensure the power ramp rate is within <span class="ph">VCCIO/10 V/ms</span> to <span class="ph">10 V/ms</span>.</div></li>
+
+<li>After all power supplies are stable, hold CRESET_N low for a duration of tCRESET_N before asserting CRESET_N from low to high to trigger active SPI programming (the FPGA loads the configuration data from an external flash device).</li>
+</ol></div><div id="creset_n" class="line-bottom a_scroll_fix"><a name="creset_n"></a><h3>Holding CRESET_N Low</h3>
+<p>Use one of the following methods to hold the <code>CRESET_N</code> pin of the FPGA low after the power supplies are stable:</p>
+
+<ul>
+<li>Supervisor integrated circuit (IC)</li>
+<li>Microprocessor or microcontroller</li>
+</ul>
+
+<p>Important: Do not drive a signal to any Titanium I/O pins before the Titanium FPGA is powered up. Most FPGAs have electrostatic discharge (ESD) circuits to protect the devices from ESD events. Driving the I/O pins before VCCIO will result in an in-rush current driving the I/O pins to a specific voltage through the ESD circuit to the VCCIO rail. Titanium FPGAs will remain in configuration mode after power-up if this unexpected voltage exists on <code>CRESET_N</code> due to the improper power-up sequence.</p>
+
+<figure class="checklist-img">
+<p><b>Supervisor IC Circuitry Example</b></p>
+<img src="Print%20Checklist%20and%20Guidelines_files/an006-jtagprogram-supervisory_8J_7.png"></figure>
+
+<p>Assuming that the VCCIO1A is the last power supply to be stable in the system, the supervisor IC must hold the <code>CRESET_N</code> pin low for a duration of t<sub>RP</sub> (reset timeout period) after the VCCIO1A reaches the stable threshold.</p>
+
+<p>Ensure that the t<sub>RP</sub> of the selected supervisor IC is more than the required t<sub>CRESET_N</sub>. Refer to the supervisor IC vendor for the recommended operating circuitry.</p>
+
+<p>Note: The user trigger (push-button, FTDI cable or module) must be connected to the MR pin of the supervisor IC.</p>
+
+<figure class="checklist-img">
+<p><b>Microprocessor or Microcontroller Circuitry Example</b></p>
+<img src="Print%20Checklist%20and%20Guidelines_files/an006-jtagprogram-microp_8J_7.png"></figure>
+	
+<p>The microprocessor or microcontroller must hold the <code>CRESET_N</code> pin low more than the required t<sub>CRESET_N</sub> duration.</p></div><div id="fuse_programming_ti60" class="line-bottom a_scroll_fix"><a name="fuse_programming_ti60"></a><h3>Fuse Programming Requirements</h3>
+
+<p class="titanium-only"><b>Note:</b> These requirements apply to F100S3F2 and F225 packages with the letter <b>S</b> in the lot
+                        number.<br>F100S3F2 and F225 packages that <b>do not</b>
+                    have the letter <b>S</b> in the lot number do not have these
+                    requirements.</p>
+
+<p>To program the security fuses, follow these requirements:</p>
+<ul>
+<li>During fuse programming, avoid device configuration and other JTAG
+                        operations which are not related to fuse programming.</li>
+                    <li>Ramp up <code>VQPS</code> only after all the other power pins have ramped to their nominal
+                        voltages.</li>
+                    <li>After powering up <code>VQPS</code>, wait for a minimum of 10 ms before issuing JTAG
+                        instructions for fuse programming.</li>
+                    <li>Upon completion of the fuse programming through JTAG, wait for a minimum of
+                        10 ms before powering down <code>VQPS</code>.</li>
+                    <li> If required, other power supplies can be powered down only after <code>VQPS</code> has
+                        been powered down below 25% of its nominal voltage level.</li>
+</ul>
+
+<figure class="checklist-img"><img style="width: 50%;" src="Print%20Checklist%20and%20Guidelines_files/user-fuse-program-wave-ti_8J_7.svg"></figure>
+
+<p>Your circuit board should include an external circuit to control the VQPS power supply. Refer to <a href="https://www.efinixinc.com/support/docsdl.php?s=ef&amp;pn=AN057">AN 057: Controlling VQPS with the Efinity SVF Player</a> for details.</p> </div><div id="" class="line-bottom a_scroll_fix"><a name=""></a><h3>Recommended Energy Storage Capacitor</h3>
+
+<p>You should place at least one 47 uF capacitor at the output of each power regulator as energy storage.</p></div><div id="" class="line-bottom a_scroll_fix"><a name=""></a><h3>Recommended Filtering Circuit</h3>
+
+<ul>
+<li> π filter (C-L-C) or τ filter (L-C) of an inductor or a magnetic bead is required for every power outlet.</li>
+<li>The nominal current should be at least 30% higher than the current of a particular power trail.</li>
+<li>VCCA pins must have separate filtering circuits.</li>
+<li>Efinix recommends that VCC pins have separate filtering circuits.
+</li></ul>
+</div><div id="unused_resources" class="line-bottom a_scroll_fix"><a name="unused_resources"></a><h3>Unused Resources and Features</h3>
+
+<p>For unused resources and features, follow these connection requirements:</p>
+
+<table class="table-striped body-table">
+<thead>
+<tr>
+<th>Unused Resource/Feature</th>
+<th>Pin</th>
+<th>Note</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>PLL</td>
+<td>VCCA_xx</td>
+<td>Connect to VCC.</td>
+</tr>
+
+<tr>
+<td>HSIO Bank</td>
+<td>VCCIO_xx</td>
+<td>Connect to either 1.2 V, 1.5 V, or 1.8 V.</td>
+</tr>
+
+<tr>
+<td>HVIO Bank</td>
+<td>VCCIO33_xx</td>
+<td>Connect to either 1.8 V, 2.5 V, 3.0 V, or 3.3 V.</td>
+</tr>
+</tbody>
+</table></div><div id="power_down_ti60" class="line-bottom a_scroll_fix"><a name="power_down_ti60"></a><h3>Power Down Sequence</h3>
+<p><b>Important:</b> You must follow the following power-down sequence when powering Titanium FPGAs.</p>
+
+<p>There is no specific power-down sequence. However, the <code>VQPS</code> power supply must follow the <a href="#fuse_programming_ti60">Fuse Programming Requirements</a>.</p></div><a name="configuration"></a><div id="ck_Configuration"><h2 class="checklist">Configuration Pin Checklist</h2><table class="table-striped body-table"><tbody><tr><th>Check</th><th>Pin Name</th><th>Package Pins</th><th>Description</th></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>The system follows the guidelines for the SPI flash capacity. <a href="#flash_cap_ti60">See guideline</a>.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>If using internal reconfiguration, the system follows the recommended guidelines. <a href="#internal_reconfig">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CBSEL[1:0]</td><td width="25%" class="text-center">E3 F3 </td><td>The system follows the guidelines for CBSEL. <a href="#cbsel">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CCK</td><td width="25%" class="text-center">N1 </td><td>Connect according to the configuration mode.   <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CDI[n:0]</td><td width="25%" class="text-center">H4 H5 J10 J12 J13 K10 K11 K12 K13 K15 K8 K9 L1 L13 L15 L7 M1 M10 M14 M15 M6 M7 N10 N6 P10 P7 P9 R10 R11 R12 R7 R9 </td><td>Connect according to the configuration mode.  <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CDONE</td><td width="25%" class="text-center">L3 </td><td>The system does not hold CDONE low (if held low, the FPGA does not enter user mode). <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CRESET_N</td><td width="25%" class="text-center">J5 </td><td>The system pulses CRESET_N low for a minimum pulse width of 320 ns (t<sub>CRESET_N</sub>) during power up or reconfiguration. <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a> </td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CSI</td><td width="25%" class="text-center">N2 </td><td>Connect according to the configuration mode.   <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">EXT_CONFIG_CLK</td><td width="25%" class="text-center">J2 </td><td>In active mode, EXT_CONFIG_CLK is connected from an external clock, to be used as a configuration clock.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">NSTATUS</td><td width="25%" class="text-center">E1 </td><td>(Optional) Connect NSTATUS to an LED to indicate configuration completes without errors. <a href="#nstatus">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">SSL_N</td><td width="25%" class="text-center">P1 </td><td>Connect according to the configuration mode.  <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">SSU_N</td><td width="25%" class="text-center">L6 </td><td>Active-low chip select to the upper flash device in active x8 configuration mode (dual quad mode). Connect to weak pull-up resistors. <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">TCK</td><td width="25%" class="text-center">N4 </td><td>Pull up to VCCIO with a 10 KΩ resistor.  <a href="#jtag_circuit">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">TDI</td><td width="25%" class="text-center">P3 </td><td>Pull up to VCCIO with a 10 KOhm resistor.  <a href="#jtag_circuit">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">TDO</td><td width="25%" class="text-center">M4 </td><td>Pull up to VCCIO with a 10 KOhm resistor.  <a href="#jtag_circuit">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">TEST_N</td><td width="25%" class="text-center">E2 </td><td>Pull up to VCCIO with a 10 KOhm resistor. <a href="#config_circuit">See SPI Active Parallel (x4) guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">TMS</td><td width="25%" class="text-center">N3 </td><td>Pull up to VCCIO with a 10 KOhm resistor.  <a href="#jtag_circuit">See guideline.</a></td></tr></tbody></table></div><a name="Configuration"></a><h2>Configuration Pin General Guidelines</h2><div id="flash_cap_ti60" class="line-bottom a_scroll_fix"><a name="flash_cap_ti60"></a><h3>Selecting the Right SPI Flash Device</h3>
+<p>Titanium FPGAs support an SPI flash memory interface for active mode configuration. Use these guidelines to help choose the correct flash device for your Titanium FPGA.&nbsp;</p>
+<ul>
+<li><strong> Configuration Bits</strong>—Ensure that your chosen flash device has enough bits to store the configuration bitstream.<br>— Single image—13,960,000 bits (maximum single image&nbsp;bits)<br>— Multiple images—Multiply 13,960,000 bits (maximum single image&nbsp;bits) with the number of images to determine the total bits required to store the full bitstream.<br>— Daisy chain—Use the formula (i x b) + (2048 x (i - 1)) where i is the number of images and b is the configuration bits for each image. For example, a daisy chain of three FPGAs uses (3 x 13,960,000) + (2,048 x (3 - 1)) = 41,884,096 bits.</li>
+<li><strong>Configuration Bus Width</strong>—Determine the supported configuration bus width for the SPI flash device in the following table.
+<table class="table-striped body-table">
+<thead>
+<tr>
+<th>Configuration Mode</th>
+<th>Width</th>
+<th>Availablity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="4">Active</td>
+<td>X1</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>X2</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>X4</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>X8</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul>
+<li><strong>SPI Clock Frequency</strong>—Ensure that your SPI flash device supports a clock frequency that is higher than the SPI active configuration clock frequency as described in the following table.
+<table class="table-striped body-table">
+<thead>
+<tr>
+<th>Clock Source</th>
+<th>Divider</th>
+<th>Frequency (MHz) (Typical)</th>
+<th>Sample On (Default)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Internal Oscillator</td>
+<td>DIV8</td>
+<td>10</td>
+<td>Positive edge</td>
+</tr>
+<tr>
+<td>Internal Oscillator</td>
+<td>DIV4</td>
+<td>20</td>
+<td>Positive edge</td>
+</tr>
+<tr>
+<td>Internal Oscillator</td>
+<td>DIV2</td>
+<td>40</td>
+<td>Negative edge</td>
+</tr>
+<tr>
+<td>Internal Oscillator</td>
+<td>DIV1</td>
+<td>80</td>
+<td>Negative edge</td>
+</tr>
+<tr>
+<td rowspan="2">External Clock</td>
+<td rowspan="2">-</td>
+<td>&lt;40</td>
+<td>Positive edge</td>
+</tr>
+<tr>
+<td>40 - 125</td>
+<td>Negative edge</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul>
+<li><strong>Required Voltage</strong>—Make sure the voltage your SPI flash device requires is the same as the FPGA I/O bank voltage.</li>
+<li><strong>Temperature Range</strong>—Check that the SPI flash device's temperature range is compatible with the operating temperature as described in the FPGA data sheet.</li>
+</ul></div><div id="internal_reconfig" class="line-bottom a_scroll_fix"><a name="internal_reconfig"></a><h3>Internal Reconfiguration</h3>
+
+<p><code>SSL_N</code> and <code>TEST_N</code> are dual-purpose configuration pins that can be used for internal reconfiguration. When internal reconfiguration is triggered, all GPIOs that are configured as outputs are driven high or low depending on the design. The rising time and falling time of the external network must fall within 800 ns to ensure that the configuration pins are stable and the reconfiguration is successful. </p>
+<p>For more information about this feature, refer to <a href="https://www.efinixinc.com/support/docsdl.php?s=ef&amp;pn=AN010">AN 010: Using the Internal Reconfiguration Feature to Remotely Update Trion and Titanium FPGAs</a></p></div><div id="cbsel" class="line-bottom a_scroll_fix"><a name="cbsel"></a><h3>Guideline for Multi-Image Select Pins</h3>
+
+<p><code>CBSEL[1:0]</code> are optional multi-image selection input pins that are used with multi-image configuration mode.
+
+<br>If you <b>are</b> using multi-image configuration, connect <code>CBSEL</code> for the image you want to use. 
+</p>
+<ul>
+<li>Set <code>CBSEL[1:0</code>] to 00 for image 1</li>
+<li>Set<code> CBSEL[1:0]</code> to 01 for image 2</li>
+<li>Set <code>CBSEL[1:0]</code> to 10 for image 3</li>
+<li>Set<code> CBSEL[1:0]</code> to 11 for image 4</li>
+</ul>
+
+<p>The <code>CBSEL[1:0]</code> pins do not require any weak pull-up or pull-down resistors if you are <b>not</b> using multi-image configuration.</p></div><div id="cdone" class="line-bottom a_scroll_fix"><a name="cdone"></a><h3>CDONE</h3>
+
+<p><code>CDONE</code> is an open drain output; connect it to an external pull-up resistor to VCCIO. When <code>CDONE</code> = 1, configuration is complete. If you hold <code>CDONE</code> low, the device will not enter user mode.</p>
+
+<p>(Optional) Connect <code>CDONE</code> to an LED to indicate when configuration is complete.</p>
+
+<figure class="checklist-img"><img src="Print%20Checklist%20and%20Guidelines_files/config-cdone_8J_7.png"></figure>
+
+<p>(Optional) Monitor <code>CDONE</code> with a microcontroller or microprocessor.</p>
+
+<figure class="checklist-img"><img src="Print%20Checklist%20and%20Guidelines_files/config-cdone-mcu_8J_7.png"></figure></div><div id="nstatus" class="line-bottom a_scroll_fix"><a name="nstatus"></a><h3>NSTATUS</h3>
+
+<p>(Optional) Connect <code>NSTATUS</code> to an LED to indicate configuration completes without errors:</p>
+
+<figure class="checklist-img"><img src="Print%20Checklist%20and%20Guidelines_files/config-testn-15_8J_7.svg"></figure></div><div id="testn" class="line-bottom a_scroll_fix"><a name="testn"></a><h3>TEST_N Guidelines</h3>
+
+<p>During configuration, rely on the external weak pull-up or drive this pin high.
+
+</p><figure class="checklist-img"><img src="Print%20Checklist%20and%20Guidelines_files/config-testn-42_8J_7.svg"></figure></div><a name="config_circuit"></a><div id="config_circuit" class="line-bottom a_scroll_fix"><figure class="checklist-img"><h3>SPI Active Parallel (x4) Configuration Pin Circuitry</h3><img src="Print%20Checklist%20and%20Guidelines_files/ti-tz-spi-active-config-x4_8J_7.svg"></figure>        <section class="section" id="concept_pull-up-resistors__section_xtl_czt_rsb">
+            <p class="p">Efinix recommends that you use 10 kΩ for all unspecified pull-up
+                and pull-down resistors in configuration circuitries. However, because of different
+                board setups and environment noises, the configuration may fail when using 10 kΩ
+                resistors. You can decrease the resistor values to improve signal integrity.
+                Typically, you can also use 1 kΩ resistors.</p>
+            <p class="p">Alternatively, you can calculate your own pull-up or pull-down resistance,
+                    R<sub class="ph sub">USER</sub>, shown in the following sections.</p>
+            <p class="note notice note_notice" id="concept_pull-up-resistors__note_zj5_nyt_rsb"><span class="note__title">Notice:</span> The internal weak pull-up resistance, internal
+                weak pull-down resistance, and Schmitt Trigger thresholds values used in the
+                following formulas are included in the FPGA data sheets
+                in the <a class="xref" href="https://www.efinixinc.com/support/docs.php" target="_blank" rel="external noopener">Support Center</a>.</p>
+        </section>
+        <section class="section" id="concept_pull-up-resistors__section_gcp_slh_xsb"><h3>User-Defined Pull-Up Resistor Values</h3>
+            
+            <p class="p"><em class="ph i">R<sub class="ph sub">USER</sub> = (R<sub class="ph sub">CPU</sub> * R<sub class="ph sub">IPU</sub>) / (R<sub class="ph sub">IPU</sub> -
+                        R<sub class="ph sub">CPU</sub>)</em></p>
+            <p class="p">where:</p><ul class="ul" id="concept_pull-up-resistors__ul_dmj_4xt_rsb">
+                    <li class="li">R<sub class="ph sub">USER</sub> = User-defined pull-up resistance</li>
+                    <li class="li">R<sub class="ph sub">CPU</sub> = Combined pull-up resistance</li>
+                    <li class="li">R<sub class="ph sub">IPU</sub> = Internal weak pull-up resistance</li>
+                </ul><p></p>
+            <p class="p">The combined pull-up resistance, R<sub class="ph sub">CPU</sub>, can be derived using the following
+                formula:</p>
+            <p class="p"><em class="ph i">VT+ ≤ VCCIO * (R<sub class="ph sub">IPD</sub> / (R<sub class="ph sub">CPU</sub> + R<sub class="ph sub">IPD</sub>))</em></p>
+            <p class="p">where:</p><ul class="ul" id="concept_pull-up-resistors__ul_p4q_dyt_rsb">
+                    <li class="li">VT+ = Schmitt Trigger low-to-high threshold</li>
+                    <li class="li">VCCIO = I/O bank power supply</li>
+                    <li class="li">R<sub class="ph sub">IPD</sub> = Internal weak pull-down resistance</li>
+                </ul><p></p>
+        </section>
+        <section class="section" id="concept_pull-up-resistors__section_cc5_tlh_xsb"><h3>User-Defined Pull-Down Resistor Values</h3>
+            
+            <p class="p"><em class="ph i">R<sub class="ph sub">USER</sub> = (R<sub class="ph sub">CPD</sub> * R<sub class="ph sub">IPD</sub>) / (R<sub class="ph sub">IPD</sub> -
+                        R<sub class="ph sub">CPD</sub>)</em></p>
+            <p class="p">where:</p><ul class="ul" id="concept_pull-up-resistors__ul_ysl_2mh_xsb">
+                    <li class="li">R<sub class="ph sub">USER</sub> = User-defined pull-down resistance</li>
+                    <li class="li">R<sub class="ph sub">CPD</sub> = Combined pull-down resistance</li>
+                    <li class="li">R<sub class="ph sub">IPD</sub> = Internal weak pull-down resistance</li>
+                </ul><p></p>
+            <p class="p">The combined pull-down resistance, R<sub class="ph sub">CPD</sub>, can be derived using the
+                following formula:</p>
+            <p class="p"><em class="ph i">VT- ≥ VCCIO * (R<sub class="ph sub">CPD</sub> / (R<sub class="ph sub">CPD</sub> + R<sub class="ph sub">IPU</sub>))</em></p>
+            <p class="p">where:</p><ul class="ul" id="concept_pull-up-resistors__ul_il2_dnh_xsb">
+                    <li class="li">VT- = Schmitt Trigger high-to-low threshold</li>
+                    <li class="li">VCCIO = I/O bank power supply</li>
+                    <li class="li">R<sub class="ph sub">IPU</sub> = Internal weak pull-up resistance</li>
+                </ul><p></p>
+        </section>
+
+</div><a name="jtag_circuit"></a><div id="jtag_circuit" class="line-bottom a_scroll_fix"><h3>JTAG Configuration Pin Circuitry</h3><figure><img src="Print%20Checklist%20and%20Guidelines_files/jtag-block-diagram-t120_8J_7.png" class="checklist-img"></figure></div><a name="gpio"></a><div id="gpio_section"><div id="ck_HVIO"><h2 class="checklist">HVIO Pin Checklist</h2><table class="table-striped body-table"><tbody><tr><th>Check</th><th>Pin Name</th><th>Package Pins</th><th>Description</th></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>Efinix recommends that you limit the number of 3.0 or 3.3 V HVIO as I/O or output to 6 per bank to avoid switching noise. The Efinity software issues a warning if you exceed the recommended limit.</td></tr></tbody></table></div><a name="HVIO"></a><h2>HVIO Pin General Guidelines</h2><div id="all" class="line-bottom a_scroll_fix"><a name="all"></a><h3>Unused HVIO Banks (VCCIO)</h3>
+
+<p>If you are not using any of the HVIO pins in a bank, connect the bank's VCCIO33 pins to 1.8 V, 2.5 V, 3.0 V, or 3.3 V.
+The VCCIOxx pins for unused HVIO banks do not require decoupling capacitors.</p>
+
+<h3>Unused HVIO Pins</h3>
+
+<p>Leave unused HVIO pins floating.</p>
+</div></div><a name="hsio"></a><div id="hsio_section"><div id="ck_HSIO"><h2 class="checklist">HSIO Pin Checklist</h2><table class="table-striped body-table"><tbody><tr><th>Check</th><th>Pin Name</th><th>Package Pins</th><th>Description</th></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>The system follows the guidelines for differential traces. <a href="#traces">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>The system follows the guidelines for impedance matching. <a href="#impedance">See guideline.</a>
+
+</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>The system follows the guidelines for avoiding crosstalk. <a href="#crosstalk">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>The system follows the guidelines for HSIO pins used as GPIO. <a href="#hsio_as_gpio">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">CLKn</td><td width="25%" class="text-center">A8 B8 C8 C9 D8 E8 G1 G14 G2 H1 H10 H11 H12 H13 H14 H15 H2 H3 J1 J15 J2 K1 K7 L8 L9 M8 M9 N8 P8 R8 </td><td><span class="glyphicon glyphicon-unchecked"></span> My design uses these global clock network inputs as dedicated clock input pins for input clocks.
+
+<br><span class="glyphicon glyphicon-unchecked"></span> My system uses these global control network input pins for high fanout and global reset.<p></p></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">GPIOT*, GPIOB*, GPIOR*, GPIOL*</td><td width="25%" class="text-center">A10 A11 A12 A13 A14 A2 A3 A4 A5 A6 A7 A8 A9 B1 B10 B11 B12 B14 B2 B3 B5 B6 B7 B8 B9 C1 C10 C12 C13 C14 C15 C2 C3 C4 C5 C6 C8 C9 D1 D10 D12 D13 D14 D15 D5 D7 D8 E1 E10 E12 E14 E15 E2 E3 E6 E7 E8 E9 F1 F10 F11 F12 F13 F15 F2 F3 F5 F7 F8 F9 G1 G11 G13 G14 G15 G2 G3 G4 G5 H1 H10 H11 H12 H13 H14 H15 H2 H3 H4 H5 J1 J10 J12 J13 J14 J15 J2 J3 K1 K10 K11 K12 K13 K14 K15 K2 K3 K4 K6 K7 K8 K9 L1 L11 L12 L13 L15 L6 L7 L8 L9 M1 M10 M14 M15 M2 M6 M7 M8 M9 N1 N10 N13 N14 N2 N6 N8 P1 P10 P11 P12 P13 P14 P15 P2 P5 P6 P7 P8 P9 R10 R11 R12 R13 R14 R2 R3 R4 R5 R6 R7 R8 R9 </td><td><span class="glyphicon glyphicon-unchecked"></span> Titanium FPGAs have a 100 Ohm on-die termination resistor for these pins. Therefore, do not use external termination. 
+
+<br><span class="glyphicon glyphicon-unchecked"></span> When used as GPIO, these HSIO pins follow the guidelines. <a href="#hsio_as_gpio">See guidelines.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">REF_RES</td><td width="25%" class="text-center">B15 D11 E4 F6 K5 M12 M5 N12 </td><td>The system follows the guidelines for REF_RES. <a href="#ref_res_ti60">See guideline.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">VREF</td><td width="25%" class="text-center">C10 E1 E6 G15 H5 K7 L15 L6 </td><td><span class="glyphicon glyphicon-unchecked"></span> When configuring an I/O pad of the standard's input path as a VREF pin, you must use the VREF from the same physical I/O bank even when the I/O banks are merged to share a common VCCIO pin. 
+
+<br><span class="glyphicon glyphicon-unchecked"></span> When using an HSIO with the HSTL or SSTL I/O standards, you must configure an I/O pad
+of the standard's input path as a VREF pin</td></tr></tbody></table></div><a name="HSIO"></a><h2>HSIO Pin General Guidelines</h2><div id="traces" class="line-bottom a_scroll_fix"><a name="traces"></a><h3>Differential Traces</h3>
+
+<p>Follow these design guidelines for HSIO traces:</p>
+
+<ul>	
+<li>The P and N channel in an HSIO pair should be as close to each other as possible, and the distance between the pair's P and N channel should be constant. </li>
+	
+<li>The HSIO TX and RX should be as close as possible to any connectors.</li>
+	
+<li>To minimize skew, the electrical length of traces:</li>
+	<ul>
+		<li>between the differential HSIO P and N channels should be +/- 0.15 mm </li>
+		<li>between one HSIO pair to another HSIO pair should be +/- 1.50 mm</li>
+	</ul>
+	
+<li>Minimize the number of vias on the signal path.</li>
+<li>If there is any parasitic loading (such as capacitance), it should be in equal amounts to each line.</li>
+<li>Traces should be bend &gt;135 degrees to avoid signal loss and jitter.</li>
+	</ul></div><div id="impedance" class="line-bottom a_scroll_fix"><a name="impedance"></a><h3>Impedance Matching</h3> 
+
+<p>The HSIO trace impedance should be:</p>
+<ul>
+<li>HSIO differential: 100 ohms +/- 10%</li>
+<li>HSIO single-ended: 50 ohms +/- 10%</li> 
+</ul></div><div id="crosstalk" class="line-bottom a_scroll_fix"><a name="crosstalk"></a><h3>Avoiding Crosstalk between HSIO and Single-Ended Signals</h3>
+
+<p>Differential HSIO signals must be isolated from single-ended signals; the single-ended signals may cause interference on the differential signals. You can implement the isolation by:</p>
+	
+<ul>
+	<li>Designing the trace for differential HSIO pairs to be at least 12 mm from the trace for single-ended I/O, if both are on the same PCB layer.</li>
+	<li>Isolating the differential HSIO pair signals from the single-ended signals using power or ground planes. </li>
+<li>Minimize stub lengths because they increase reflection noise.</li>
+	</ul>
+</div><div id="hsio_as_gpio" class="line-bottom a_scroll_fix"><a name="hsio_as_gpio"></a><h3>HSIO Used as GPIO</h3>
+
+<p>You can use the HSIO pins as 1.2 V, 1.5 V, or 1.8 V single-ended GPIO pins.</p>
+
+<p>When you are using an HSIO pin as a GPIO, make sure to leave at least 1 pair of unassigned
+HSIO pins between any GPIO and LVDS or MIPI lane pins. This rule applies for pins on each side of the
+device (top, bottom, left, right). This separation reduces noise. The Efinity software issues an error if you do
+not leave this separation.</p>
+
+<p>Separate the I/O placement evenly in a single bank.</p></div><div id="all" class="line-bottom a_scroll_fix"><a name="all"></a><h3>Unused HSIO Banks or Pins</h3>
+
+<p>If you are not using any of the HSIO in a bank, connect the bank's <code>VCCIOxx</code> pins to 1.2 V, 1.5 V, or 1.8 V.</p>
+
+<p>The<code> VCCIOxx</code> pins for unused HSIO banks do not require decoupling capacitors.</p>
+
+<p>Leave unused HSIO pins floating.</p></div><div id="traces" class="line-bottom a_scroll_fix"><a name="traces"></a><h3>Termination</h3>
+
+<p>On-board termination is not required.</p></div><div id="differential_lanes_in_channel_use_same_side" class="line-bottom a_scroll_fix"><a name="differential_lanes_in_channel_use_same_side"></a><h3>Differential Lanes in the Same Channel Should Use GPIOs on the Same Side</h3>
+
+<p>An LVDS differential channel that contains a clock lane and data lanes to the same TX/RX destination must use GPIO pins on same side of the FPGA. </p>
+
+<p>Example: An LVDS channel with a clock lane using GPIO<b>R</b>_PN_xx must use data lanes on the right side (GPIO<b>R</b>_PN_xx).</p>
+
+<figure class="checklist-img"><img src="Print%20Checklist%20and%20Guidelines_files/differential-channels-same-side_8J_7.svg" width="550" justify-content="center"></figure></div><div id="ref_res_ti60" class="line-bottom a_scroll_fix"><a name="ref_res_ti60"></a><h3>REF_RES Pin</h3>
+
+
+<p><code>REF_RES</code> is a reference resistor to generate constant current for the related circuits.</p>
+
+<p>Connect the following <code>REF_RES</code> pins to ground through a 10 kOhm resistor with a tolerance of +/-1%:</p>
+
+<ul>
+<li><code>REF_RES_2A</code> and <code>REF_RES_4A</code> pins must be connected.</li>
+<li><code>REF_RES</code> pin of the particular bank, if pins in the bank are used as LVDS TX or MIPI TX lane.</li>
+<li><code>REF_RES_3A</code> pin, if the internal oscillator is used.</li>
+<li><code>REF_RES_3A</code> pin, if blowing of fuses for FPGA security is required.</li>
+</ul>
+
+<p>You can leave the <code>REF_RES</code> pins floating if none of the above are applicable.</p>
+
+<figure class="checklist-img"><img src="Print%20Checklist%20and%20Guidelines_files/ref_res-ti_8J_7.png"></figure></div></div><a name="mipiln"></a><div id="mipiln_section"><div id="ck_MIPILN"><h2 class="checklist">MIPI Lane Pin Checklist</h2><table class="table-striped body-table"><tbody><tr><th>Check</th><th>Pin Name</th><th>Package Pins</th><th>Description</th></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>Refer to the <a href="https://www.efinixinc.com/support/docsdl.php?s=ef&amp;pn=PCB-MIPI-TI">Titanium MIPI Interface PCB Design User Guide</a> for detailed guidelines. </td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">RX_CLK*</td><td width="25%" class="text-center">A10 A5 A6 B10 C1 C13 D1 D13 D8 E8 G1 H1 H12 H13 K7 L8 M14 M15 M2 M6 N2 N6 P10 R10 </td><td>The system follows the guidelines for MIPI traces. <a href="#mipi_trace_ln">See guidelines.</a></td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">RX_DATA*</td><td width="25%" class="text-center">A11 A2 A7 A8 A9 B1 B11 B2 B6 B7 B8 B9 C10 C14 C15 C2 C6 C8 C9 D10 D14 D15 D5 D7 E1 E10 E12 E14 E15 E2 E3 E6 E7 E9 F1 F10 F11 F12 F13 F15 F2 F3 F5 F7 F8 F9 G11 G13 G14 G15 G2 G3 G4 G5 H10 H11 H14 H15 H2 H3 H4 H5 J1 J10 J12 J13 J14 J15 J2 J3 K1 K10 K11 K12 K13 K14 K15 K2 K3 K4 K6 K8 K9 L1 L11 L12 L13 L15 L6 L7 L9 M1 M10 M7 M8 M9 N1 N10 N8 P1 P11 P12 P2 P5 P6 P7 P8 P9 R11 R12 R2 R5 R6 R7 R8 R9 </td><td><p><span class="glyphicon glyphicon-unchecked"></span> The system follows the guidelines for MIPI traces. <a href="#mipi_trace_ln">See guidelines.</a></p>
+
+<p><span class="glyphicon glyphicon-unchecked"></span> When using HSIO pins as GPIO, make sure to leave at least 1 pair of unassigned HSIO pins between any GPIO and HSIO used as MIPI lanes. This rule applies for pins on each side of the device (top, bottom, left, right). This separation reduces noise. The Efinity software issues an error if you do not leave this separation. </p></td></tr></tbody></table></div><a name="MIPI Lane"></a><h2>MIPI Lane Pin General Guidelines</h2><div id="mipi_trace_ln" class="line-bottom a_scroll_fix"><a name="mipi_trace_ln"></a><h3>MIPI Traces</h3>
+
+<p>To reduce signal reflections and impedance changes, route high-speed signals using:</p><ul><li>A minimum number of vias and corners</li><li>The same PCB layer for all the lanes in the same channel</li></ul><p></p>
+
+<p><b>The MIPI trace impedance should be: </b>
+<br>Data differential 100 Ohm +/- 10% 
+<br>Data single-ended 50 Ohm +/- 10% </p>
+
+<p><b>Match routing length for 1.5 Gbps:</b>
+<br>Data P/N pair +/- 0.10 mm
+<br>Clock +/- 1.00 mm</p>
+
+<p><b>Match routing length for 1.0 Gbps:</b>
+<br>Data P/N pair +/- 0.15 mm
+<br>ClocK +/- 1.5 mm</p></div><div id="all" class="line-bottom a_scroll_fix"><a name="all"></a><h3>Unused MIPI Lanes</h3>
+
+<p>You can leave unused MIPI lanes floating.</p></div></div><a name="pll"></a><div id="pll_section"><div id="ck_PLL"><h2 class="checklist">PLL Pin Checklist</h2><table class="table-striped body-table"><tbody><tr><th>Check</th><th>Pin Name</th><th>Package Pins</th><th>Description</th></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">All</td><td width="25%" class="text-center">All</td><td>The PLL reference clock must be between 16 and 800 MHz.</td></tr><tr><td width="5%" class="text-center blue"><span class="glyphicon glyphicon-unchecked"></span> </td><td width="10%">PLLINn</td><td width="25%" class="text-center">A11 B2 C14 C5 E6 L11 P11 P2 R13 R5 </td><td>Assign the PLL reference clock port based on the PLL that you are using. <a href="#pll_ti60_f225">See guideline.</a></td></tr></tbody></table></div><a name="PLL"></a><h2>PLL Pin General Guidelines</h2><div id="all" class="line-bottom a_scroll_fix"><a name="all"></a><h3>Unused PLLs</h3>
+
+<p>Always connect a <code>VCCA_PLL</code> pin to VCC regardless of whether you use the PLL or not.</p>
+
+<p>The <code>VCCA_PL</code>L pins for unused PLLs do not require decoupling capacitors.</p></div><div id="pll_ti60_f225" class="line-bottom a_scroll_fix"><a name="pll_ti60_f225"></a><h3>PLL Reference Clocks</h3>
+
+<p>The PLL reference clock port can be driven by single ended I/O pins or a differential pair clock.</p> 
+
+<p><strong>PLL Reference Clock Resource Assignments</strong></p>
+        <table class="body-table">
+                    <tbody><tr>
+                        <th>PLL</th>
+                        <th>REFCLK0</th>
+                        <th>REFCLK1</th>
+<th>REFCLK2</th>
+                        <th>External Feedback I/O</th>
+                    </tr>
+
+                    <tr>
+                        <td>PLL_BL</td>
+                        <td>Single-ended: GPIOL_P_00_PLLIN0<br>Differential: GPIOL_P_00_PLLIN0,
+                                GPIOL_N_00</td>
+                        <td>Single-ended: GPIOB_P_00_PLLIN1<br>Differential: GPIOB_P_00_PLLIN1,
+                                GPIOB_N_00</td>
+                        <td>Unbonded (1)</td>
+                        <td>Single-ended: GPIOB_P_01_EXTFB<br>Differential: GPIOB_P_01_EXTFB,
+                                GPIOB_N_01</td>
+                    </tr>
+                    <tr>
+                        <td>PLL_TL</td>
+                        <td>Single-ended: GPIOL_P_18_PLLIN0<br>Differential: GPIOL_P_18_PLLIN0,
+                                GPIOL_N_18</td>
+                        <td>Single-ended: GPIOT_P_00_PLLIN1<br>Differential: GPIOT_P_00_PLLIN1
+                                GPIOT_N_00</td>
+                        <td>GPIOL_11_PLLIN2</td>
+                        <td>Single-ended: GPIOL_P_17_EXTFB<br>Differential: GPIOL_P_17_EXTFB,
+                                GPIOL_N_17</td>
+                    </tr>
+                    <tr>
+                        <td>PLL_TR</td>
+                        <td>Single-ended: GPIOR_P_19_PLLIN0<br>Differential: GPIOR_P_19_PLLIN0,
+                                GPIOR_N_19</td>
+                        <td>Single-ended: GPIOT_P_17_PLLIN1<br>Differential: GPIOT_P_17_PLLIN1,
+                                GPIOT_N_17</td>
+                        <td>Unbonded (1)</td>
+                        <td>Single-ended: GPIOT_P_16_EXTFB<br>Differential: GPIOT_P_16_EXTFB,
+                                GPIOT_N_16</td>
+                    </tr>
+                    <tr>
+                        <td>PLL_BR</td>
+                        <td>Single-ended: GPIOR_P_00_PLLIN0<br>Differential: GPIOR_P_00_PLLIN0,
+                                GPIOR_N_00_CDI22</td>
+                        <td>Single-ended: GPIOB_P_17_PLLIN1<br>Differential: GPIOB_P_17_PLLIN1,
+                                GPIOB_N_17</td>
+                        <td>GPIOR_29_PLLIN2</td>
+                        <td>Single-ended: GPIOR_P_01_EXTFB<br>Differential: GPIOR_P_01_EXTFB,
+                                GPIOR_N_01_CDI23</td>
+                    </tr>
+        </tbody></table>
+
+<p>1. There is no dedicated pin assigned to
+                                this reference clock.</p></div></div></div></body></html>
