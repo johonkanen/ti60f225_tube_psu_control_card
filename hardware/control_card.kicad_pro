@@ -648,7 +648,7 @@
     "netclass_patterns": [
       {
         "netclass": "PWR_CORE",
-        "pattern": "+0V75"
+        "pattern": "+0V95"
       },
       {
         "netclass": "PWR",
@@ -664,10 +664,6 @@
       },
       {
         "netclass": "PWR",
-        "pattern": "+1V2"
-      },
-      {
-        "netclass": "PWR",
         "pattern": "+3V3A"
       },
       {
@@ -677,14 +673,6 @@
       {
         "netclass": "SW",
         "pattern": "/Power/SW_*"
-      },
-      {
-        "netclass": "SENSE",
-        "pattern": "VCC_SENSE_P"
-      },
-      {
-        "netclass": "SENSE",
-        "pattern": "VCC_SENSE_N"
       }
     ]
   },
