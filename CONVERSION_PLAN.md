@@ -56,22 +56,20 @@ What the card connects at 3.3 V on the Agilex version (63 I/O):
 
 HVIO available: 23. Proposed allocation:
 
+Allocation (decided 2026-10-30):
+
 | Signals | Where | How |
 |---|---|---|
 | HyperRAM (12 used, CK# unused), CLK100M | HSIO, one 1.8 V bank close to the HyperRAM, clock on a PLLIN ball | direct, 1.8 V |
 | ADC SPI (6) | HSIO | **[mod]** ADS7056 **DVDD → +1V8** (DVDD range 1.65–3.6 V, AVDD stays on +3V3A). Frees 6 HVIO; the earlier Ti60 card already did this |
-| 15 PWM / gate-drive / SPI outputs to J1 | HSIO → **2 × SN74AXC8T245** (1.8 V → 3.3 V, DIR fixed A→B) | **[new]**. OE driven so the outputs stay Hi-Z (power board pull-downs hold them low) until the FPGA is configured and the design enables them. 1 channel left for a spare |
+| Mux selects (6) | HSIO | **[mod]** SN74LV4051A → **TMUX1308** (1.8 V-logic selects at a 3.3 V supply, same TSSOP-16 pinout family as the 4051) **[verify]** pin-for-pin match, on-resistance, leakage and charge injection against the ADS7056 front end. JLC 2026-10-30: TMUX1308APWR C39707757 (700), TMUX1308QPWRQ1 C1517403 (536); the DQFN/QFN versions have more stock but need a new footprint |
+| 15 PWM / gate-drive / SPI outputs to J1 | HSIO → **2 × SN74AXC8T245PWR** (1.8 V → 3.3 V, DIR fixed A→B) | **[new]**, TSSOP-24, JLC C882718 (8403 on 2026-10-30; the small UQFN/VQFN versions are out of stock). OE from a **dedicated FPGA HSIO pin** with a pull-up to +1V8 (OE is active low, referenced to VCCA), so the outputs stay Hi-Z during and before configuration and the power board's pull-downs hold them low until the design enables them. 1 channel left for a spare |
 | 3 header inputs (HT_SDATA, CUK_SDATA, RX) | HVIO | direct 3.3 V |
 | TX, GPIO_BYPASS_RLY | HVIO | direct |
-| Mux selects (6) | HVIO | direct, keeps the SN74LV4051A |
 | LEDs (6) | HVIO | direct |
-| J1 spares | the leftover HVIO (23 − 3 − 2 − 6 − 6 = 6) + 1 translator channel | 7 of 13 spares connected; the rest unconnected (or add a third translator, see decisions) |
+| J1 spares (13) | the leftover HVIO (23 − 3 − 2 − 6 = 12) + 1 translator channel | **all 13 spares connected** |
 
-Alternatives, if HVIO gets tight during placement:
-- Replace the SN74LV4051A with a mux that has 1.8 V-logic selects at 3.3 V supply (e.g. TMUX1308): frees 6 HVIO.
-  Needs a check of on-resistance, leakage and charge injection against the ADS7056 front end, and JLC stock.
-- One RGB LED instead of two: frees 3 HVIO.
-- Put the 3 inputs on HSIO through a translator or a resistor divider: frees 3 HVIO but adds parts.
+HVIO is then fully used. If placement needs a free HVIO ball, one RGB LED instead of two frees 3.
 
 Pin placement rules for later (to be checked in Efinity Interface Designer before layout is frozen):
 - HyperRAM in one HSIO bank; RWDS/CK on pins the Efinix HyperRAM controller IP allows **[verify]** in the IP user guide.
@@ -97,30 +95,35 @@ Pin placement rules for later (to be checked in Efinity Interface Designer befor
 | U17 AP61102 +1V2, U18 AP61102 +1V8_HR | **[drop]** | No 1.2 V or separate HyperRAM rail needed; removes two buck cells (~24 parts) |
 | FB1–FB5 ferrite filters (PLLDIG, PLL, ADC, RCORE, OSC) | **[mod]** | → 4 × VCCA filters from VCC (dev board: VCCA_xx_FIL) + the oscillator bead |
 | Forced-PWM EN dividers (R46–R51), PG chain | **[mod]** | Chain becomes 0.95 V → 1.8 V → 3.3 V → CRESET_N release. Sequencing rules **[verify]** in the Ti60 datasheet (power-up sequence section); hold CRESET_N low until all rails are good regardless |
-| U6 TLV75533 +3V3A, ADC chains (4051, OPA365, ADS7056) | **[keep]** | Only ADS7056 DVDD moves to +1V8 |
+| U6 TLV75533 +3V3A, ADC chains (4051, OPA365, ADS7056) | **[keep]** OPA365, ADS7056, LDO; **[mod]** mux | ADS7056 DVDD moves to +1V8; the SN74LV4051A muxes become TMUX1308 with selects on HSIO |
 | J1 2 × 25 header, J2 JTAG 1 × 5 | **[keep]** footprints and positions | J2 is now direct 3.3 V JTAG to the FTDI cable. Efinix programming (and openFPGALoader `spiOverJtag_efinix_ti60f225`) both work over JTAG |
 | RGB LEDs D1/D2 | **[keep]** | on HVIO |
-| — | **[new]** 2 × SN74AXC8T245 + decoupling, OE control | Check JLC stock; the earlier Ti60 card used this part |
+| — | **[new]** 2 × SN74AXC8T245PWR + decoupling, OE from an FPGA pin | JLC C882718; the earlier Ti60 card used this part |
 | Outline, stackup, JLC rules | **[keep]** | 32.5 × 33.8 mm, 6 layers JLC06161H-3313, via-in-pad, `control_card.kicad_dru`. 4 layers may now be possible but is not the plan |
 
 ---
 
 ## 4. Phases
 
-### Phase 0: repository setup (now)
+### Phase 0: repository setup (done 2026-10-30)
 - [x] `git init`, repository name `ti60f225_control_card` (not yet on GitHub; the source's remote is
   `agilex3_control_card`, so the name is free).
 - [x] This plan and `reference/ti60f225_pinout.csv`.
-- [ ] Copy from the source: `hardware/` (project, sheets, libs, `.kicad_dru`), `reference/power_board_header.csv`,
-  `reference/mux_assignment.csv`, `reference/jlc_parts.csv`, `docs/` (to adapt), `LICENSE`, `.gitignore`.
-  Rename the project files to `ti60f225_control_card.*` (or keep `control_card.*`; see decisions).
-- [ ] Add `tools/jlc` as a submodule (`https://github.com/johonkanen/jlc-tools.git`).
-- [ ] Copy only the generator scripts worth adapting (`make_bga_footprint.py`, symbol generation idea from
-  `efinix_soc_board/tools/gen_symbols.py`); do not bring the Agilex build chain.
+- [x] Copied from the source at commit `43b9ec7` (committed state, via `git archive`): `hardware/` (project, sheets,
+  libs, `.kicad_dru`; `fab/` and `.kicad_prl` left out), `LICENSE`, `.gitignore`,
+  `docs/jlcpcb_production_checklist.md`, and in `reference/`: `power_board_header.csv`, `mux_assignment.csv`,
+  `jlc_parts.csv`, and the Agilex pin list as `agilex3_pin_assignment.csv` (net names and J1 mapping to carry over).
+  The project files keep the name `control_card.*`. Until phase 3 the KiCad project is still the unchanged
+  Agilex 3 design.
+- [x] `tools/jlc` submodule (`https://github.com/johonkanen/jlc-tools.git`).
+- Not copied: the Agilex generator chain in `tools/` (the source README says not to rerun it on the hand-edited
+  design), Altera pin lists, Agilex requirement docs, design notes and bring-up checklist. Those stay in the source
+  repository; the Ti60 versions are written in phase 6. Footprint/symbol generators are written fresh in phase 2
+  (ideas from the source's `make_bga_footprint.py` and `efinix_soc_board/tools/gen_symbols.py`).
 
-### Phase 1: decisions and device data (before touching KiCad)
-- [ ] Part number / grade (speed and temperature): e.g. Ti60F225I3 vs C4. Sets the core voltage and availability.
-  Check DigiKey / JLC Global Sourcing.
+### Phase 1: device data (before touching KiCad)
+- [x] Part: **Ti60F225C4** (commercial temperature, speed grade 4). **[verify]** VCC for C4 (expected 0.95 V)
+  and Tj range against the card's use. Check DigiKey / JLC Global Sourcing availability.
 - [ ] Package drawing: pitch, body size, ball diameter, recommended land → footprint. Cross-check against the
   earlier Ti60 card's CADCAM footprint.
 - [ ] Ti60 datasheet: supply ranges, power-up sequence, CRESET_N timing, configuration pin polarity, JTAG bank voltage.
@@ -128,7 +131,9 @@ Pin placement rules for later (to be checked in Efinity Interface Designer befor
   dev-board schematic: decoupling per rail, VCCA filter values, REF_RES value, strap values.
 - [ ] Efinity Power Estimator for a realistic design (HyperRAM controller, ADC capture, PWM) → core current → buck
   choice and inductor rating.
-- [ ] Confirm the I/O plan in section 2 (translators, spares, mux choice).
+- [x] I/O plan in section 2 confirmed (translators, all spares, OE from an FPGA pin, 1.8 V-logic mux).
+- [ ] TMUX1308 check: pinout against the SN74LV4051A footprint, select-input thresholds at VDD 3.3 V, and the
+  analog specs (on-resistance, leakage, charge injection) against the 2.5 MSPS front end.
 
 ### Phase 2: libraries
 - [ ] Symbol `hardware/lib/ti60f225.kicad_sym` generated from `reference/ti60f225_pinout.csv`, multi-unit.
@@ -173,14 +178,28 @@ Pin placement rules for later (to be checked in Efinity Interface Designer befor
 
 ---
 
-## 5. Open decisions for the user
+## 5. Decisions
 
-1. **FPGA grade** (temperature and speed): which Ti60F225 ordering code?
-2. **3.3 V I/O strategy:** translators for the 15 header outputs (proposed), or a different split? How many of the
-   13 J1 spare pins must stay connected?
-3. **Translator OE source:** a dedicated FPGA pin (held off by a pull-up/pull-down during configuration), CDONE, or both?
-4. **Mux:** keep SN74LV4051A on HVIO (proposed), or switch to a 1.8 V-logic mux to free 6 HVIO?
-5. **Core regulator:** keep the AP61302 cell or downsize to an AP61102 once the power estimate is in?
-6. **Project file names:** keep `hardware/control_card.*` or rename to `ti60f225_control_card.*`?
+Made 2026-10-30:
+1. **FPGA:** Ti60F225C4.
+2. **3.3 V I/O:** 2 × SN74AXC8T245 for the 15 header outputs; all 13 J1 spares connected.
+3. **Translator OE:** a dedicated FPGA pin, pulled to the disabled state.
+4. **Mux:** 1.8 V-logic mux (TMUX1308), selects on HSIO.
+5. **Project file names:** kept as `hardware/control_card.*` (phase 0 default; rename later if wanted).
+
+Still open:
+6. **Core regulator:** keep the AP61302 cell or downsize to an AP61102 once the power estimate is in?
 7. **Start point:** copy the routed Agilex board and strip the FPGA region (proposed: keeps the solved edge
    placement, buck cells and J1 fan-out), or start a fresh board with only the outline and connectors?
+
+## 6. Efinix documents needed
+
+The user can download these; put them in `reference/efinix/`:
+- **Ti60 data sheet** (DS-Ti60): supply ranges for C4, power-up sequence, CRESET_N timing, configuration pins,
+  JTAG bank voltage, F225 package drawing (pitch, body size, ball size).
+- **Titanium hardware checklist / PCB guidelines** for Ti60F225 (the `Print Checklist and Guidelines titanium.htm`
+  in Downloads may be it; a PDF or the Ti60 version is better): decoupling, VCCA filter, REF_RES, straps.
+- **Titanium configuration user guide** (SPI active ×4 timing, SSL_N/CBSEL/TEST_N/CSI use, supported flash list).
+- **HyperRAM controller core user guide** (Titanium pin rules for CK, RWDS and DQ).
+- **Efinity Power Estimator** for Ti60 (or the power section of the data sheet) for the core current.
+- Optional: Ti60F225 IBIS model (`titanium_ibis-v1.5.zip` is already in Downloads) and the Ti60F225 3D STEP model.
