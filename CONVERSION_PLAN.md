@@ -195,11 +195,32 @@ plan; with `--before` (Agilex netlist) it also checks that every untouched part 
 - Open for phase 4/5: the provisional ball assignment; the mux-channel table (`reference/mux_assignment.csv`)
   is unchanged; `reference/agilex3_pin_assignment.csv` is history only.
 
-### Phase 4: pin plan in Efinity (before layout is frozen)
-- [ ] Efinity project with the Ti60F225, Interface Designer: all GPIOs with their I/O standards (1.8 V LVCMOS on
-  HSIO, 3.3 V LVCMOS on HVIO), PLL with CLK100M input, HyperRAM IP pins, SPI ×4 configuration.
-- [ ] Compile a stub design so Efinity checks bank voltages, PLLIN reachability, DDIO and HyperRAM pin rules.
-- [ ] Export pin list → `reference/pin_assignment.csv`; this is the contract between board and FPGA design.
+### Phase 4: pin plan in Efinity (done 2026-10-30)
+`efinity/pinplan/run.sh [--compile]` (Efinity 2026.1, KiCad 10):
+1. exports the schematic netlist and builds an Interface Designer design (`pinplan.py`) with **every FPGA user I/O
+   taken from the netlist** (U1 ball → net), I/O standards 1.8 V LVCMOS on HSIO and 3.3 V LVCMOS on HVIO, banks
+   1A–4B at 1.8 V and TL/TR/BL/BR at 3.3 V;
+2. imports the HyperRAM GPIOs **unchanged from the user's AC PSU design** (`hyperram_gpio.isf`, exported from
+   `ti60_ac_psu` `tsemac_soc.peri.xml`: DDIO resync inputs on `ram_clk_cal`, DDIO outputs on inverted `ram_clk`,
+   CK on `ram_clk90`, the same balls) and stops if a ball differs from the schematic;
+3. moves its PLL (`hyperram_pll.isf`, PLL_TR0, 50 MHz × M 4) to **PLL_BL0 with the board's 100 MHz on P2** and
+   M = 2: same VCO (4000 MHz) and the same 200 MHz `ram_clk`/`ram_clk90`/`ram_clk_cal`; the AC PSU's Ethernet clock
+   is dropped;
+4. with `--compile` (`stub.py`): a placeholder core (LFSR on `ram_clk`, all inputs folded in) through synthesis,
+   place and route and bitstream, with **configuration SPI active x4** in the project.
+
+Results:
+- [x] Interface Designer design check: **passed, 0 issues**. No HVIO drive warning (≤ 6 outputs per bank).
+- [x] Compile: map, interface, pnr and pgm **pass**; reports say "Configuration Mode: active (x4)". Timing met at
+  200 MHz (worst setup +1.27 ns on the rise-to-fall DDIO path, worst hold +0.035 ns); the only warnings are the
+  periphery-only clocks `ram_clk90` and `clk100m` being unused by the stub core.
+- [x] `reference/pin_assignment.csv` (71 signals: net, direction, ball, pad, bank) is written from the check and is
+  the contract between the board and the FPGA design. Kept in git: the `.peri.xml`, `.isf`, project, SDC, stub and
+  the pinout/timing reports in `efinity/pinplan/build/` (the rest of the build is ignored).
+- The FPGA design for this card can start from `efinity/pinplan/build/ti60f225_pinplan.peri.xml`.
+- Phase 5 may still swap balls for routing (translator channels, ADC SPI, HVIO spares, within the same bank
+  type); after any swap, rerun `efinity/pinplan/run.sh --compile` and `tools/check_schematic.py`. The HyperRAM balls
+  stay as they are (they are the AC PSU card's proven map).
 
 ### Phase 5: PCB
 - [ ] Start from the routed Agilex board: keep outline, J1, J2, LEDs, ADC chains, analog LDO, the 1.8 V/3.3 V/core

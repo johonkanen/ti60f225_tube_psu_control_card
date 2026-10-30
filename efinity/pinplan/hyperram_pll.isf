@@ -1,0 +1,59 @@
+# Efinity Interface Configuration
+# Version: 2026.1.132.5.14
+# Date: 2026-10-30 21:53
+#
+# Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
+#
+# Device: Ti60F225
+# Package: 225-ball FBGA (final)
+# Project: tsemac_soc
+# Configuration mode: active (x1)
+# Timing Model: C4 (final)
+design.set_gpio_unused_state("INPUT_WEAK_PULLUP")
+
+# Create instance
+design.create_block("main_pll","PLL")
+
+# Set property, non-defaults
+design.set_property("main_pll","CLKOUT0_EN","1","PLL")
+design.set_property("main_pll","CLKOUT1_EN","1","PLL")
+design.set_property("main_pll","CLKOUT2_EN","1","PLL")
+design.set_property("main_pll","CLKOUT3_EN","1","PLL")
+design.set_property("main_pll","CLKOUT4_EN","0","PLL")
+design.set_property("main_pll","REFCLK_SOURCE","EXTERNAL","PLL")
+design.set_property("main_pll","CLKOUT0_CONN_TYPE","GCLK","PLL")
+design.set_property("main_pll","CLKOUT0_DIV","10","PLL")
+design.set_property("main_pll","CLKOUT0_DYNPHASE_EN","0","PLL")
+design.set_property("main_pll","CLKOUT0_PHASE_STEP","0","PLL")
+design.set_property("main_pll","CLKOUT0_PIN","ram_clk","PLL")
+design.set_property("main_pll","CLKOUT1_DIV","16","PLL")
+design.set_property("main_pll","CLKOUT1_DYNPHASE_EN","0","PLL")
+design.set_property("main_pll","CLKOUT1_PHASE_STEP","0","PLL")
+design.set_property("main_pll","CLKOUT1_PIN","io_tseClk","PLL")
+design.set_property("main_pll","CLKOUT2_DIV","10","PLL")
+design.set_property("main_pll","CLKOUT2_DYNPHASE_EN","0","PLL")
+design.set_property("main_pll","CLKOUT2_PHASE_STEP","5","PLL")
+design.set_property("main_pll","CLKOUT2_PIN","ram_clk90","PLL")
+design.set_property("main_pll","CLKOUT3_DIV","10","PLL")
+design.set_property("main_pll","CLKOUT3_DYNPHASE_EN","1","PLL")
+design.set_property("main_pll","CLKOUT3_PHASE_STEP","0","PLL")
+design.set_property("main_pll","CLKOUT3_PIN","ram_clk_cal","PLL")
+design.set_property("main_pll","EXT_CLK","EXT_CLK0","PLL")
+design.set_property("main_pll","IS_CLKOUT0_INVERTED","0","PLL")
+design.set_property("main_pll","IS_CLKOUT1_INVERTED","0","PLL")
+design.set_property("main_pll","IS_CLKOUT2_INVERTED","0","PLL")
+design.set_property("main_pll","IS_CLKOUT3_INVERTED","0","PLL")
+design.set_property("main_pll","LOCKED_PIN","pll_locked","PLL")
+design.set_property("main_pll","M","4","PLL")
+design.set_property("main_pll","N","1","PLL")
+design.set_property("main_pll","O","2","PLL")
+design.set_property("main_pll","PHASE_SHIFT_ENA_PIN","hbc_cal_SHIFT_ENA","PLL")
+design.set_property("main_pll","PHASE_SHIFT_PIN","hbc_cal_SHIFT","PLL")
+design.set_property("main_pll","PHASE_SHIFT_SEL_PIN","hbc_cal_SHIFT_SEL","PLL")
+design.set_property("main_pll","REFCLK_FREQ","50.0","PLL")
+design.set_property("main_pll","RSTN_PIN","","PLL")
+design.set_property("main_pll","FEEDBACK_MODE","LOCAL","PLL")
+design.set_property("main_pll","FEEDBACK_CLK","CLK0","PLL")
+
+# Set resource assignment
+design.assign_resource("main_pll","PLL_TR0","PLL")

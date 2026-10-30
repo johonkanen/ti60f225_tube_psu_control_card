@@ -4,8 +4,9 @@ An FPGA control card for the tube_power_5_1 power board, built around an Efinix 
 KiCad 10. It is a conversion of the Agilex 3 control card (`~/dev/ti60f225_control_card`, GitHub
 `agilex3_control_card`): same outline, 2×25 1.27 mm power-board header and JTAG header positions.
 
-**Status: phase 3 of the conversion done (2026-10-30).** The schematic is converted to the Ti60F225 (ERC clean,
-netlist checked by `tools/check_schematic.py`); the FPGA ball assignment is still provisional. The board
+**Status: phase 4 of the conversion done (2026-10-30).** The schematic is converted to the Ti60F225 (ERC clean,
+netlist checked by `tools/check_schematic.py`), and its FPGA ball assignment passes Efinity's Interface Designer
+check and a stub compile with SPI active x4 (`efinity/pinplan/run.sh --compile`, `reference/pin_assignment.csv`). The board
 (`hardware/control_card.kicad_pcb`) is still the Agilex 3 layout. Plan, decisions and remaining steps:
 [`CONVERSION_PLAN.md`](CONVERSION_PLAN.md); device requirements: [`docs/ti60_requirements.md`](docs/ti60_requirements.md).
 

@@ -6,3 +6,16 @@ _autosave-*
 __pycache__/
 .history/
 hardware/fab/
+# Efinity pin-plan build: keep the design, constraints and the main reports only
+efinity/pinplan/build/*
+!efinity/pinplan/build/ti60f225_pinplan.peri.xml
+!efinity/pinplan/build/ti60f225_pinplan.isf
+!efinity/pinplan/build/ti60f225_pinplan.xml
+!efinity/pinplan/build/ti60f225_pinplan.sdc
+!efinity/pinplan/build/ti60f225_pinplan_stub.v
+!efinity/pinplan/build/outflow/
+efinity/pinplan/build/outflow/*
+!efinity/pinplan/build/outflow/ti60f225_pinplan.pinout.csv
+!efinity/pinplan/build/outflow/ti60f225_pinplan.pinout.rpt
+!efinity/pinplan/build/outflow/ti60f225_pinplan.pt.rpt
+!efinity/pinplan/build/outflow/ti60f225_pinplan.timing.rpt
