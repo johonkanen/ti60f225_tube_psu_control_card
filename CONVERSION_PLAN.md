@@ -222,18 +222,30 @@ Results:
   type); after any swap, rerun `efinity/pinplan/run.sh --compile` and `tools/check_schematic.py`. The HyperRAM balls
   stay as they are (they are the AC PSU card's proven map).
 
-### Phase 5: PCB
-- [ ] Start from the routed Agilex board: keep outline, J1, J2, LEDs, ADC chains, analog LDO, the 1.8 V/3.3 V/core
-  buck cells and their pours. Delete U1, its via-in-pads, decoupling, U17/U18 cells, the JTAG shifter, and every
-  FPGA-side track.
-- [ ] Place the Ti60F225 (smaller than B18A, so there is space to recentre or rotate it so HVIO and the translators
-  face J1 and the HSIO bank for the HyperRAM faces the memory strip).
-- [ ] Re-run placement-driven pin assignment (min-cost matching idea from `assign_io.py`) within the Efinity-legal
-  pin sets; feed back into Phase 4.
-- [ ] Fan-out with via-in-pad on supply/GND balls; new plane plan: L4 gets +0V95 island + +3V3, L3 +1V8 pour
-  (no +1V2 island any more). Re-check GND balls on the outer ring.
-- [ ] Route HyperRAM length-matched; ADC SPI; translator nets; JTAG.
-- [ ] DRC clean (JLC rules), zones refilled, schematic parity 0.
+### Phase 5: PCB (in progress)
+Pipeline, rerunnable from the copied Agilex board (`git checkout` the board first):
+`tools/phase5_sync.py OLD_NET NEW_NET board` then `tools/phase5_place.py board` (KiCad 10's Python).
+- [x] **Sync** (`phase5_sync.py`, 2026-10-31): like Update PCB from Schematic with re-link by reference.
+  81 footprints deleted, U1 replaced by `Efinix_F225`, 104 new footprints parked east of the board; pad nets,
+  values and LCSC fields from the new netlist; renamed nets (+0V75 → +0V95, the header nets now local to the
+  connector sheet) renamed on copper and zones. Deleted: every track/via of the Agilex FPGA's signal nets (1189),
+  copper of vanished nets (72), copper inside the old BGA area (394) or ending on a deleted pad (66), the old
+  4051 VEE ties, the +3V3 taps at the ADS7056 DVDD pins; zones of the deleted bucks and of +1V2. Kept: J1, J2,
+  LEDs, both ADC chains, the analog LDO, the 0.95/1.8/3.3 V buck cells with their pours, the L2/L5 GND planes,
+  the L3 +1V8 and L4 +0V95/+3V3 pours.
+- [x] **Floorplan** (`phase5_place.py`): U1 at (92, 113), rotated 90° clockwise: banks 1A (flash) north-west,
+  1B (HyperRAM) north-east, 4A/4B (ADC) west, 3A/3B (translators) and HVIO TR/BR south towards J1, 2A/2B
+  (unused) east, HVIO TL north-east and BL north-west. Because 1B ends up east of 1A, **U9 (HyperRAM) and U7
+  (flash) swapped places**, their via-in-pads moving with them; the HyperRAM's three 0402s and the flash's
+  100 nF sit on VCC/VSS ball pairs underneath; R24 beside the HyperRAM. **Translators U19–U22** in a row on the
+  top side at y 122.5, x 104.5 → 92.5 (4 mm pitch, ordered by J1 pin), 1.8 V side towards the FPGA.
+- [x] DRC: 0 errors other than unconnected items (419) and the HyperRAM length rule (nets unrouted);
+  schematic parity 0.
+- [ ] Place the rest: Ti60 decoupling (centre VCC/GND ball pairs for 0201s; VCCIO, VCCAUX, VCCIO33 and the
+  four VCCA bead filters around the BGA on the bottom, as the full 0.65 mm array leaves no room for extra vias),
+  configuration passives near bank 1A / the CONFIG balls, translator decoupling and the OE pull-up.
+- [ ] BGA fan-out (via-in-pad on supply/GND balls), plane rework (L3 +1V8, L4 +0V95 island over the new core
+  balls + +3V3), routing (HyperRAM length-matched, ADC SPI, translators, HVIO, JTAG, config), DRC clean.
 
 ### Phase 6: verification and production
 - [ ] Independent reviews as for the Agilex card: Efinix hardware checklist, electrical review, JLC production check.
