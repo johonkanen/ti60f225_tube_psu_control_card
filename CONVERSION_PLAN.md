@@ -263,8 +263,23 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
     caps in the J1 path.
   - DRC (zones refilled, original rules): no clearance, hole or courtyard errors; unconnected 228, HyperRAM
     length rule (11, unrouted), dangling escape stubs and vias, silk; schematic parity 0.
-- [ ] Plane rework (L3 +1V8, L4 +0V95 island over the new core balls + +3V3), routing (HyperRAM length-matched,
-  ADC SPI, translators, HVIO, JTAG, config), DRC clean.
+  - Later changes (same day): U9 (HyperRAM) turned to 270° (7 HyperRAM airwire crossings instead of 59);
+    R25 moved off its caps; U7/U9 plane balls get via-in-pad too; no FPGA decap or bead in the band between the
+    BGA's south edge and J1 (`SOUTH_BAND`), which carries ~24 translator/header nets (FB7 now 10 mm from G10).
+- [ ] **Planes and routing** (`tools/phase5_route.sh` → `build/phase5/routed.kicad_pcb`, not yet in `hardware/`):
+  L4 split by KRT route_planes (+0V95 island, +3V3 around) with notches for the +3V3 vias it caught
+  (`phase5_planes.py`); L3 +1V8 pour dropped before routing and poured again after; HyperRAM; all nets on a
+  0.025 mm grid. First result: 65 unconnected items in KiCad (≈ 28 signal nets), 2 clearance (old Agilex JTAG arcs
+  against PG_0V95), 2 vias at the board edge. Open, in order of weight:
+  1. **South band congestion.** The translator inputs (3A/3B), the translator outputs and the direct HVIO header
+     nets (J1_P19–P32, TX, CUK/HT data) all cross the 8 mm between the BGA and J1; the translators sit at 4 mm pitch
+     with no channel between them on F.Cu, and J1's 1.27 mm row-2 pins are reachable only through one centred
+     channel each. Options: move translator inputs to the unused east banks 2A/2B (pin plan + Efinity check),
+     translators on the bottom, or hand-route the band.
+  2. **Old Agilex copper** that phase5_sync kept is broken: JTAG arcs near J2, the PG_1V8/PG_0V95 enable lines
+     (cut where the old BGA was), J1-side stubs. Strip and reroute.
+  3. **HyperRAM matching:** routed 10.9–16.9 mm, no room for meanders; the `.kicad_dru` rule (10.8 ± 0.1 mm,
+     Agilex geometry) needs a new target or a window.
 
 ### Phase 6: verification and production
 - [ ] Independent reviews as for the Agilex card: Efinix hardware checklist, electrical review, JLC production check.

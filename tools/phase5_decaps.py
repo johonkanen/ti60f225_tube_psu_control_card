@@ -29,6 +29,11 @@ MM, IU = pcbnew.ToMM, pcbnew.FromMM
 CLR, HOLE_CLR, HOLE_HOLE = 0.1, 0.2, 0.2
 VIA_D, VIA_DRILL = 0.30, 0.15
 STUB_W, STUB_MAX = 0.2, 0.8
+# The band between the BGA's south edge and J1 carries the 3A/3B translator inputs, the translator outputs and the
+# direct HVIO header nets (about 24 nets on three layers): no FPGA decap or bead there; only the translators' own
+# caps and the OE pull-up.
+SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
+BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67"}
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]
@@ -178,6 +183,11 @@ def try_pose(board, f, pos, rot, netname):
     cb = c.BBox() if not c.IsEmpty() else f.GetBoundingBox(False)
     if not board.edge.Contains(cb):
         return None
+    if f.GetReference() not in BAND_OK:
+        x0, y0, x1, y1 = SOUTH_BAND
+        band = pcbnew.BOX2I(pcbnew.VECTOR2I(IU(x0), IU(y0)), pcbnew.VECTOR2L(IU(x1 - x0), IU(y1 - y0)))
+        if band.Intersects(cb):
+            return None
     for ob, _, flipped in board.court:
         if flipped == f.IsFlipped() and ob.Intersects(cb):
             return None

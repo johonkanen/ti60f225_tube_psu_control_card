@@ -5,6 +5,7 @@
 - U1 is rotated 90 deg clockwise, which puts bank 1A (flash) at the top-left and bank 1B (HyperRAM) at the
   top-right of the package. The HyperRAM U9 and the flash U7 swap places (same BGA-24 footprint); the
   HyperRAM's decoupling and reset pull-up move with it, each cap on a VCC/VSS ball pair of its memory.
+- U9 is turned to 270 deg, the orientation with the fewest HyperRAM airwire crossings to bank 1B.
 - The four SN74AVC4T774 translators sit in a row on the top side between the BGA and J1, A side (1.8 V,
   pins 1-4) facing the FPGA, B side (3.3 V, pins 9-12) facing J1, ordered like their J1 pins.
 """
@@ -94,6 +95,9 @@ def main(path):
         put(u9, x7, y, u9.GetOrientationDegrees(), False)
         put(u7, x9, y, u7.GetOrientationDegrees(), False)
         print(f"swapped U7/U9: {len(moves)} via-in-pads moved with them, {len(drop)} other tracks/vias dropped")
+    # HyperRAM turned to 270 deg: its bus then runs to bank 1B with 7 airwire crossings instead of 59 at 90 deg
+    # (its plane balls get their via-in-pad in phase5_vias.py)
+    u9.SetOrientationDegrees(270)
     # memory decoupling on VCC/VSS ball pairs (HyperRAM: B3/B4, C1/D1, E4/E5; flash: B3/B4)
     cap_on_pair(b, "C51", "U9", "B4", "B3")
     cap_on_pair(b, "C53", "U9", "D1", "C1")
@@ -105,6 +109,17 @@ def main(path):
 
     # R24 (HyperRAM RESET# pull-up): bottom, beside the HyperRAM, first free spot
     free_spot(b, fp(b, "R24"), fp(b, "U9"), "A4", True)
+    # R25 (CLK100M series resistor, under the HyperRAM since the Agilex card): if the turned HyperRAM's caps now
+    # sit on it, to the nearest free spot by the oscillator's output; its old CLK100M_R copper is redrawn later
+    r25 = fp(b, "R25")
+    if any(courtyard(r25).Intersects(courtyard(o)) for o in b.GetFootprints() if o is not r25 and o.IsFlipped() == r25.IsFlipped()):
+        x1 = next(o for o in b.GetFootprints() if o.GetReference().startswith("X")
+                  and any(p.GetNetCode() == pr.GetNetCode() for p in o.Pads() for pr in r25.Pads()))
+        out = next(p.GetNumber() for p in x1.Pads() if any(p.GetNetCode() == pr.GetNetCode() for pr in r25.Pads()))
+        for tr in [tr for tr in b.GetTracks() if tr.GetNetCode() in {p.GetNetCode() for p in r25.Pads()}]:
+            b.Remove(tr)
+        free_spot(b, r25, x1, out, r25.IsFlipped())
+        print(f"R25 moved off the HyperRAM caps, next to {x1.GetReference()}.{out}")
 
     # translators: row between the BGA (south edge y 118) and J1 (pads from y 125.8)
     xl = sorted((f for f in b.GetFootprints() if str(f.GetFPID().GetLibItemName()).startswith("UQFN-16")
