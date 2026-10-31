@@ -241,11 +241,30 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   top side at y 122.5, x 104.5 → 92.5 (4 mm pitch, ordered by J1 pin), 1.8 V side towards the FPGA.
 - [x] DRC: 0 errors other than unconnected items (419) and the HyperRAM length rule (nets unrouted);
   schematic parity 0.
-- [ ] Place the rest: Ti60 decoupling (centre VCC/GND ball pairs for 0201s; VCCIO, VCCAUX, VCCIO33 and the
-  four VCCA bead filters around the BGA on the bottom, as the full 0.65 mm array leaves no room for extra vias),
-  configuration passives near bank 1A / the CONFIG balls, translator decoupling and the OE pull-up.
-- [ ] BGA fan-out (via-in-pad on supply/GND balls), plane rework (L3 +1V8, L4 +0V95 island over the new core
-  balls + +3V3), routing (HyperRAM length-matched, ADC SPI, translators, HVIO, JTAG, config), DRC clean.
+- [x] **Fan-out and placement** (`tools/phase5_layout.sh`, 2026-10-31): the whole chain from the Agilex board in
+  git, rerunnable (~3 min, work files in `build/phase5/`): sync → floorplan → `phase5_vias.py` → KiCadRoutingTools
+  `bga_fanout` → `phase5_decaps.py` → KiCadRoutingTools `place_simple` (inputs `tools/phase5/groups.json`,
+  `intent.json`) → `phase5_decaps.py --legalise`.
+  - **Via-in-pad on U1** (JLC fills and caps via-in-pad free on 6+ layers): every plane ball has a 0.30/0.15 via in
+    its 0.30 mm pad; KRT escapes the 84 signal balls under-pad, 74 on F.Cu between the balls and 10 through a
+    via in their pad, 0.09 mm tracks at 0.125 mm clearance. The via is the pad's size, so 0.125 mm copper
+    clearance is JLC's 0.2 mm via-hole-to-track on every layer (a dog-bone fan-out, as on the proven card,
+    was tried first: it fills the diagonal gaps the decaps and routing want).
+  - **Decoupling** (`phase5_decaps.py`, each pose checked with pcbnew's collision tests at 0.1 mm copper, 0.2 mm
+    hole): all on the bottom. Core VCC 1n/10n first, straight on adjacent VCC/GND ball vias in the centre;
+    each other cap at the nearest spot where its pads reach their plane through an existing via (≤ 0.8 mm
+    stub) or a new 0.30/0.15 via in the pad. U1 has only 11 GND balls and a new via under the ball field would
+    hit the F.Cu escapes, so most VCCIO/VCCAUX/VCCIO33 caps sit 2–5 mm out, each with its own vias into the
+    planes. Escape corridors (2.5 mm beyond every escape end) are kept free. VCCA caps next to their ball,
+    VCCA side left to the router; beads further out. CRESET_N RC, CDONE/CSI/TEST_N pull-ups and REF_RES at
+    their balls; translator caps (pin 14 VCCA, pin 13 VCCB) and R67 under the translators.
+  - **KRT place_simple** placed the flash pull-ups (near U7) and the JTAG pull-ups (near J2). Its generic decap
+    placement was tried for all parked parts first and dropped: caps on other nets' fan-out vias, translator
+    caps in the J1 path.
+  - DRC (zones refilled, original rules): no clearance, hole or courtyard errors; unconnected 228, HyperRAM
+    length rule (11, unrouted), dangling escape stubs and vias, silk; schematic parity 0.
+- [ ] Plane rework (L3 +1V8, L4 +0V95 island over the new core balls + +3V3), routing (HyperRAM length-matched,
+  ADC SPI, translators, HVIO, JTAG, config), DRC clean.
 
 ### Phase 6: verification and production
 - [ ] Independent reviews as for the Agilex card: Efinix hardware checklist, electrical review, JLC production check.

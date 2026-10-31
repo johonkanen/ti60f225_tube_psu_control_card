@@ -59,7 +59,7 @@ def parse(path):
         g = lambda k: (re.search(r'\(%s "([^"]*)"\)' % k, b) or [None, ""])[1]   # noqa: E731
         sp = re.search(r'\(sheetpath\s*\(names "[^"]*"\)\s*\(tstamps "([^"]*)"\)\s*\)', b)
         ts = re.search(r'\(tstamps "([^"]+)"', b[sp.end():]).group(1)
-        fields = dict(re.findall(r'\(field\s*\(name "([^"]+)"\)\s*"([^"]*)"\)', b))
+        fields = {n: v for n, v in re.findall(r'\(field\s*\(name "([^"]+)"\)\s*(?:"([^"]*)")?\s*\)', b)}
         comps.append(dict(ref=g("ref"), value=g("value"), footprint=g("footprint"), path=sp.group(1) + ts,
                           sheetname=re.search(r'\(names "([^"]*)"\)', b).group(1), fields=fields))
     nets = {}
@@ -205,9 +205,9 @@ def main(old_net, new_net, pcb_path, dry):
                 fp.SetPosition(pcbnew.VECTOR2I(park_x + MM(6) * (added // 30), park_y + MM(1.6) * (added % 30)))
                 added += 1
         fp.SetValue(c["value"])
-        for k in ("LCSC", "MPN", "Description"):
+        for k in ("LCSC", "MPN", "Description", "Group"):
             v = c["fields"].get(k, "")
-            if not v and k == "Description":
+            if not v and (k == "Description" or k not in c["fields"]):
                 continue
             fp.SetField(k, v)
             fld = fp.GetField(k)

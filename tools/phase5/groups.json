@@ -1,0 +1,31 @@
+{
+ "schema": 1,
+ "groups": [
+  {
+   "name": "flash_cfg",
+   "role": "interface",
+   "refs": [
+    "U7",
+    "R54",
+    "R57",
+    "R58",
+    "R59"
+   ],
+   "anchor": "U7",
+   "why": "SPI flash SSL_N, IO2, IO3 and RESET# pull-ups at the flash"
+  },
+  {
+   "name": "jtag",
+   "role": "interface",
+   "refs": [
+    "J2",
+    "R60",
+    "R61",
+    "R62",
+    "R63"
+   ],
+   "anchor": "J2",
+   "why": "JTAG pull-ups at the header"
+  }
+ ]
+}
