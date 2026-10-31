@@ -29,11 +29,12 @@ MM, IU = pcbnew.ToMM, pcbnew.FromMM
 CLR, HOLE_CLR, HOLE_HOLE = 0.1, 0.2, 0.2
 VIA_D, VIA_DRILL = 0.30, 0.15
 STUB_W, STUB_MAX = 0.2, 0.8
-# The band between the BGA's south edge and J1 carries the 3A/3B translator inputs, the translator outputs and the
-# direct HVIO header nets (about 24 nets on three layers): no FPGA decap or bead there; only the translators' own
-# caps and the OE pull-up.
+# The band between the BGA's south edge and J1 carries the translator outputs and the direct HVIO header nets
+# (the translator inputs come from banks 2A/2B, down the east side): no FPGA decap there; only the translators' own
+# caps, the OE pull-up and FB7 (VCCA_TR, G10), which finds no room nearer: the band's middle is free since
+# banks 3A/3B are unused.
 SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
-BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67"}
+BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67", "FB7"}
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]

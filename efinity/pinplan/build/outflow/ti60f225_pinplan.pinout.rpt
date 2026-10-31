@@ -1,7 +1,7 @@
 
 # Efinity Pinout Report
 # Version: 2026.1.132.5.14
-# Date: 2026-10-30 21:57
+# Date: 2026-10-31 19:52
 
 # Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -19,13 +19,13 @@
 |     A2     |           --UNUSED--           |     GPIOL_N_18     |               |              |      1.8 V       |  1B  |             |                    User IO/PLL_CLKIN                     |
 |     A3     |             led1_r             |      GPIOL_03      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                         User IO                          |
 |     A4     |             led2_g             |      GPIOL_09      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                         User IO                          |
-|     A5     |           --UNUSED--           |     GPIOT_P_03     |               |              |      1.8 V       |  2A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
-|     A6     |           --UNUSED--           |     GPIOT_N_03     |               |              |      1.8 V       |  2A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
-|     A7     |           --UNUSED--           |     GPIOT_N_06     |               |              |      1.8 V       |  2A  |             |                         User IO                          |
-|     A8     |           --UNUSED--           | GPIOT_N_07_CLK4_N  |               |              |      1.8 V       |  2A  |             |                    User IO/GCLK/RCLK                     |
-|     A9     |           --UNUSED--           |     GPIOT_N_11     |               |              |      1.8 V       |  2B  |             |                         User IO                          |
-|    A10     |           --UNUSED--           |     GPIOT_P_14     |               |              |      1.8 V       |  2B  |             |                    User IO/MIPI_GCLK                     |
-|    A11     |           --UNUSED--           | GPIOT_P_17_PLLIN1  |               |              |      1.8 V       |  2B  |             |                    User IO/PLL_CLKIN                     |
+|     A5     |        pri_dhb_hi_1v8.P        |     GPIOT_P_03     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
+|     A6     |          epwm6a_1v8.N          |     GPIOT_N_03     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
+|     A7     |          epwm5a_1v8.N          |     GPIOT_N_06     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |                         User IO                          |
+|     A8     |          ht_cs_1v8.N           | GPIOT_N_07_CLK4_N  |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |                    User IO/GCLK/RCLK                     |
+|     A9     |         synch_2_1v8.N          |     GPIOT_N_11     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                         User IO                          |
+|    A10     |         cuk_clk_1v8.P          |     GPIOT_P_14     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                    User IO/MIPI_GCLK                     |
+|    A11     |          ht_clk_1v8.P          | GPIOT_P_17_PLLIN1  |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                    User IO/PLL_CLKIN                     |
 |    A12     |               tx               |      GPIOR_13      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TR  |             |                         User IO                          |
 |    A13     |           cuk_sdata            |      GPIOR_12      |     Input     | 3.3 V LVCMOS |      3.3 V       |  TR  |             |                         User IO                          |
 |    A14     |             j1_p24             |      GPIOR_19      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TR  |             |                         User IO                          |
@@ -35,11 +35,11 @@
 |     B3     |             led1_g             |      GPIOL_04      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                         User IO                          |
 |     B4     |            --VCC--             |     VCCIO33_TL     |     Power     |              |      3.3 V       |  TL  |             |                       VCCIO Power                        |
 |     B5     |             led2_b             |      GPIOL_10      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                         User IO                          |
-|     B6     |           --UNUSED--           |     GPIOT_P_01     |               |              |      1.8 V       |  2A  |             |                         User IO                          |
-|     B7     |           --UNUSED--           |     GPIOT_P_06     |               |              |      1.8 V       |  2A  |             |                         User IO                          |
-|     B8     |           --UNUSED--           | GPIOT_P_07_CLK4_P  |               |              |      1.8 V       |  2A  |             |                    User IO/GCLK/RCLK                     |
-|     B9     |           --UNUSED--           |     GPIOT_P_11     |               |              |      1.8 V       |  2B  |             |                         User IO                          |
-|    B10     |           --UNUSED--           |     GPIOT_N_14     |               |              |      1.8 V       |  2B  |             |                    User IO/MIPI_GCLK                     |
+|     B6     |        pri_dhb_lo_1v8.P        |     GPIOT_P_01     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |                         User IO                          |
+|     B7     |          cuk_cs_1v8.P          |     GPIOT_P_06     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |                         User IO                          |
+|     B8     |          epwm2a_1v8.P          | GPIOT_P_07_CLK4_P  |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |                    User IO/GCLK/RCLK                     |
+|     B9     |          epwm2b_1v8.P          |     GPIOT_P_11     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                         User IO                          |
+|    B10     |         synch_1_1v8.N          |     GPIOT_N_14     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                    User IO/MIPI_GCLK                     |
 |    B11     |           --UNUSED--           |     GPIOT_N_17     |               |              |      1.8 V       |  2B  |             |                    User IO/PLL_CLKIN                     |
 |    B12     |             j1_p17             |      GPIOR_15      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TR  |             |                         User IO                          |
 |    B13     |            --VCC--             |     VCCIO33_TR     |     Power     |              |      3.3 V       |  TR  |             |                       VCCIO Power                        |
@@ -50,14 +50,14 @@
 |     C3     |             led1_b             |      GPIOL_06      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                         User IO                          |
 |     C4     |             led2_r             |      GPIOL_07      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                         User IO                          |
 |     C5     |            ht_sdata            |  GPIOL_11_PLLIN2   |     Input     | 3.3 V LVCMOS |      3.3 V       |  TL  |             |                    User IO/PLL_CLKIN                     |
-|     C6     |           --UNUSED--           |     GPIOT_N_01     |               |              |      1.8 V       |  2A  |             |                         User IO                          |
+|     C6     |          xlat_oe_n.N           |     GPIOT_N_01     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2A  |             |                         User IO                          |
 |     C7     |            --VCC--             |      VCCIO2A       |     Power     |              |      1.8 V       |  2A  |             |                       VCCIO Power                        |
-|     C8     |           --UNUSED--           | GPIOT_P_10_CLK7_P  |               |              |      1.8 V       |  2B  |             |                    User IO/GCLK/RCLK                     |
-|     C9     |           --UNUSED--           | GPIOT_N_10_CLK7_N  |               |              |      1.8 V       |  2B  |             |                    User IO/GCLK/RCLK                     |
-|    C10     |           --UNUSED--           |     GPIOT_P_13     |               |              |      1.8 V       |  2B  |             |                       User IO/VREF                       |
+|     C8     |     gpio_bypass_rly_1v8.P      | GPIOT_P_10_CLK7_P  |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                    User IO/GCLK/RCLK                     |
+|     C9     |         pfc_pwm1_1v8.N         | GPIOT_N_10_CLK7_N  |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                    User IO/GCLK/RCLK                     |
+|    C10     |          epwm1a_1v8.P          |     GPIOT_P_13     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                       User IO/VREF                       |
 |    C11     |            --VCC--             |      VCCIO2B       |     Power     |              |      1.8 V       |  2B  |             |                       VCCIO Power                        |
 |    C12     |             j1_p19             |      GPIOR_16      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TR  |             |                         User IO                          |
-|    C13     |         pfc_pwm2_1v8.P         |     GPIOR_P_17     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
+|    C13     |           --UNUSED--           |     GPIOR_P_17     |               |              |      1.8 V       |  3A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
 |    C14     |           --UNUSED--           | GPIOR_P_19_PLLIN0  |               |              |      1.8 V       |  3A  |             |                    User IO/PLL_CLKIN                     |
 |    C15     |           --UNUSED--           |     GPIOR_N_19     |               |              |      1.8 V       |  3A  |             |                    User IO/PLL_CLKIN                     |
 |     D1     |           hbc_dq4.P            |     GPIOL_P_16     | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
@@ -69,11 +69,11 @@
 |     D7     |           --UNUSED--           |     GPIOT_N_05     |               |              |      1.8 V       |  2A  |             |                         User IO                          |
 |     D8     |           --UNUSED--           | GPIOT_N_09_CLK6_N  |               |              |      1.8 V       |  2B  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
 |     D9     |            --VCC--             |      VCCIO2B       |     Power     |              |      1.8 V       |  2B  |             |                       VCCIO Power                        |
-|    D10     |           --UNUSED--           |     GPIOT_N_13     |               |              |      1.8 V       |  2B  |             |                         User IO                          |
+|    D10     |         pfc_pwm2_1v8.N         |     GPIOT_N_13     |     Output    | 1.8 V LVCMOS |      1.8 V       |  2B  |             |                         User IO                          |
 |    D11     |           --UNUSED--           |     REF_RES_2B     |     Input     |              |      1.8 V       |  2B  |             |                                                          |
 |    D12     |             j1_p26             |      GPIOR_20      |     Output    | 3.3 V LVCMOS |      3.3 V       |  TR  |             |                         User IO                          |
-|    D13     |          epwm1a_1v8.N          |     GPIOR_N_17     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
-|    D14     |          xlat_oe_n.N           |     GPIOR_N_18     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
+|    D13     |           --UNUSED--           |     GPIOR_N_17     |               |              |      1.8 V       |  3A  |             |               User IO/MIPI_GCLK/MIPI_RCLK                |
+|    D14     |           --UNUSED--           |     GPIOR_N_18     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |    D15     |           --UNUSED--           |     GPIOR_P_18     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |     E1     |    --NSTATUS-- / hbc_rwds.P    | GPIOL_P_15_NSTATUS | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  | weak pullup |                User IO/VREF/Configuration                |
 |     E2     |     --TEST_N-- / hbc_dq3.N     | GPIOL_N_15_TEST_N  | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |                  User IO/Configuration                   |
@@ -86,10 +86,10 @@
 |     E9     |           --UNUSED--           |     GPIOT_N_12     |               |              |      1.8 V       |  2B  |             |                         User IO                          |
 |    E10     |           --UNUSED--           |  GPIOT_P_16_EXTFB  |               |              |      1.8 V       |  2B  |             |                    User IO/PLL_EXTFB                     |
 |    E11     |            --VCC--             |       VCCAUX       |     Power     |              |      1.8 V       |  4B  |             |                                                          |
-|    E12     |         synch_1_1v8.N          |     GPIOR_N_15     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
+|    E12     |           --UNUSED--           |     GPIOR_N_15     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |    E13     |            --VCC--             |        VCC         |     Power     |              |                  |      |             |                     0.95 V VCC Power                     |
-|    E14     |     gpio_bypass_rly_1v8.N      |     GPIOR_N_16     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
-|    E15     |         pfc_pwm1_1v8.P         |     GPIOR_P_16     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
+|    E14     |           --UNUSED--           |     GPIOR_N_16     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
+|    E15     |           --UNUSED--           |     GPIOR_P_16     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |     F1     |           hbc_dq0.P            |     GPIOL_P_14     | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |                         User IO                          |
 |     F2     |           hbc_dq5.N            |     GPIOL_N_14     | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |                         User IO                          |
 |     F3     |           --CBSEL0--           | GPIOL_P_13_CBSEL0  |               |              |      1.8 V       |  1B  |             |                         User IO                          |
@@ -100,11 +100,11 @@
 |     F8     |           --UNUSED--           |     GPIOT_N_04     |               |              |      1.8 V       |  2A  |             |                         User IO                          |
 |     F9     |           --UNUSED--           |     GPIOT_P_12     |               |              |      1.8 V       |  2B  |             |                         User IO                          |
 |    F10     |           --UNUSED--           |     GPIOT_N_16     |               |              |      1.8 V       |  2B  |             |                    User IO/PLL_EXTFB                     |
-|    F11     |          epwm2b_1v8.N          |     GPIOR_N_14     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
-|    F12     |          ht_clk_1v8.P          |     GPIOR_P_15     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
-|    F13     |          cuk_cs_1v8.N          |     GPIOR_N_12     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
+|    F11     |           --UNUSED--           |     GPIOR_N_14     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
+|    F12     |           --UNUSED--           |     GPIOR_P_15     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
+|    F13     |           --UNUSED--           |     GPIOR_N_12     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |    F14     |            --VCC--             |      VCCIO3A       |     Power     |              |      1.8 V       |  3A  |             |                       VCCIO Power                        |
-|    F15     |          epwm2a_1v8.N          |     GPIOR_N_13     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
+|    F15     |           --UNUSED--           |     GPIOR_N_13     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |     G1     |           hbc_dq1.N            | GPIOL_N_09_CLK2_N  | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
 |     G2     |           hbc_dq6.N            | GPIOL_N_10_CLK3_N  | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |                    User IO/GCLK/RCLK                     |
 |     G3     |           --UNUSED--           |     GPIOL_P_12     |               |              |      1.8 V       |  1B  |             |                         User IO                          |
@@ -115,11 +115,11 @@
 |     G8     |            --GND--             |        GND         |     Power     |              |                  |      |             |                          Ground                          |
 |     G9     |            --VCC--             |        VCC         |     Power     |              |                  |      |             |                     0.95 V VCC Power                     |
 |    G10     |            --VCC--             |      VCCA_TR       |     Power     |              |                  |      |             |                     0.95 V PLL Power                     |
-|    G11     |         cuk_clk_1v8.P          |     GPIOR_P_14     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
+|    G11     |           --UNUSED--           |     GPIOR_P_14     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
 |    G12     |            --VCC--             |      VCCIO3A       |     Power     |              |      1.8 V       |  3A  |             |                       VCCIO Power                        |
-|    G13     |          ht_cs_1v8.P           |     GPIOR_P_12     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                         User IO                          |
-|    G14     |        pri_dhb_lo_1v8.N        | GPIOR_N_11_CLK8_N  |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                    User IO/GCLK/RCLK                     |
-|    G15     |         synch_2_1v8.P          |     GPIOR_P_13     |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                       User IO/VREF                       |
+|    G13     |           --UNUSED--           |     GPIOR_P_12     |               |              |      1.8 V       |  3A  |             |                         User IO                          |
+|    G14     |           --UNUSED--           | GPIOR_N_11_CLK8_N  |               |              |      1.8 V       |  3A  |             |                    User IO/GCLK/RCLK                     |
+|    G15     |           --UNUSED--           |     GPIOR_P_13     |               |              |      1.8 V       |  3A  |             |                       User IO/VREF                       |
 |     H1     |           --UNUSED--           | GPIOL_P_09_CLK2_P  |               |              |      1.8 V       |  1B  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
 |     H2     |  --PCR_READBACK-- / hbc_dq7.P  | GPIOL_P_10_CLK3_P  | Bidirectional | 1.8 V LVCMOS |      1.8 V       |  1B  |             |             User IO/GCLK/RCLK/Configuration              |
 |     H3     |       --EXT_CONFIG_CLK--       | GPIOL_N_08_CLK1_N  |               |              |      1.8 V       |  1A  |             |             User IO/GCLK/RCLK/Configuration              |
@@ -131,9 +131,9 @@
 |     H9     |            --GND--             |        GND         |     Power     |              |                  |      |             |                          Ground                          |
 |    H10     |           --UNUSED--           | GPIOR_P_08_CLK11_P |               |              |      1.8 V       |  3B  |             |                    User IO/GCLK/RCLK                     |
 |    H11     |           --UNUSED--           | GPIOR_N_08_CLK11_N |               |              |      1.8 V       |  3B  |             |                    User IO/GCLK/RCLK                     |
-|    H12     |        pri_dhb_hi_1v8.N        | GPIOR_N_10_CLK9_N  |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
-|    H13     |          epwm6a_1v8.P          | GPIOR_P_10_CLK9_P  |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
-|    H14     |          epwm5a_1v8.P          | GPIOR_P_11_CLK8_P  |     Output    | 1.8 V LVCMOS |      1.8 V       |  3A  |             |                    User IO/GCLK/RCLK                     |
+|    H12     |           --UNUSED--           | GPIOR_N_10_CLK9_N  |               |              |      1.8 V       |  3A  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
+|    H13     |           --UNUSED--           | GPIOR_P_10_CLK9_P  |               |              |      1.8 V       |  3A  |             |          User IO/GCLK/MIPI_GCLK/RCLK/MIPI_RCLK           |
+|    H14     |           --UNUSED--           | GPIOR_P_11_CLK8_P  |               |              |      1.8 V       |  3A  |             |                    User IO/GCLK/RCLK                     |
 |    H15     |           --UNUSED--           | GPIOR_N_09_CLK10_N |               |              |      1.8 V       |  3B  |             |                    User IO/GCLK/RCLK                     |
 |     J1     |           --UNUSED--           | GPIOL_N_07_CLK0_N  |               |              |      1.8 V       |  1A  |             |                    User IO/GCLK/RCLK                     |
 |     J2     |           --UNUSED--           | GPIOL_P_08_CLK1_P  |               |              |      1.8 V       |  1A  |             |                    User IO/GCLK/RCLK                     |

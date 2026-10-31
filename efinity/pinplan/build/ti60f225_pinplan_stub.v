@@ -46,23 +46,23 @@ module ti60f225_pinplan (
     output [0:0] hbc_rwds_OUT_HI,
     output [0:0] hbc_rwds_OUT_LO,
     output [0:0] hbc_rwds_OE,
-    output pfc_pwm2_1v8,
-    output epwm1a_1v8,
-    output xlat_oe_n,
-    output synch_1_1v8,
-    output gpio_bypass_rly_1v8,
-    output pfc_pwm1_1v8,
-    output epwm2b_1v8,
-    output ht_clk_1v8,
-    output cuk_cs_1v8,
-    output epwm2a_1v8,
     output cuk_clk_1v8,
-    output ht_cs_1v8,
-    output pri_dhb_lo_1v8,
-    output synch_2_1v8,
+    output ht_clk_1v8,
     output pri_dhb_hi_1v8,
     output epwm6a_1v8,
     output epwm5a_1v8,
+    output ht_cs_1v8,
+    output synch_2_1v8,
+    output synch_1_1v8,
+    output pri_dhb_lo_1v8,
+    output cuk_cs_1v8,
+    output epwm2a_1v8,
+    output epwm2b_1v8,
+    output epwm1a_1v8,
+    output xlat_oe_n,
+    output gpio_bypass_rly_1v8,
+    output pfc_pwm1_1v8,
+    output pfc_pwm2_1v8,
     output adca_sclk,
     output adasel2,
     output adasel1,
@@ -111,23 +111,23 @@ module ti60f225_pinplan (
     assign hbc_rwds_OUT_HI = {lfsr[13]};
     assign hbc_rwds_OUT_LO = {lfsr[14]};
     assign hbc_rwds_OE = {lfsr[15]};
-    assign pfc_pwm2_1v8 = {lfsr[16]};
-    assign epwm1a_1v8 = {lfsr[17]};
-    assign xlat_oe_n = {lfsr[18]};
-    assign synch_1_1v8 = {lfsr[19]};
-    assign gpio_bypass_rly_1v8 = {lfsr[20]};
-    assign pfc_pwm1_1v8 = {lfsr[21]};
-    assign epwm2b_1v8 = {lfsr[22]};
-    assign ht_clk_1v8 = {lfsr[23]};
-    assign cuk_cs_1v8 = {lfsr[24]};
-    assign epwm2a_1v8 = {lfsr[25]};
-    assign cuk_clk_1v8 = {lfsr[26]};
-    assign ht_cs_1v8 = {lfsr[27]};
-    assign pri_dhb_lo_1v8 = {lfsr[28]};
-    assign synch_2_1v8 = {lfsr[29]};
-    assign pri_dhb_hi_1v8 = {lfsr[30]};
-    assign epwm6a_1v8 = {lfsr[31]};
-    assign epwm5a_1v8 = {lfsr[0]};
+    assign cuk_clk_1v8 = {lfsr[16]};
+    assign ht_clk_1v8 = {lfsr[17]};
+    assign pri_dhb_hi_1v8 = {lfsr[18]};
+    assign epwm6a_1v8 = {lfsr[19]};
+    assign epwm5a_1v8 = {lfsr[20]};
+    assign ht_cs_1v8 = {lfsr[21]};
+    assign synch_2_1v8 = {lfsr[22]};
+    assign synch_1_1v8 = {lfsr[23]};
+    assign pri_dhb_lo_1v8 = {lfsr[24]};
+    assign cuk_cs_1v8 = {lfsr[25]};
+    assign epwm2a_1v8 = {lfsr[26]};
+    assign epwm2b_1v8 = {lfsr[27]};
+    assign epwm1a_1v8 = {lfsr[28]};
+    assign xlat_oe_n = {lfsr[29]};
+    assign gpio_bypass_rly_1v8 = {lfsr[30]};
+    assign pfc_pwm1_1v8 = {lfsr[31]};
+    assign pfc_pwm2_1v8 = {lfsr[0]};
     assign adca_sclk = {lfsr[1]};
     assign adasel2 = {lfsr[2]};
     assign adasel1 = {lfsr[3]};

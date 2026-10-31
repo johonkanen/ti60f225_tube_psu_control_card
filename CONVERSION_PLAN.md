@@ -221,6 +221,12 @@ Results:
 - Phase 5 may still swap balls for routing (translator channels, ADC SPI, HVIO spares, within the same bank
   type); after any swap, rerun `efinity/pinplan/run.sh --compile` and `tools/check_schematic.py`. The HyperRAM balls
   stay as they are (they are the AC PSU card's proven map).
+- [x] **Ball swap for routing** (2026-10-31, `tools/swap_balls.py NET=BALL ...`, which moves U1 labels on the sheets):
+  the 16 translator inputs and `XLAT_OE_N` moved from bank 3A to the east banks 2A/2B, so they no longer cross
+  the band between the BGA and J1. In translator order (U19 → U22, J1 order): A5 A6 B6 A7 | B7 A8 B8 A9 | B9 A10
+  B10 A11 | C8 C9 C10 D10, OE on C6. Rows A/B escape east on F.Cu, the U22 group drops south through the middle
+  columns that 3A/3B left free. Banks 3A/3B are now unused (VCCIO3A/3B stay on +1V8 with their caps, REF_RES_3A
+  stays). ERC 0, `check_schematic.py` 0 errors, Efinity compile passes (map/interface/pnr/pgm), timing met.
 
 ### Phase 5: PCB (in progress)
 Pipeline, rerunnable from the copied Agilex board (`git checkout` the board first):
@@ -234,8 +240,8 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   LEDs, both ADC chains, the analog LDO, the 0.95/1.8/3.3 V buck cells with their pours, the L2/L5 GND planes,
   the L3 +1V8 and L4 +0V95/+3V3 pours.
 - [x] **Floorplan** (`phase5_place.py`): U1 at (92, 113), rotated 90° clockwise: banks 1A (flash) north-west,
-  1B (HyperRAM) north-east, 4A/4B (ADC) west, 3A/3B (translators) and HVIO TR/BR south towards J1, 2A/2B
-  (unused) east, HVIO TL north-east and BL north-west. Because 1B ends up east of 1A, **U9 (HyperRAM) and U7
+  1B (HyperRAM) north-east, 4A/4B (ADC) west, 3A/3B (unused since the ball swap) and HVIO TR/BR south towards
+  J1, 2A/2B (translator inputs) east, HVIO TL north-east and BL north-west. Because 1B ends up east of 1A, **U9 (HyperRAM) and U7
   (flash) swapped places**, their via-in-pads moving with them; the HyperRAM's three 0402s and the flash's
   100 nF sit on VCC/VSS ball pairs underneath; R24 beside the HyperRAM. **Translators U19–U22** in a row on the
   top side at y 122.5, x 104.5 → 92.5 (4 mm pitch, ordered by J1 pin), 1.8 V side towards the FPGA.
@@ -271,7 +277,12 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   (`phase5_planes.py`); L3 +1V8 pour dropped before routing and poured again after; HyperRAM; all nets on a
   0.025 mm grid. First result: 65 unconnected items in KiCad (≈ 28 signal nets), 2 clearance (old Agilex JTAG arcs
   against PG_0V95), 2 vias at the board edge. Open, in order of weight:
-  1. **South band congestion.** The translator inputs (3A/3B), the translator outputs and the direct HVIO header
+  After the ball swap to 2A/2B (2026-10-31, FB7 allowed in the band's free middle): 44 unconnected items
+  (was 65), 27 KRT-failed nets. Translator inputs all routed except EPWM2B_1V8 and one XLAT_OE_N pad; still open:
+  9 translator outputs to J1, the HVIO header nets J1_P26/28/30/32, TX, HT_SDATA, JTAG (TCK/TMS/TDI), CRESET_N,
+  VCCA_TR/BL, HR_CS_N/HR_DQ2 (broken by the run), a few +1V8/+3V3/GND taps; 2 clearance (HR_DQ3 against R56's
+  pad, 0.097 mm), R56/C87 courtyards. The user may finish the band by hand.
+  1. **South band congestion** (before the swap). The translator inputs (3A/3B), the translator outputs and the direct HVIO header
      nets (J1_P19–P32, TX, CUK/HT data) all cross the 8 mm between the BGA and J1; the translators sit at 4 mm pitch
      with no channel between them on F.Cu, and J1's 1.27 mm row-2 pins are reachable only through one centred
      channel each. Options: move translator inputs to the unused east banks 2A/2B (pin plan + Efinity check),
