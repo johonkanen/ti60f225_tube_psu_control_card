@@ -227,6 +227,12 @@ Results:
   B10 A11 | C8 C9 C10 D10, OE on C6. Rows A/B escape east on F.Cu, the U22 group drops south through the middle
   columns that 3A/3B left free. Banks 3A/3B are now unused (VCCIO3A/3B stay on +1V8 with their caps, REF_RES_3A
   stays). ERC 0, `check_schematic.py` 0 errors, Efinity compile passes (map/interface/pnr/pgm), timing met.
+- [x] **HSIO decoupling** (2026-11-01, `tools/sch_vccio_caps.py`): 10 nF + 1 nF (0201) added per used HSIO bank
+  (1A 1B 2A 2B 4A 4B, C166–C177), so each used bank now has the checklist's 1n/10n/100n/1u; the shared
+  47µ/10µ/4µ7 stay shared (one +1V8 plane). The 1µ + 100n of the unused banks 3A/3B (C136–C139) removed, as the
+  checklist asks no caps for an unused bank. ERC 0, `check_schematic.py` 0 errors. On the board each bank's
+  four caps sit 2.6–5.7 mm from its VCCIO balls (bottom side, own plane vias; no room for more vias in the
+  ball field).
 
 ### Phase 5: PCB (in progress)
 Pipeline, rerunnable from the copied Agilex board (`git checkout` the board first):

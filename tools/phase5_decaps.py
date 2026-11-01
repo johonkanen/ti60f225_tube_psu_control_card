@@ -17,8 +17,8 @@ hole to hole, against every other net's pads, tracks, vias and F.Cu/B.Cu zone ou
 other bottom courtyards, and stay inside the board.
 
 Which balls each cap serves follows the schematic's order (tools/phase3_schematic.py): VCC caps at the VCC
-balls; VCCAUX 4u7/100n/10n/1n at the VCCAUX balls; 1u + 100n per HSIO bank at that bank's VCCIO balls; 4u7/1u/
-100n per HVIO bank at its VCCIO33 ball; each VCCA's five caps and bead at its VCCA ball. Smallest caps first.
+balls; VCCAUX 4u7/100n/10n/1n at the VCCAUX balls; 1n/10n/100n/1u per used HSIO bank (none on 3A/3B) at that
+bank's VCCIO balls; 4u7/1u/100n per HVIO bank at its VCCIO33 ball; each VCCA's five caps and bead at its VCCA ball. Smallest caps first.
 """
 import math
 import sys
@@ -37,6 +37,8 @@ SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
 BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67", "FB7"}
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
+UNUSED_BANKS = {"3A", "3B"}                     # no caps (tools/sch_vccio_caps.py)
+USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]   # 10n/1n C166-C177 in this order
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]
 
 
@@ -65,8 +67,11 @@ def plan(u1):
     jobs += [(c[-1], balls) for c, balls in vcca]                                  # each VCCA's 1n
     jobs += [(r, balls) for c, balls in vcca for r in reversed(c[:-1])]           # then its 10n, 100n
     jobs += [(r, vcc) for r in ["C108", "C107"]]
-    for i, bank in enumerate(BANK_ORDER):                           # 100n then 1u per HSIO bank
-        jobs += [(f"C{129 + 2 * i}", pb[f"VCCIO{bank}"]), (f"C{128 + 2 * i}", pb[f"VCCIO{bank}"])]
+    for i, bank in enumerate(BANK_ORDER):                           # 1n, 10n, 100n, 1u per used HSIO bank
+        if bank in UNUSED_BANKS:
+            continue
+        k = USED_BANKS.index(bank)
+        jobs += [(r, pb[f"VCCIO{bank}"]) for r in (f"C{167 + 2 * k}", f"C{166 + 2 * k}", f"C{129 + 2 * i}", f"C{128 + 2 * i}")]
     aux = pb["VCCAUX"]
     jobs += [(r, aux) for r in ["C124", "C123", "C122", "C121"]]
     for i, bank in enumerate(HVIO_ORDER):                          # 100n, 1u, 4u7 per HVIO bank
