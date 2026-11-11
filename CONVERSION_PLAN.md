@@ -278,6 +278,17 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   - Later changes (same day): U9 (HyperRAM) turned to 270° (7 HyperRAM airwire crossings instead of 59);
     R25 moved off its caps; U7/U9 plane balls get via-in-pad too; no FPGA decap or bead in the band between the
     BGA's south edge and J1 (`SOUTH_BAND`), which carries ~24 translator/header nets (FB7 now 10 mm from G10).
+- [x] **Supply copper** (2026-11-11, `tools/phase5_power.py`, step 7 of `phase5_layout.sh`). An audit found the
+  pours still in their Agilex shapes: the L4 +0V95 island missed M3 and the west core decaps, neither buck output
+  pour on B.Cu had a via to L4 (the 3.3 V one sat under the stale island), U2's feedback divider (R1/C77/R2) was
+  open, the L3 +1V8 outline stopped short of the translators, ~20 supply/GND pads had lost their via, plus a dead
+  via and a PG_1V8 track on L4. Now: dead copper removed; 6 + 5 stitching vias in the 0.95 V and 3.3 V buck pours;
+  23 pad taps (via in pad, or a short stub); one +1V8 pour over all of L3; L4 split by KRT route_planes with
+  `phase5_planes.py notch` now trying each channel, refilling and keeping it only if the +3V3 via joins the main
+  +3V3 fill (8 notches). Result: every +0V95/+3V3/+1V8 via reaches its plane, one island per plane net, nothing
+  orphaned; DRC clean apart from routing, schematic parity 0. Left for routing: the translators' supply pins to
+  their cap vias, U10/U13 GND (TSSOP, no room for a tap), the U6 LDO (+5V in, +3V3A out, C15), the PG_0V95/PG_1V8
+  enable lines (two PG_1V8 vias at (77.73, 102.28) and (79.81, 104.60) are the old layer change), VCCA filters.
 - [ ] **Planes and routing** (`tools/phase5_route.sh` → `build/phase5/routed.kicad_pcb`, not yet in `hardware/`):
   L4 split by KRT route_planes (+0V95 island, +3V3 around) with notches for the +3V3 vias it caught
   (`phase5_planes.py`); L3 +1V8 pour dropped before routing and poured again after; HyperRAM; all nets on a

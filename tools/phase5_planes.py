@@ -20,7 +20,7 @@ import pcbnew
 
 IU, MM = pcbnew.FromMM, pcbnew.ToMM
 L4 = "In3.Cu"
-NOTCH_W, NOTCH_KEEP, NOTCH_MAX = 0.9, 0.5, 8.0
+NOTCH_W, NOTCH_KEEP, NOTCH_MAX, NOTCH_PAST = 0.9, 0.5, 8.0, 0.6
 
 
 def drop(b, layer=L4):
@@ -47,6 +47,17 @@ def rect(a, c, w):
     return s
 
 
+def main_fill(b, lay):
+    """The largest island of the +3V3 fill on L4, refilled now."""
+    zones = b.Zones()                      # held: Fill on a temporary zone list crashes KiCad 10's Python
+    pcbnew.ZONE_FILLER(b).Fill(zones)
+    f = [x for x in zones if x.IsOnLayer(lay) and x.GetNetname() == "+3V3"][0].GetFilledPolysList(lay)
+    k = max(range(f.OutlineCount()), key=lambda i: abs(f.Outline(i).Area()))
+    s = pcbnew.SHAPE_POLY_SET()
+    s.AddOutline(f.Outline(k))
+    return s
+
+
 def notch(b):
     lay = b.GetLayerID(L4)
     island = [z for z in b.Zones() if z.IsOnLayer(lay) and z.GetNetname() == "+0V95"]
@@ -59,10 +70,11 @@ def notch(b):
              if p.GetNetname() == "+0V95" and p.HasHole()]
     cut = 0
     for v in vias:
-        if v.GetNetname() != "+3V3" or not z.Outline().Contains(v.GetPosition()):
-            continue
         a = v.GetPosition()
-        best = None
+        if v.GetNetname() != "+3V3" or main_fill(b, lay).Contains(a):
+            continue
+        # candidate channels: 8 directions, from the via to NOTCH_PAST beyond the island's edge, clear of +0V95
+        cands = []
         for k in range(8):
             ang = k * math.pi / 4
             for step in range(1, int(NOTCH_MAX / 0.1)):
@@ -71,18 +83,22 @@ def notch(b):
                     break
             else:
                 continue
-            band = rect(a, c, IU(NOTCH_W + 2 * NOTCH_KEEP))
-            if any(band.Contains(p) for p in core):
-                continue
-            if best is None or step < best[0]:
-                best = (step, c)
-        if best is None:
-            print(f"  no notch for the +3V3 via at ({MM(a.x):.2f}, {MM(a.y):.2f})")
-            continue
-        o = z.Outline()
-        o.BooleanSubtract(rect(a, best[1], IU(NOTCH_W)))
-        cut += 1
-        print(f"  notch for the +3V3 via at ({MM(a.x):.2f}, {MM(a.y):.2f}), {best[0] * 0.1:.1f} mm")
+            c = pcbnew.VECTOR2I(int(c.x + math.cos(ang) * IU(NOTCH_PAST)), int(c.y + math.sin(ang) * IU(NOTCH_PAST)))
+            if not any(rect(a, c, IU(NOTCH_W + 2 * NOTCH_KEEP)).Contains(p) for p in core):
+                cands.append((step, c))
+        # shortest first; keep the first one after which the via really sits in the main +3V3 fill (an antipad or
+        # a pocket of the island can still cut the channel off), else undo it
+        for step, c in sorted(cands, key=lambda s: s[0]):
+            keep = pcbnew.SHAPE_POLY_SET(z.Outline())
+            z.Outline().BooleanSubtract(rect(a, c, IU(NOTCH_W)))
+            if main_fill(b, lay).Contains(a):
+                cut += 1
+                print(f"  notch for the +3V3 via at ({MM(a.x):.2f}, {MM(a.y):.2f}), {step * 0.1:.1f} mm")
+                break
+            z.Outline().RemoveAllContours()
+            z.Outline().Append(keep)
+        else:
+            print(f"  NO NOTCH for the +3V3 via at ({MM(a.x):.2f}, {MM(a.y):.2f})")
     print(f"phase5_planes: {cut} notches in the L4 +0V95 island")
 
 

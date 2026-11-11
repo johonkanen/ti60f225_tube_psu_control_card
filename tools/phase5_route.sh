@@ -4,8 +4,7 @@
 # Work files in build/phase5/route/. Rules for every routing step: 0.1 mm tracks at 0.125 mm clearance with
 # 0.30/0.15 vias (0.125 + 0.075 via ring = JLC's 0.2 mm via-hole-to-track; KRT itself holds hole clearance only at
 # NPTH walls), signal layers F.Cu, L3 (In2.Cu) and B.Cu; the GND layers and the split L4 are never routed.
-#  1. L4 (In3.Cu): old zones dropped, KRT route_planes splits it between +0V95 and +3V3, phase5_planes notches
-#     the +0V95 island for the +3V3 vias it caught
+#  1. L4 (In3.Cu) comes split between +0V95 and +3V3 from tools/phase5_layout.sh and is kept as it is
 #  2. L3 +1V8 pour dropped: KRT routes no track through another net's pour; it is poured again in step 5
 #  3. HyperRAM: HR_DQ3 (three pads, FPGA / RAM / TEST_N pull-up) alone first, then the rest with earlier copper
 #     protected, as one length-match group (DQ, RWDS, CS#)
@@ -27,13 +26,8 @@ COMMON=(--clearance 0.125 --fab-tier advanced --escalation off --no-fix-drc-sett
 ROUTE=(--layers F.Cu In2.Cu B.Cu --track-width 0.1 --via-size 0.3 --via-drill 0.15 --no-bga-zones U1 U7 U9 "${COMMON[@]}")
 
 cp "$IN" "$W/r0.kicad_pcb"; sib "$W/r0.kicad_pcb"
-# 1.-2. planes
-kpy "$R/tools/phase5_planes.py" drop "$W/r0.kicad_pcb" "$W/r0.kicad_pcb" In3.Cu
-(cd "$K" && $KP py_router/route_planes.py "$W/r0.kicad_pcb" "$W/r1.kicad_pcb" --nets +0V95 +3V3 \
-    --plane-layers In3.Cu In3.Cu --zone-clearance 0.15 --min-thickness 0.15 --no-thermal-vias "${COMMON[@]}" \
-    > "$W/r1.log" 2>&1) || { tail -20 "$W/r1.log"; exit 1; }
-sib "$W/r1.kicad_pcb"
-kpy "$R/tools/phase5_planes.py" notch "$W/r1.kicad_pcb" "$W/r1.kicad_pcb" | tail -1
+# 1.-2. planes: L4 is already split by tools/phase5_layout.sh (step 7)
+cp "$W/r0.kicad_pcb" "$W/r1.kicad_pcb"; sib "$W/r1.kicad_pcb"
 kpy "$R/tools/phase5_planes.py" drop "$W/r1.kicad_pcb" "$W/r1.kicad_pcb" In2.Cu
 # 3. HyperRAM
 (cd "$K" && $KP py_router/route.py "$W/r1.kicad_pcb" "$W/r2.kicad_pcb" --nets HR_DQ3 "${ROUTE[@]}" \

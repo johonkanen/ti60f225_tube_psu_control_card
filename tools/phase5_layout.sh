@@ -10,6 +10,9 @@
 #  5. phase5_decaps   Ti60 decoupling, VCCA filters, configuration parts, translator caps on the bottom at their pins
 #  6. place_simple    KRT places the flash and JTAG pull-ups (tools/phase5/groups.json, intent.json); 8 seeds,
 #                     the first judged one is kept, then phase5_decaps --legalise moves them off other nets' copper
+#  7. phase5_power    supply copper fitted to the Ti60: dead Agilex copper out, buck output pours stitched to L4,
+#                     supply/GND pads that lost their via tapped, one +1V8 pour over the whole of L3; then L4 split
+#                     between +0V95 and +3V3 (KRT route_planes) and phase5_planes notch for the +3V3 vias it caught
 set -euo pipefail
 R="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="${1:-$R/hardware/control_card.kicad_pcb}"
@@ -51,6 +54,14 @@ kpy "$R/tools/phase5_lock.py" "$W/b3.kicad_pcb" "$W/b3.kicad_pcb"
     || { tail -20 "$W/place.log"; exit 1; }
 SEED=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['judge'][0])" "$W/place/judge.json")
 echo "place_simple: seed $SEED kept"
-kpy "$R/tools/phase5_decaps.py" "$W/place/s$SEED.kicad_pcb" "$OUT" --legalise R54 R57 R58 R59 R60 R61 R62 R63 | tail -1
-kpy "$R/tools/phase5_lock.py" "$OUT" "$OUT" --unlock
+kpy "$R/tools/phase5_decaps.py" "$W/place/s$SEED.kicad_pcb" "$W/b4.kicad_pcb" --legalise R54 R57 R58 R59 R60 R61 R62 R63 | tail -1
+kpy "$R/tools/phase5_lock.py" "$W/b4.kicad_pcb" "$W/b4.kicad_pcb" --unlock
+# 7. supply copper and the L4 split
+kpy "$R/tools/phase5_power.py" "$W/b4.kicad_pcb" "$W/b5.kicad_pcb" | grep -v "memory leak"
+kpy "$R/tools/phase5_planes.py" drop "$W/b5.kicad_pcb" "$W/b5.kicad_pcb" In3.Cu | grep -v "memory leak"
+cp "$W/b0.kicad_pro" "$W/b5.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b5.kicad_dru"
+(cd "$K" && $KP py_router/route_planes.py "$W/b5.kicad_pcb" "$W/b6.kicad_pcb" --nets +0V95 +3V3 \
+    --plane-layers In3.Cu In3.Cu --zone-clearance 0.15 --min-thickness 0.15 --no-thermal-vias --clearance 0.125 \
+    --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/planes.log" 2>&1) || { tail -20 "$W/planes.log"; exit 1; }
+kpy "$R/tools/phase5_planes.py" notch "$W/b6.kicad_pcb" "$OUT" | grep -v "memory leak" | tail -1
 echo "wrote $OUT"
