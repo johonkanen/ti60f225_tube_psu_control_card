@@ -27,6 +27,7 @@ import pcbnew
 
 MM, IU = pcbnew.ToMM, pcbnew.FromMM
 CLR, HOLE_CLR, HOLE_HOLE = 0.1, 0.2, 0.2
+SW_CLR = 0.15                                   # netclass SW (hardware/control_card.kicad_pro)
 VIA_D, VIA_DRILL = 0.30, 0.15
 STUB_W, STUB_MAX = 0.2, 0.8
 # The band between the BGA's south edge and J1 carries the translator outputs and the direct HVIO header nets
@@ -40,6 +41,7 @@ BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
 UNUSED_BANKS = {"3A", "3B"}                     # no caps (tools/sch_vccio_caps.py)
 USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]   # 10n/1n C166-C177 in this order
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]
+UNDER_BGA = {"1n", "10n", "100n"}               # 0201s of these values may sit under the ball field (Lattice)
 
 
 def refs(a, b, p="C"):
@@ -65,17 +67,24 @@ def plan(u1):
     jobs += [(r, vcc) for r in refs(119, 120) + refs(114, 118) + refs(109, 113)]   # core first: 1n, 10n, 100n
     vcca = [(refs(86 + 5 * i, 90 + 5 * i), pb[f"VCCA_{c}"]) for i, c in enumerate(["TL", "TR", "BL", "BR"])]
     jobs += [(c[-1], balls) for c, balls in vcca]                                  # each VCCA's 1n
-    jobs += [(r, balls) for c, balls in vcca for r in reversed(c[:-1])]           # then its 10n, 100n
-    jobs += [(r, vcc) for r in ["C108", "C107"]]
-    for i, bank in enumerate(BANK_ORDER):                           # 1n, 10n, 100n, 1u per used HSIO bank
+    # the small caps of the I/O supplies before the VCCA's 10n/100n: under the ball field there is room for only
+    # about half of all 1n/10n/100n (UNDER_BGA)
+    for i, bank in enumerate(BANK_ORDER):                           # 1n, 10n, 100n per used HSIO bank
         if bank in UNUSED_BANKS:
             continue
         k = USED_BANKS.index(bank)
-        jobs += [(r, pb[f"VCCIO{bank}"]) for r in (f"C{167 + 2 * k}", f"C{166 + 2 * k}", f"C{129 + 2 * i}", f"C{128 + 2 * i}")]
+        jobs += [(r, pb[f"VCCIO{bank}"]) for r in (f"C{167 + 2 * k}", f"C{166 + 2 * k}", f"C{129 + 2 * i}")]
     aux = pb["VCCAUX"]
-    jobs += [(r, aux) for r in ["C124", "C123", "C122", "C121"]]
-    for i, bank in enumerate(HVIO_ORDER):                          # 100n, 1u, 4u7 per HVIO bank
-        jobs += [(f"C{146 + 3 * i - k}", pb[f"VCCIO33_{bank}"]) for k in range(3)]
+    jobs += [(r, aux) for r in ["C124", "C123", "C122"]]           # VCCAUX 1n, 10n, 100n
+    jobs += [(f"C{146 + 3 * i}", pb[f"VCCIO33_{bank}"]) for i, bank in enumerate(HVIO_ORDER)]   # HVIO 100n
+    jobs += [(r, balls) for c, balls in vcca for r in reversed(c[:-1])]           # each VCCA's 10n, 100n
+    jobs += [(r, vcc) for r in ["C108", "C107"]]                                   # VCC 1u, 4u7
+    for i, bank in enumerate(BANK_ORDER):                           # 1u per used HSIO bank
+        if bank not in UNUSED_BANKS:
+            jobs.append((f"C{128 + 2 * i}", pb[f"VCCIO{bank}"]))
+    jobs.append(("C121", aux))                                      # VCCAUX 4u7
+    for i, bank in enumerate(HVIO_ORDER):                          # 1u, 4u7 per HVIO bank
+        jobs += [(f"C{146 + 3 * i - k}", pb[f"VCCIO33_{bank}"]) for k in (1, 2)]
     vccio = [b for k, v in pb.items() if k.startswith("VCCIO") and not k.startswith("VCCIO33") for b in v]
     jobs += [("C127", vccio), ("C126", vccio), ("C125", vccio), ("C106", vcc)]
     jobs += [(f"FB{6 + i}", pb[f"VCCA_{c}"]) for i, c in enumerate(["TL", "TR", "BL", "BR"])]
@@ -98,6 +107,10 @@ class Board:
         self.holes = []                             # (pos, radius, net)
         self.court = []                             # bottom courtyard bboxes: (box, ref)
         self.vias = []                              # (pos, net, radius)
+        self.field = None                           # U1's ball field: on the bottom only UNDER_BGA caps (set_field)
+        # nets of a wider netclass clearance (the project's SW class: the buck switch nodes, 0.15 mm)
+        self.net_clr = {n.GetNetCode(): SW_CLR for name, n in b.GetNetsByName().items()
+                        if str(name).startswith("/Power/SW_")}
         for t in b.GetTracks():
             if t.Type() == pcbnew.PCB_VIA_T:
                 self.add_via_obj(t)
@@ -135,6 +148,13 @@ class Board:
                     n += 1
         return n
 
+    def set_field(self, u1, margin=0.2):
+        bb = pcbnew.BOX2I()
+        for p in u1.Pads():
+            bb.Merge(p.GetPosition())
+        self.field = pcbnew.BOX2I(bb.GetPosition(), bb.GetSize())
+        self.field.Inflate(IU(margin))
+
     def add_via_obj(self, v):
         for l in self.layers:
             self.items[l].append((v.GetEffectiveShape(l), v.GetNetCode(), v.GetBoundingBox()))
@@ -155,7 +175,7 @@ class Board:
         box = pcbnew.BOX2I(box.GetPosition(), box.GetSize())
         box.Inflate(IU(clr + 0.3))
         for s, n, bb in self.items[layer]:
-            if n != net and bb.Intersects(box) and s.Collide(shape, IU(clr) - 1):
+            if n != net and bb.Intersects(box) and s.Collide(shape, IU(max(clr, self.net_clr.get(n, 0))) - 1):
                 return False
         return True
 
@@ -180,6 +200,10 @@ def same_net_via_in(board, pad):
     return None
 
 
+def under_bga_ok(f):
+    return f.GetValue() in UNDER_BGA and "0201" in str(f.GetFPID().GetLibItemName())
+
+
 def try_pose(board, f, pos, rot, netname):
     """Legal? -> (new via positions) or None."""
     f.SetPosition(pos)
@@ -197,6 +221,8 @@ def try_pose(board, f, pos, rot, netname):
     for ob, _, flipped in board.court:
         if flipped == f.IsFlipped() and ob.Intersects(cb):
             return None
+    if board.field is not None and board.field.Intersects(cb) and not under_bga_ok(f):
+        return None
     new = []
     for p in f.Pads():
         if not p.GetNumber() or not p.IsOnLayer(side):
@@ -250,6 +276,43 @@ def stub_to_via(board, f, p, side):
     return best[1] if best else None
 
 
+class Lattice:
+    """U1's ball sites and the diagonal gaps between them, in half-pitch steps (both indices even: a ball, both
+    odd: a gap). A 0201 (pads 0.64 mm apart) fits the 0.65 mm pitch with each pad on a site: on a plane ball's
+    via, or on a new via in a gap."""
+    def __init__(self, u1):
+        xs = sorted({p.GetPosition().x for p in u1.Pads()})
+        ys = sorted({p.GetPosition().y for p in u1.Pads()})
+        self.x0, self.y0, self.h = xs[0], ys[0], (xs[1] - xs[0]) / 2
+        self.nx, self.ny = 2 * (len(xs) - 1), 2 * (len(ys) - 1)
+
+    def index(self, pos, tol=IU(0.03)):
+        i, j = (pos.x - self.x0) / self.h, (pos.y - self.y0) / self.h
+        ri, rj = round(i), round(j)
+        if abs(i - ri) * self.h > tol or abs(j - rj) * self.h > tol or (ri - rj) % 2:
+            return None
+        return (ri, rj) if 0 <= ri <= self.nx and 0 <= rj <= self.ny else None
+
+    def sites(self):
+        return [pcbnew.VECTOR2I(int(self.x0 + i * self.h), int(self.y0 + j * self.h))
+                for i in range(self.nx + 1) for j in range(self.ny + 1) if (i - j) % 2 == 0]
+
+
+def lattice_poses(f, lat, tpos, reach=2.0):
+    """Poses of a 0201 under the ball field with both pads on lattice sites, near the targets."""
+    out = []
+    for s in lat.sites():
+        if min(math.hypot(s.x - t.x, s.y - t.y) for t in tpos) > IU(reach):
+            continue
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            c = pcbnew.VECTOR2I(int(s.x + dx * lat.h), int(s.y + dy * lat.h))
+            for rot in (0, 90, 180, 270):
+                f.SetPosition(c); f.SetOrientationDegrees(rot)
+                if all(lat.index(p.GetPosition()) is not None for p in f.Pads() if p.GetNumber()):
+                    out.append((c, rot))
+    return list({(c.x, c.y, r): (c, r) for c, r in out}.values())
+
+
 def main(src, dst, legalise=()):
     b = pcbnew.LoadBoard(src)
     u1 = b.FindFootprintByReference("U1")
@@ -270,10 +333,13 @@ def main(src, dst, legalise=()):
     moving = {r for r, _ in jobs}
     board = Board(b)
     print("escape corridors reserved:", board.reserve_escapes(u1))
+    if not legalise:
+        board.set_field(u1)
     for f in b.GetFootprints():
         if f.GetReference() not in moving:
             board.add_footprint(f)
     ball = {p.GetNumber(): p.GetPosition() for p in u1.Pads()}
+    lat = Lattice(u1)
     for f in b.GetFootprints():
         if f.GetReference() != "U1":    # (a legalised part's own pad is read here, before it moves)
             ball.update({f"{f.GetReference()}.{p.GetNumber()}": p.GetPosition() for p in f.Pads()})
@@ -303,15 +369,25 @@ def main(src, dst, legalise=()):
                     f.SetPosition(pcbnew.VECTOR2I(0, 0)); f.SetOrientationDegrees(rot)
                     off = [p for p in f.Pads() if p.GetNumber() == p0.GetNumber()][0].GetPosition()
                     cands.append((pcbnew.VECTOR2I(vpos.x - off.x, vpos.y - off.y), rot))
+        if under_bga_ok(f):
+            cands += lattice_poses(f, lat, tpos)
         best = None
         for c in sorted(cands, key=rail_dist):
+            if best is not None and rail_dist(c) >= best[0]:
+                break                       # score >= rail distance: nothing later can win
             new = try_pose(board, f, c[0], c[1], netname)
             if new is not None:
                 score = rail_dist(c) + cost(new)
                 if best is None or score < best[0]:
                     best = (score, c, new)
-        if best is None or best[0] > 0.6:     # a grid search around the targets, nearest first
-            step, reach = 0.1, 80
+        field = board.field
+        for attempt in (0, 1):  # no place outside the ball field: under it after all, wider (R65)
+            if attempt and (best is not None or field is None or under_bga_ok(f)):
+                break
+            board.field = field if attempt == 0 else None
+            if not (best is None or best[0] > 0.6):     # a grid search around the targets, nearest first
+                continue
+            step, reach = 0.1, (80, 130)[attempt]
             grid = []
             for t in tpos:
                 for i in range(-reach, reach + 1):
@@ -330,6 +406,7 @@ def main(src, dst, legalise=()):
                     if best is None or score < best[0]:
                         best = (score, c, new)
                     break
+        board.field = field
         if best is None:
             print(f"NO LEGAL PLACE for {ref}: left where it was")
             continue

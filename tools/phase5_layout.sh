@@ -63,5 +63,5 @@ cp "$W/b0.kicad_pro" "$W/b5.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b5.kicad_dru"
 (cd "$K" && $KP py_router/route_planes.py "$W/b5.kicad_pcb" "$W/b6.kicad_pcb" --nets +0V95 +3V3 \
     --plane-layers In3.Cu In3.Cu --zone-clearance 0.15 --min-thickness 0.15 --no-thermal-vias --clearance 0.125 \
     --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/planes.log" 2>&1) || { tail -20 "$W/planes.log"; exit 1; }
-kpy "$R/tools/phase5_planes.py" notch "$W/b6.kicad_pcb" "$OUT" | grep -v "memory leak" | tail -1
+kpy "$R/tools/phase5_planes.py" notch "$W/b6.kicad_pcb" "$OUT" | grep -E "NO NOTCH|notches"
 echo "wrote $OUT"

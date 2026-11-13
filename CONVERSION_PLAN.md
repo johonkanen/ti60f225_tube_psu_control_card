@@ -289,6 +289,18 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   orphaned; DRC clean apart from routing, schematic parity 0. Left for routing: the translators' supply pins to
   their cap vias, U10/U13 GND (TSSOP, no room for a tap), the U6 LDO (+5V in, +3V3A out, C15), the PG_0V95/PG_1V8
   enable lines (two PG_1V8 vias at (77.73, 102.28) and (79.81, 104.60) are the old layer change), VCCA filters.
+- [x] **Decoupling under the BGA** (2026-11-13, `tools/phase5_decaps.py`). The 1n/10n/100n 0201s may now sit
+  inside U1's ball field on the lattice of ball vias and diagonal gaps (pads 0.64 mm apart on the 0.65 mm pitch:
+  one pad on a plane ball's via, the other on a new via in a gap); nothing else may go under the field (R65, the
+  unused bank 3A's REF_RES, goes there as a last resort). Plan order changed: bank, VCCAUX and HVIO 1n/10n/100n
+  now come before the VCCA 10n/100n. Limit found: of the 196 gaps only 42 take a via, since the F.Cu under-pad
+  escapes run through the rest, and the I/O banks have almost no GND balls, so most bank caps need a gap via
+  for GND; with clean 0201 courtyards (one free ball between caps) the field holds about 25 caps. Result
+  (same fanned-out board, old → new mean distance to the balls): HSIO+VCCAUX 21 caps 4.14 → 2.81 mm, HVIO 100n
+  4.25 → 2.02 mm, core 12 caps 1.66 → 1.46 mm; VCCA 10n/100n worse (TL 1.67 → 4.14, TR 4.37 → 5.77 mm).
+  Also: the placers keep the SW netclass's 0.15 mm from the switch nodes; `phase5_planes.py notch` keeps a via's
+  holes in the +3V3 fill test (a via in a hole of the island was taken as joined), starts the channel at the via,
+  tries 1.5 mm wide and closer to +0V95 vias when 0.9 mm fails, and rejects a channel that cuts a +0V95 via off.
 - [ ] **Planes and routing** (`tools/phase5_route.sh` → `build/phase5/routed.kicad_pcb`, not yet in `hardware/`):
   L4 split by KRT route_planes (+0V95 island, +3V3 around) with notches for the +3V3 vias it caught
   (`phase5_planes.py`); L3 +1V8 pour dropped before routing and poured again after; HyperRAM; all nets on a

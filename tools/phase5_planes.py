@@ -21,6 +21,8 @@ import pcbnew
 IU, MM = pcbnew.FromMM, pcbnew.ToMM
 L4 = "In3.Cu"
 NOTCH_W, NOTCH_KEEP, NOTCH_MAX, NOTCH_PAST = 0.9, 0.5, 8.0, 0.6
+NOTCH_TRIES = ((NOTCH_W, NOTCH_KEEP), (1.5, NOTCH_KEEP), (NOTCH_W, 0.05), (1.5, 0.05))   # width, keep from +0V95
+NOTCH_BACK = 0.25                   # the channel starts this far behind the via (its pad is 0.15 in radius)
 
 
 def drop(b, layer=L4):
@@ -33,29 +35,38 @@ def drop(b, layer=L4):
     print(f"phase5_planes: {n} old zones removed from {layer}")
 
 
-def rect(a, c, w):
-    """Polygon of a w-wide band from point a to point c (VECTOR2I), square ends."""
+def rect(a, c, w, back):
+    """Polygon of a w-wide band from `back` behind point a to point c (VECTOR2I)."""
     dx, dy = c.x - a.x, c.y - a.y
     d = math.hypot(dx, dy)
     nx, ny = -dy / d * w / 2, dx / d * w / 2
-    ex, ey = dx / d * w / 2, dy / d * w / 2
+    ex, ey = dx / d * back, dy / d * back
     s = pcbnew.SHAPE_POLY_SET()
     s.NewOutline()
-    for px, py in ((a.x - ex + nx, a.y - ey + ny), (c.x + ex + nx, c.y + ey + ny),
-                   (c.x + ex - nx, c.y + ey - ny), (a.x - ex - nx, a.y - ey - ny)):
+    for px, py in ((a.x - ex + nx, a.y - ey + ny), (c.x + nx, c.y + ny),
+                   (c.x - nx, c.y - ny), (a.x - ex - nx, a.y - ey - ny)):
         s.Append(int(px), int(py))
     return s
 
 
-def main_fill(b, lay):
-    """The largest island of the +3V3 fill on L4, refilled now."""
-    zones = b.Zones()                      # held: Fill on a temporary zone list crashes KiCad 10's Python
-    pcbnew.ZONE_FILLER(b).Fill(zones)
-    f = [x for x in zones if x.IsOnLayer(lay) and x.GetNetname() == "+3V3"][0].GetFilledPolysList(lay)
+def largest(f):
+    """The largest island of a fill, with its holes (a point in a hole is not on it)."""
     k = max(range(f.OutlineCount()), key=lambda i: abs(f.Outline(i).Area()))
     s = pcbnew.SHAPE_POLY_SET()
     s.AddOutline(f.Outline(k))
+    for h in range(f.HoleCount(k)):
+        s.AddHole(f.Hole(k, h))
     return s
+
+
+def main_fill(b, lay, core):
+    """The largest island of the +3V3 fill on L4 (refilled now), and how many of the +0V95 vias `core` are off
+    the largest +0V95 island."""
+    zones = b.Zones()                      # held: Fill on a temporary zone list crashes KiCad 10's Python
+    pcbnew.ZONE_FILLER(b).Fill(zones)
+    fill = lambda net: [x for x in zones if x.IsOnLayer(lay) and x.GetNetname() == net][0].GetFilledPolysList(lay)
+    island = largest(fill("+0V95"))
+    return largest(fill("+3V3")), sum(not island.Contains(p) for p in core)
 
 
 def notch(b):
@@ -69,31 +80,36 @@ def notch(b):
     core += [p.GetPosition() for f in b.GetFootprints() for p in f.Pads()
              if p.GetNetname() == "+0V95" and p.HasHole()]
     cut = 0
+    n_core0 = main_fill(b, lay, core)[1]
     for v in vias:
         a = v.GetPosition()
-        if v.GetNetname() != "+3V3" or main_fill(b, lay).Contains(a):
+        if v.GetNetname() != "+3V3" or main_fill(b, lay, core)[0].Contains(a):
             continue
-        # candidate channels: 8 directions, from the via to NOTCH_PAST beyond the island's edge, clear of +0V95
+        # candidate channels: 8 directions, from the via to NOTCH_PAST beyond the island's edge, clear of +0V95;
+        # NOTCH_W first, then wider (another net's via in a narrow channel leaves only slivers beside its antipad),
+        # then closer to the +0V95 vias (the refill check below rejects one that cuts a +0V95 via off)
         cands = []
-        for k in range(8):
-            ang = k * math.pi / 4
-            for step in range(1, int(NOTCH_MAX / 0.1)):
-                c = pcbnew.VECTOR2I(int(a.x + math.cos(ang) * IU(step * 0.1)), int(a.y + math.sin(ang) * IU(step * 0.1)))
-                if not z.Outline().Contains(c):
-                    break
-            else:
-                continue
-            c = pcbnew.VECTOR2I(int(c.x + math.cos(ang) * IU(NOTCH_PAST)), int(c.y + math.sin(ang) * IU(NOTCH_PAST)))
-            if not any(rect(a, c, IU(NOTCH_W + 2 * NOTCH_KEEP)).Contains(p) for p in core):
-                cands.append((step, c))
-        # shortest first; keep the first one after which the via really sits in the main +3V3 fill (an antipad or
-        # a pocket of the island can still cut the channel off), else undo it
-        for step, c in sorted(cands, key=lambda s: s[0]):
+        for n_try, (w, keep_d) in enumerate(NOTCH_TRIES):
+            for k in range(8):
+                ang = k * math.pi / 4
+                for step in range(1, int(NOTCH_MAX / 0.1)):
+                    c = pcbnew.VECTOR2I(int(a.x + math.cos(ang) * IU(step * 0.1)), int(a.y + math.sin(ang) * IU(step * 0.1)))
+                    if not z.Outline().Contains(c):
+                        break
+                else:
+                    continue
+                c = pcbnew.VECTOR2I(int(c.x + math.cos(ang) * IU(NOTCH_PAST)), int(c.y + math.sin(ang) * IU(NOTCH_PAST)))
+                if not any(rect(a, c, IU(w + 2 * keep_d), IU(NOTCH_BACK + keep_d)).Contains(p) for p in core):
+                    cands.append((n_try, step, c, w))
+        # narrowest, then shortest first; keep the first one after which the via really sits in the main +3V3 fill
+        # (an antipad or a pocket of the island can still cut the channel off), else undo it
+        for _, step, c, w in sorted(cands, key=lambda s: s[:2]):
             keep = pcbnew.SHAPE_POLY_SET(z.Outline())
-            z.Outline().BooleanSubtract(rect(a, c, IU(NOTCH_W)))
-            if main_fill(b, lay).Contains(a):
+            z.Outline().BooleanSubtract(rect(a, c, IU(w), IU(NOTCH_BACK)))
+            fill, n_core = main_fill(b, lay, core)
+            if fill.Contains(a) and n_core <= n_core0:      # and no +0V95 via is cut off
                 cut += 1
-                print(f"  notch for the +3V3 via at ({MM(a.x):.2f}, {MM(a.y):.2f}), {step * 0.1:.1f} mm")
+                print(f"  notch for the +3V3 via at ({MM(a.x):.2f}, {MM(a.y):.2f}), {step * 0.1:.1f} mm long, {w} mm wide")
                 break
             z.Outline().RemoveAllContours()
             z.Outline().Append(keep)
