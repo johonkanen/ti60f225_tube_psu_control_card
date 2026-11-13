@@ -20,3 +20,6 @@ efinity/pinplan/build/outflow/*
 !efinity/pinplan/build/outflow/ti60f225_pinplan.pt.rpt
 !efinity/pinplan/build/outflow/ti60f225_pinplan.timing.rpt
 /build/
+
+# Claude Code agent worktrees
+.claude/worktrees/
