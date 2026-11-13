@@ -3,7 +3,7 @@
 #   tools/phase5_route.sh [IN.kicad_pcb] [OUT.kicad_pcb]   (default: hardware/control_card.kicad_pcb, in place)
 # Work files in build/phase5/route/. Rules for every routing step: 0.1 mm tracks at 0.125 mm clearance with
 # 0.30/0.15 vias (0.125 + 0.075 via ring = JLC's 0.2 mm via-hole-to-track; KRT itself holds hole clearance only at
-# NPTH walls), signal layers F.Cu, L3 (In2.Cu) and B.Cu; the GND layers and the split L4 are never routed.
+# NPTH walls), signal layers F.Cu and L3 (In2.Cu), F.Cu preferred; the GND layers and the split L4 are never routed.
 #  1. L4 (In3.Cu) comes split between +0V95 and +3V3 from tools/phase5_layout.sh and is kept as it is
 #  2. L3 +1V8 pour dropped: KRT routes no track through another net's pour; it is poured again in step 5
 #  3. HyperRAM: HR_DQ3 (three pads, FPGA / RAM / TEST_N pull-up) alone first, then the rest with earlier copper
@@ -23,7 +23,7 @@ kpy() { "$E" bash -c '"$KICAD_MOUNT/bin/python3.11" -I "$@" 2>&1 | grep -v "memo
 sib() { for x in kicad_pro kicad_dru; do cp "$R/hardware/control_card.$x" "${1%.kicad_pcb}.$x"; done; }
 mkdir -p "$W"
 COMMON=(--clearance 0.125 --fab-tier advanced --escalation off --no-fix-drc-settings)
-ROUTE=(--layers F.Cu In2.Cu B.Cu --track-width 0.1 --via-size 0.3 --via-drill 0.15 --no-bga-zones U1 U7 U9 "${COMMON[@]}")
+ROUTE=(--layers F.Cu In2.Cu --track-width 0.1 --via-size 0.3 --via-drill 0.15 --no-bga-zones U1 U7 U9 "${COMMON[@]}")
 
 cp "$IN" "$W/r0.kicad_pcb"; sib "$W/r0.kicad_pcb"
 # 1.-2. planes: L4 is already split by tools/phase5_layout.sh (step 7)
@@ -31,16 +31,16 @@ cp "$W/r0.kicad_pcb" "$W/r1.kicad_pcb"; sib "$W/r1.kicad_pcb"
 kpy "$R/tools/phase5_planes.py" drop "$W/r1.kicad_pcb" "$W/r1.kicad_pcb" In2.Cu
 # 3. HyperRAM
 (cd "$K" && $KP py_router/route.py "$W/r1.kicad_pcb" "$W/r2.kicad_pcb" --nets HR_DQ3 "${ROUTE[@]}" \
-    --layer-costs 1 4 1.5 --grid-step 0.025 > "$W/r2.log" 2>&1) || { tail -20 "$W/r2.log"; exit 1; }
+    --layer-costs 1 4 --grid-step 0.025 > "$W/r2.log" 2>&1) || { tail -20 "$W/r2.log"; exit 1; }
 sib "$W/r2.kicad_pcb"
 (cd "$K" && KICAD_RIP_PREEXISTING=0 $KP py_router/route.py "$W/r2.kicad_pcb" "$W/r3.kicad_pcb" \
     --nets HR_DQ0 HR_DQ1 HR_DQ2 HR_DQ4 HR_DQ5 HR_DQ6 HR_DQ7 HR_RWDS HR_CS_N HR_CK HR_RESET_N "${ROUTE[@]}" \
-    --layer-costs 1 4 1.5 --grid-step 0.025 --length-match-group 'HR_DQ*' HR_RWDS HR_CS_N \
+    --layer-costs 1 4 --grid-step 0.025 --length-match-group 'HR_DQ*' HR_RWDS HR_CS_N \
     --length-match-tolerance 0.2 > "$W/r3.log" 2>&1) || { tail -20 "$W/r3.log"; exit 1; }
 sib "$W/r3.kicad_pcb"
 # 4. everything else
 (cd "$K" && $KP py_router/route.py "$W/r3.kicad_pcb" "$W/r4.kicad_pcb" --nets '*' "${ROUTE[@]}" \
-    --layer-costs 1 1.3 1.2 --grid-step 0.025 --no-smoothing \
+    --layer-costs 1 2 --grid-step 0.025 --no-smoothing \
     --power-nets '+0V95' '+1V8' '+3V3' '+5V' '+3V3A' '*VCCA*' --power-nets-widths 0.3 0.3 0.3 0.3 0.25 0.2 \
     --json-out "$W/r4.json" > "$W/r4.log" 2>&1) || { tail -20 "$W/r4.log"; exit 1; }
 grep -E "Single-ended:|Multi-point:|Ships" "$W/r4.log" | tail -3
