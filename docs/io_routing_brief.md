@@ -91,16 +91,42 @@ Procedure for every swap:
 
 1. Change `tools/phase5_route.sh` to F.Cu + In2.Cu and run it on the current board as a baseline. Record
    unconnected count, via count and failed nets.
-2. Look at the result (render the copper, or list where nets cross and where vias were added). Plan swaps that
-   untangle it: translator inputs against the 2A/2B (and 3A/3B) ball order, translator channels against the J1
-   pin order, ADC nets against their ADC chips, HVIO nets against J1.
-3. Apply, rerun, repeat until it converges. Prefer moving a pin over adding a via.
+2. Render review (see below), then plan swaps that untangle what you see: translator inputs against the 2A/2B
+   (and 3A/3B) ball order, translator channels against the J1 pin order, ADC nets against their ADC chips, HVIO
+   nets against J1.
+3. Apply, rerun, review again, repeat until it converges. Prefer moving a pin over adding a via. Rip up and
+   reroute the worst nets rather than patching a tangle.
 4. HyperRAM: the board's design rules (`hardware/control_card.kicad_dru`, rule `hyperram_length`) still hold
    10.8 ± 0.1 mm from the old Agilex layout. Set it from the new geometry (shortest matched length the routes
    allow) and keep DQ0–7, RWDS and CS# matched within the tolerance the chain uses (0.2 mm).
 5. Power stubs: the translators' supply pins (+1V8 pin 14, +3V3 pin 13, GND pin 8) to their cap vias, U10/U13 GND
    pin 6, the U6 LDO (+5V in, +3V3A out, C15), the PG_0V95/PG_1V8 enable lines (two old PG_1V8 vias at
    (77.73, 102.28) and (79.81, 104.60) can be reused or deleted), and the VCCA_BL filter (FB8, C96, C100 to ball L5).
+
+## Render review after every routing run
+
+DRC only proves the copper is legal, not that the routing is good. After each run, render and look at it:
+
+    tools/render_layers.sh build/phase5/route/r5.kicad_pcb build/phase5/route/render F.Cu,In2.Cu,B.Cu
+
+This writes one PNG per layer, cropped to the board (about 39 px/mm). View them with the Read tool; for detail,
+render a smaller area at a higher DPI by editing the crop, or use KRT's output and a pcbnew script. Look for, and
+write down per image:
+
+- **Crossings that a swap would undo:** two nets that leave neighbouring balls or pins and cross on the way to
+  neighbouring destinations. Each one is a pin-swap or channel-swap candidate.
+- **Vias:** every signal via on F.Cu/In2.Cu routes. Ask why it is there; a swap or a different escape side
+  often removes it. Count them per run, and the count should fall.
+- **Detours:** a track that wanders far past a straight line (around the BGA, around the translators), a
+  U-turn, or a long parallel run back and forth.
+- **Tangles:** a region too dense to trace by eye. Rip up those nets and route them again in a better order
+  (neighbours in sequence, the most constrained first).
+- **Plane damage:** on In2.Cu, look at the +1V8 pour after the re-pour: a thin neck, a cut-off area or a via left
+  in a hole means the L3 tracks need to bunch or move to F.Cu.
+- **B.Cu:** any new track there needs a reason.
+
+A PDF render shows only copper, not the ratsnest, so read the unconnected nets from DRC or KRT's log alongside it.
+Record what you saw and what you changed in each iteration (a short table in your report is enough).
 
 ## Checks after every routing run
 
@@ -110,8 +136,21 @@ Procedure for every swap:
   and short, and check after each run. Same for L4 (+0V95 one island, +3V3 one island) and the GND layers.
 - No track on In1.Cu, In3.Cu, In4.Cu.
 
+## Optional second router: WeaveEngine
+
+If KRT keeps leaving the same nets unrouted or tangled (translator band, J1), try WeaveEngine
+(https://github.com/c28ba/WeaveEngine, GPL-3.0, Python 3.13, CLI `weaveengine board.dsn -o board.ses`) on those nets:
+it plans topology first (no crossings), then geometry, with rip-up rounds and clean-up; `--layers` limits it to
+F.Cu/In2.Cu, `--svg` gives a picture for the review, and it reads the `.kicad_pcb`, `.kicad_pro` and `.kicad_dru`
+next to the DSN. Round trip: KiCad export Specctra DSN → WeaveEngine → import Specctra session. Limits: no length
+matching or differential pairs (keep HyperRAM with KRT), pours are left to KiCad, and it is young (tested on 44
+open KiCad boards, nothing about BGAs). Before trusting a result, check that the session import kept the U1 fan-out,
+the decap vias and the HyperRAM routes unchanged (KiCad's session import replaces tracks and vias), and run the
+full checks above. Download it into its own directory under `build/` and do not commit it.
+
 ## Report back
 
 Unconnected count, via count (new signal vias), DRC summary, the list of pin and channel swaps with the reason for
-each, whether 3A/3B were used, and anything left for hand routing. Copy the finished board to
+each, the render-review notes per iteration, the final F.Cu and In2.Cu renders, whether 3A/3B were used, which
+router produced which nets, and anything left for hand routing. Copy the finished board to
 `hardware/control_card.kicad_pcb` and add an entry to `CONVERSION_PLAN.md`.
