@@ -135,7 +135,11 @@ Pin placement rules for later (to be checked in Efinity Interface Designer befor
 - [x] Data sheet v3.9 and the Ti60 F225 hardware checklist read; results in `docs/ti60_requirements.md`.
 - [x] Proven card's power, configuration and JTAG circuits read (schematic pages 4 and 5).
 - [x] Flash: IS25WP128-RHLE (user's stock); configuration **x4**.
-- [ ] IS25WP128 data sheet: ball map, RESET#, QE bit / x4 default (see section 6).
+- [x] IS25WP128 ball map and RESET# (2026-11-13): identical to the built and tested Agilex card's flash footprint
+  (MT25QU256ABA8E12 on the same BGA-24 5×5), and the Agilex card's `docs/agilex_flash_requirements.md` lists
+  IS25WP128-RHLE with that ball map from its datasheet: A4 RESET#, B2 CLK, B3 GND, B4 VCC, C2 CS#, C4 DQ2, D2 DQ1,
+  D3 DQ0, D4 DQ3. This schematic matches.
+- [ ] IS25WP128 QE bit / x4 default for active x4 configuration (AN 033): a programming/bring-up item.
 - [ ] Efinity Power Estimator for a realistic design (HyperRAM controller, ADC capture, PWM) → core current → buck
   choice and inductor rating.
 - [x] I/O plan in section 2 confirmed (translators, all spares, OE from an FPGA pin, 1.8 V-logic mux).
@@ -160,7 +164,7 @@ Pin placement rules for later (to be checked in Efinity Interface Designer befor
   - `IS25WP128-RHLE` (existing `BGA-24_6x8mm_Layout5x5_P1.0mm_CY0.5` footprint, C1349419). Ball functions taken
     from the MT25QU256 symbol and the Ti135 project's IS25WP128 symbol; ISSI's site blocks downloads, so the
     ISSI data sheet check is still open.
-- [x] Smaller translator: 4 × SN74AVC4T774RSVR, existing `SN74AXC4T774RSV` symbol (same RSV pinout, checked against TI SCES693I) and `Package_DFN_QFN:UQFN-16_1.8x2.6mm_P0.4mm`. Compare that footprint with TI's RSV land pattern before layout. The `SN74AXC8T245PW` symbol stays in the library unused.
+- [x] Smaller translator: 4 × SN74AVC4T774RSVR, existing `SN74AXC4T774RSV` symbol (same RSV pinout, checked against TI SCES693I) and `Package_DFN_QFN:UQFN-16_1.8x2.6mm_P0.4mm`. Compare that footprint with TI's RSV land pattern before layout (done 2026-11-13: the KiCad footprint is made from TI's RSV0016A drawing, qfnd836). The `SN74AXC8T245PW` symbol stays in the library unused.
 
 ### Phase 3: schematic (done 2026-10-30)
 Done by `tools/phase3_schematic.py` (run once on the copied Agilex sheets; it refuses to run twice) with the

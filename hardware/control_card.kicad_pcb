@@ -38749,14 +38749,6 @@
 		(net "+1V8")
 		(uuid "de3970ae-21d1-4401-bba1-99a0ae562ea1")
 	)
-	(segment
-		(start 102.54 120.99)
-		(end 103.77 120.99)
-		(width 0.1)
-		(layer "F.Cu")
-		(net "+1V8")
-		(uuid "f892f391-5ff6-4ff3-8db4-af6f24ca38b7")
-	)
 	(via
 		(at 96.695 96.745)
 		(size 0.3)
