@@ -83,5 +83,6 @@ kpy "$R/tools/phase5_lock_tracks.py" "$CUR" unlock | tail -1
 # the six mux select lines share the west edge's south end and one of them (ADASEL0) stays open in the adc step:
 # all six ripped and routed again together, that one first
 step adc_sel adc_sel --layers F.Cu In2.Cu B.Cu --layer-costs 1 4 2 --force-reroute --ordering original
-cp "$CUR" "$OUT"
+# manufacturing fixes: undersized vias to 0.30/0.15, three fiducials per side (tools/phase5_fab.py)
+kpy "$R/tools/phase5_fab.py" "$CUR" "$OUT"
 echo "wrote $OUT"

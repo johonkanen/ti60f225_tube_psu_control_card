@@ -31,7 +31,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 | [ ] | Track width ≥ 0.09 mm | board stats | min 0.09 (210 segments, J1 area), mostly 0.1 |
 | [ ] | Copper clearance ≥ 0.1 mm (routing used 0.125) | DRC | passes |
 | [ ] | Via hole to other copper ≥ 0.2 mm | DRC `hole_clearance` | passes |
-| [ ] | Via sizes within JLC limits (min drill 0.15, ring per capability page) | board stats | 282 × 0.30/0.15, 20 × 0.35/0.20, 17 × 0.45/0.25, **1 × 0.25/0.15 (0.05 mm ring): GND via at (99.69, 96.75), enlarge to 0.30/0.15** |
+| [x] | Via sizes within JLC limits (min drill 0.15, ring per capability page) | board stats | 283 × 0.30/0.15, 20 × 0.35/0.20, 17 × 0.45/0.25; the 0.25/0.15 GND via at (99.69, 96.75) enlarged by `tools/phase5_fab.py` (DRC clean) |
 | [ ] | Via-in-pad ordered as filled and capped (POFV) | order option | U1 plane balls, caps under the BGA, pads with vias: must be filled + capped, else solder wicks |
 | [ ] | PTH hole to copper ≥ 0.28 mm, PTH hole to hole ≥ 0.45 mm | DRC (project rules) | passes |
 | [ ] | Copper to board edge ≥ 0.3 mm | DRC `copper_edge_clearance` | passes |
@@ -61,7 +61,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 | [ ] | Pin 1 / polarity marks visible on silk for every IC, LED, diode, electrolytic | Gerber view | check |
 | [ ] | Two-sided assembly: heavy parts on the bottom (bucks, inductors) are fine for second reflow | part masses | check L1–L3, U2–U4 |
 | [ ] | Parts not too close to the edge for JLC's handling; rails or panel needed? | closest SMD pad centre 0.85 mm from the edge (D1) | check JLC's edge rule for this board size; add rails/panel if required |
-| [ ] | Fiducials (JLC adds rails with fiducials if needed; global fiducials help with the 0.65 mm BGA) | footprint list | **none on the board**: decide (add 2–3 per side, or let JLC panelize) |
+| [x] | Fiducials (global fiducials help with the 0.65 mm BGA) | footprint list | FID1–3 top (76.65, 102.35), (101.65, 107.10), (84.15, 123.60); FID4–6 bottom (77.40, 96.35), (101.65, 102.10), (89.15, 124.60): 1 mm copper, 2 mm mask, board-only, not in BOM/CPL (`tools/phase5_fab.py`) |
 | [ ] | BGA X-ray inspection option for U1 (and the HyperRAM / flash BGAs) | order option | recommended |
 | [ ] | THT J1/J2: JLC through-hole assembly or hand soldering | order option | decide |
 | [ ] | Moisture-sensitive parts (U1, BGAs) baked/handled by JLC | part MSL | note |
