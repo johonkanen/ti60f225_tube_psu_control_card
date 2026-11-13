@@ -69,15 +69,14 @@ def plan(u1):
     jobs += [(c[-1], balls) for c, balls in vcca]                                  # each VCCA's 1n
     # the small caps of the I/O supplies before the VCCA's 10n/100n: under the ball field there is room for only
     # about half of all 1n/10n/100n (UNDER_BGA)
-    for i, bank in enumerate(BANK_ORDER):                           # 1n, 10n, 100n per used HSIO bank
-        if bank in UNUSED_BANKS:
-            continue
-        k = USED_BANKS.index(bank)
-        jobs += [(r, pb[f"VCCIO{bank}"]) for r in (f"C{167 + 2 * k}", f"C{166 + 2 * k}", f"C{129 + 2 * i}")]
+    used = [(i, bank, USED_BANKS.index(bank)) for i, bank in enumerate(BANK_ORDER) if bank not in UNUSED_BANKS]
+    jobs += [(r, pb[f"VCCIO{bank}"]) for i, bank, k in used for r in (f"C{167 + 2 * k}", f"C{166 + 2 * k}")]  # 1n, 10n
+    jobs += [(c[-2], balls) for c, balls in vcca]                                  # one 10n per VCCA (PLL supply)
+    jobs += [(f"C{129 + 2 * i}", pb[f"VCCIO{bank}"]) for i, bank, k in used]      # then each bank's 100n
     aux = pb["VCCAUX"]
     jobs += [(r, aux) for r in ["C124", "C123", "C122"]]           # VCCAUX 1n, 10n, 100n
     jobs += [(f"C{146 + 3 * i}", pb[f"VCCIO33_{bank}"]) for i, bank in enumerate(HVIO_ORDER)]   # HVIO 100n
-    jobs += [(r, balls) for c, balls in vcca for r in reversed(c[:-1])]           # each VCCA's 10n, 100n
+    jobs += [(r, balls) for c, balls in vcca for r in reversed(c[:-2])]           # each VCCA's other 10n, 100n
     jobs += [(r, vcc) for r in ["C108", "C107"]]                                   # VCC 1u, 4u7
     for i, bank in enumerate(BANK_ORDER):                           # 1u per used HSIO bank
         if bank not in UNUSED_BANKS:

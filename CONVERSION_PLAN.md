@@ -292,12 +292,14 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
 - [x] **Decoupling under the BGA** (2026-11-13, `tools/phase5_decaps.py`). The 1n/10n/100n 0201s may now sit
   inside U1's ball field on the lattice of ball vias and diagonal gaps (pads 0.64 mm apart on the 0.65 mm pitch:
   one pad on a plane ball's via, the other on a new via in a gap); nothing else may go under the field (R65, the
-  unused bank 3A's REF_RES, goes there as a last resort). Plan order changed: bank, VCCAUX and HVIO 1n/10n/100n
-  now come before the VCCA 10n/100n. Limit found: of the 196 gaps only 42 take a via, since the F.Cu under-pad
+  unused bank 3A's REF_RES, goes there as a last resort). Plan order changed: core 1n/10n/100n, each VCCA's 1n,
+  bank 1n/10n, one 10n per VCCA, bank 100n, VCCAUX and HVIO small caps, then the other VCCA 10n/100n. Limit found: of the 196 gaps only 42 take a via, since the F.Cu under-pad
   escapes run through the rest, and the I/O banks have almost no GND balls, so most bank caps need a gap via
   for GND; with clean 0201 courtyards (one free ball between caps) the field holds about 25 caps. Result
   (same fanned-out board, old → new mean distance to the balls): HSIO+VCCAUX 21 caps 4.14 → 2.81 mm, HVIO 100n
   4.25 → 2.02 mm, core 12 caps 1.66 → 1.46 mm; VCCA 10n/100n worse (TL 1.67 → 4.14, TR 4.37 → 5.77 mm).
+  With one 10n per VCCA moved ahead of the bank 100n, that 10n lands 2.5–4.5 mm from its VCCA ball (TL 2.5, TR
+  3.8, BL 4.5, BR 3.8); the VCCA balls sit where the gaps are taken by escapes, and their pads join by routing.
   Also: the placers keep the SW netclass's 0.15 mm from the switch nodes; `phase5_planes.py notch` keeps a via's
   holes in the +3V3 fill test (a via in a hole of the island was taken as joined), starts the channel at the via,
   tries 1.5 mm wide and closer to +0V95 vias when 0.9 mm fails, and rejects a channel that cuts a +0V95 via off.
