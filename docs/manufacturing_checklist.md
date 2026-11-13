@@ -15,7 +15,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 
 | ✓ | Check | How | Status |
 |---|---|---|---|
-| [ ] | DRC clean, zones refilled | `tools/phase5_check.sh hardware/control_card.kicad_pcb` | 0 errors; 3 dangling old +5V stubs, 26 silk-to-edge, 1 silk overlap, 6 library warnings |
+| [ ] | DRC clean, zones refilled | `tools/phase5_check.sh hardware/control_card.kicad_pcb` | 0 errors; 5 dangling-track warnings (kept, see section 3), 26 silk-to-edge, 1 silk overlap, 6 library warnings |
 | [ ] | 0 unconnected items | same | 0 |
 | [ ] | Schematic parity 0 | same | 0 |
 | [ ] | ERC 0, schematic check 0 errors | `tools/sch_check.sh` | 0 / 0 at merge |
@@ -47,7 +47,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 | [ ] | L3 +1V8 small islands joined to the main pour (bunch or move the LED and J1-fan tracks; `tools/phase5_islands.py` lists each) | 8 islands open |
 | [ ] | Decide: JTAG, PG_0V95/PG_1V8, CLK100M on B.Cu (318 mm of bottom-side signal copper) | user decision |
 | [ ] | HyperRAM skew accepted or meandered (lengths 8.6–14.2 mm; rule widened to match) | user decision |
-| [ ] | Delete the 3 dangling old +5V stubs | open |
+| [ ] | Dangling stubs left on purpose (2026-11-13): +5V on F.Cu (103.21, 109.76) 0.01 mm and on L3 (78.99, 107.55) 2.04 mm; HT_CS (101.83, 125.45) 0.12 mm, SYNCH_2 (100.55, 125.45) 0.11 mm, CUK_SDATA (96.50, 115.27) 0.39 mm. KiCad DRC: warnings only. Check whether JLC's DFM / upload review flags them; delete them only if it does | watch at ordering |
 | [ ] | Bank 3A caps C178/C179 are 3–4 mm from F14/G12: accept or move | open |
 | [ ] | Old Agilex +5V trace on L3 above J1: still needed? | check |
 
