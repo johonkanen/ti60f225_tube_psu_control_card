@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "ad07ae58-b9ff-52c9-9030-e74c427bdd2f")
-	(paper "A2")
+	(paper "A3")
 	(title_block
 		(title "Ti60F225 power and decoupling")
 		(rev "0.1")
@@ -6539,7 +6539,7 @@
 	)
 	(symbol
 		(lib_id "Device:FerriteBead")
-		(at 193.04 132.08 0)
+		(at 180.34 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6547,7 +6547,7 @@
 		(dnp no)
 		(uuid "93e11fe4-ead4-55ae-8713-ea437e299d00")
 		(property "Reference" "FB8"
-			(at 195.58 130.81 0)
+			(at 182.88 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6556,7 +6556,7 @@
 			)
 		)
 		(property "Value" "120R@100MHz"
-			(at 195.58 133.35 0)
+			(at 182.88 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6565,7 +6565,7 @@
 			)
 		)
 		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
-			(at 193.04 132.08 0)
+			(at 180.34 45.72 0)
 			(hide yes)
 			(effects
 				(font
@@ -6575,7 +6575,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 193.04 132.08 0)
+			(at 180.34 45.72 0)
 			(hide yes)
 			(effects
 				(font
@@ -6585,7 +6585,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 193.04 132.08 0)
+			(at 180.34 45.72 0)
 			(hide yes)
 			(effects
 				(font
@@ -6595,7 +6595,7 @@
 			)
 		)
 		(property "LCSC" "C14709"
-			(at 193.04 132.08 0)
+			(at 180.34 45.72 0)
 			(hide yes)
 			(effects
 				(font
@@ -6605,7 +6605,7 @@
 			)
 		)
 		(property "MPN" "BLM18PG121SN1D"
-			(at 193.04 132.08 0)
+			(at 180.34 45.72 0)
 			(hide yes)
 			(effects
 				(font
@@ -6615,7 +6615,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 193.04 132.08 0)
+			(at 180.34 45.72 0)
 			(hide yes)
 			(effects
 				(font
@@ -6641,7 +6641,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 128.27) (xy 193.04 125.73)
+			(xy 180.34 41.91) (xy 180.34 39.37)
 		)
 		(stroke
 			(width 0)
@@ -6651,7 +6651,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 193.04 125.73 90)
+		(at 180.34 39.37 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6661,7 +6661,7 @@
 		)
 		(uuid "36365a07-6074-5fa5-b0c0-44be83468a6a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 193.04 125.73 0)
+			(at 180.34 39.37 0)
 			(hide yes)
 			(effects
 				(font
@@ -6672,7 +6672,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 135.89) (xy 193.04 138.43)
+			(xy 180.34 49.53) (xy 180.34 52.07)
 		)
 		(stroke
 			(width 0)
@@ -6681,7 +6681,7 @@
 		(uuid "2bbdb845-17f3-5291-9217-4412eee59c0a")
 	)
 	(label "+0V95_VCCA_BL"
-		(at 193.04 138.43 270)
+		(at 180.34 52.07 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6692,7 +6692,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 205.74 142.24 0)
+		(at 193.04 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6700,7 +6700,7 @@
 		(dnp no)
 		(uuid "37c8a410-b3ba-5545-b5e4-05fe543247ad")
 		(property "Reference" "C96"
-			(at 208.28 140.97 0)
+			(at 195.58 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6709,7 +6709,7 @@
 			)
 		)
 		(property "Value" "1u"
-			(at 208.28 143.51 0)
+			(at 195.58 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6718,7 +6718,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 205.74 142.24 0)
+			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6728,7 +6728,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 205.74 142.24 0)
+			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6738,7 +6738,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 205.74 142.24 0)
+			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6748,7 +6748,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 205.74 142.24 0)
+			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6758,7 +6758,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 205.74 142.24 0)
+			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6768,7 +6768,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 205.74 142.24 0)
+			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6794,7 +6794,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 138.43) (xy 205.74 135.89)
+			(xy 193.04 52.07) (xy 193.04 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6803,7 +6803,7 @@
 		(uuid "ccc65762-63fd-5785-8301-f66702db2244")
 	)
 	(label "+0V95_VCCA_BL"
-		(at 205.74 135.89 90)
+		(at 193.04 49.53 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6814,7 +6814,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 146.05) (xy 205.74 148.59)
+			(xy 193.04 59.69) (xy 193.04 62.23)
 		)
 		(stroke
 			(width 0)
@@ -6824,7 +6824,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 205.74 148.59 270)
+		(at 193.04 62.23 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6834,7 +6834,7 @@
 		)
 		(uuid "a2b91b61-77cc-53e0-bf69-30ef67de4172")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 205.74 148.59 0)
+			(at 193.04 62.23 0)
 			(hide yes)
 			(effects
 				(font
@@ -6845,7 +6845,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 256.54 142.24 0)
+		(at 205.74 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6853,7 +6853,7 @@
 		(dnp no)
 		(uuid "8a1775b2-571c-5666-8ce7-c32c8d82bb1f")
 		(property "Reference" "C100"
-			(at 259.08 140.97 0)
+			(at 208.28 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6862,7 +6862,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 259.08 143.51 0)
+			(at 208.28 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6871,7 +6871,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 256.54 142.24 0)
+			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6881,7 +6881,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 256.54 142.24 0)
+			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6891,7 +6891,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 256.54 142.24 0)
+			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6901,7 +6901,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 256.54 142.24 0)
+			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6911,7 +6911,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 256.54 142.24 0)
+			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6921,7 +6921,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 256.54 142.24 0)
+			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
 				(font
@@ -6947,7 +6947,7 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 138.43) (xy 256.54 135.89)
+			(xy 205.74 52.07) (xy 205.74 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6956,7 +6956,7 @@
 		(uuid "c2fc27b4-5d09-5c58-b65d-ca6903a2fd72")
 	)
 	(label "+0V95_VCCA_BL"
-		(at 256.54 135.89 90)
+		(at 205.74 49.53 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6967,7 +6967,7 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 146.05) (xy 256.54 148.59)
+			(xy 205.74 59.69) (xy 205.74 62.23)
 		)
 		(stroke
 			(width 0)
@@ -6977,7 +6977,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 256.54 148.59 270)
+		(at 205.74 62.23 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6987,7 +6987,7 @@
 		)
 		(uuid "554c78cb-04f5-555b-a189-3b75e23213dc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 256.54 148.59 0)
+			(at 205.74 62.23 0)
 			(hide yes)
 			(effects
 				(font
@@ -6998,7 +6998,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 30.48 193.04 0)
+		(at 144.78 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7006,7 +7006,7 @@
 		(dnp no)
 		(uuid "37933004-922d-54b0-b1fa-dead3a2fb640")
 		(property "Reference" "C106"
-			(at 33.02 191.77 0)
+			(at 147.32 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7015,7 +7015,7 @@
 			)
 		)
 		(property "Value" "47u"
-			(at 33.02 194.31 0)
+			(at 147.32 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7024,7 +7024,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 30.48 193.04 0)
+			(at 144.78 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7034,7 +7034,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 30.48 193.04 0)
+			(at 144.78 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7044,7 +7044,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 30.48 193.04 0)
+			(at 144.78 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7054,7 +7054,7 @@
 			)
 		)
 		(property "LCSC" "C140782"
-			(at 30.48 193.04 0)
+			(at 144.78 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7064,7 +7064,7 @@
 			)
 		)
 		(property "MPN" "GRM188R60J476ME15D"
-			(at 30.48 193.04 0)
+			(at 144.78 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7074,7 +7074,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 30.48 193.04 0)
+			(at 144.78 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7100,7 +7100,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 189.23) (xy 30.48 186.69)
+			(xy 144.78 115.57) (xy 144.78 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7110,7 +7110,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 30.48 186.69 90)
+		(at 144.78 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7120,7 +7120,7 @@
 		)
 		(uuid "f2265b9f-d06d-5689-abdc-1519ef045fbf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 30.48 186.69 0)
+			(at 144.78 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -7131,7 +7131,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 196.85) (xy 30.48 199.39)
+			(xy 144.78 123.19) (xy 144.78 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7141,7 +7141,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 30.48 199.39 270)
+		(at 144.78 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7151,7 +7151,7 @@
 		)
 		(uuid "981d7af1-fea9-5aca-aa20-e5b960325046")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 30.48 199.39 0)
+			(at 144.78 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -7162,7 +7162,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 68.58 193.04 0)
+		(at 132.08 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7170,7 +7170,7 @@
 		(dnp no)
 		(uuid "98229acf-e8b1-501d-9d62-fdeb01bc5833")
 		(property "Reference" "C109"
-			(at 71.12 191.77 0)
+			(at 134.62 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7179,7 +7179,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 71.12 194.31 0)
+			(at 134.62 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7188,7 +7188,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 68.58 193.04 0)
+			(at 132.08 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7198,7 +7198,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 193.04 0)
+			(at 132.08 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7208,7 +7208,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 68.58 193.04 0)
+			(at 132.08 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7218,7 +7218,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 68.58 193.04 0)
+			(at 132.08 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7228,7 +7228,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 68.58 193.04 0)
+			(at 132.08 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7238,7 +7238,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 68.58 193.04 0)
+			(at 132.08 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7264,7 +7264,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 189.23) (xy 68.58 186.69)
+			(xy 132.08 115.57) (xy 132.08 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7274,7 +7274,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 68.58 186.69 90)
+		(at 132.08 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7284,7 +7284,7 @@
 		)
 		(uuid "7098e13c-7f65-5bb9-bc96-adbe368b6f65")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 186.69 0)
+			(at 132.08 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -7295,7 +7295,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 196.85) (xy 68.58 199.39)
+			(xy 132.08 123.19) (xy 132.08 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7305,7 +7305,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 68.58 199.39 270)
+		(at 132.08 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7315,7 +7315,7 @@
 		)
 		(uuid "b966d9f6-1e3f-5f0c-8e34-d6177a1cf8d5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 199.39 0)
+			(at 132.08 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -7326,7 +7326,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 81.28 193.04 0)
+		(at 119.38 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7334,7 +7334,7 @@
 		(dnp no)
 		(uuid "8e4f2a68-ca6f-5d4c-8236-9d672092a0e8")
 		(property "Reference" "C110"
-			(at 83.82 191.77 0)
+			(at 121.92 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7343,7 +7343,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 83.82 194.31 0)
+			(at 121.92 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7352,7 +7352,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 81.28 193.04 0)
+			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7362,7 +7362,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 193.04 0)
+			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7372,7 +7372,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 81.28 193.04 0)
+			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7382,7 +7382,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 81.28 193.04 0)
+			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7392,7 +7392,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 81.28 193.04 0)
+			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7402,7 +7402,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 81.28 193.04 0)
+			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7428,7 +7428,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 189.23) (xy 81.28 186.69)
+			(xy 119.38 115.57) (xy 119.38 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7438,7 +7438,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 81.28 186.69 90)
+		(at 119.38 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7448,7 +7448,7 @@
 		)
 		(uuid "37a13407-1ade-50ba-8da7-df881cc5ba52")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.28 186.69 0)
+			(at 119.38 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -7459,7 +7459,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 196.85) (xy 81.28 199.39)
+			(xy 119.38 123.19) (xy 119.38 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7469,7 +7469,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 81.28 199.39 270)
+		(at 119.38 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7479,7 +7479,7 @@
 		)
 		(uuid "7ccd8b7f-3254-5361-85a5-952ad03298d3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.28 199.39 0)
+			(at 119.38 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -7490,7 +7490,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 132.08 193.04 0)
+		(at 55.88 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7498,7 +7498,7 @@
 		(dnp no)
 		(uuid "6624b05b-683b-59be-94ec-e24b07ebed40")
 		(property "Reference" "C114"
-			(at 134.62 191.77 0)
+			(at 58.42 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7507,7 +7507,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 134.62 194.31 0)
+			(at 58.42 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7516,7 +7516,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 132.08 193.04 0)
+			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7526,7 +7526,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 193.04 0)
+			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7536,7 +7536,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 132.08 193.04 0)
+			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7546,7 +7546,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 132.08 193.04 0)
+			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7556,7 +7556,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 132.08 193.04 0)
+			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7566,7 +7566,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 132.08 193.04 0)
+			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7592,7 +7592,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 189.23) (xy 132.08 186.69)
+			(xy 55.88 115.57) (xy 55.88 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7602,7 +7602,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 132.08 186.69 90)
+		(at 55.88 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7612,7 +7612,7 @@
 		)
 		(uuid "9f27122e-d68d-5cd4-a2db-2a3b90a222da")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 186.69 0)
+			(at 55.88 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -7623,7 +7623,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 196.85) (xy 132.08 199.39)
+			(xy 55.88 123.19) (xy 55.88 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7633,7 +7633,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 132.08 199.39 270)
+		(at 55.88 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7643,7 +7643,7 @@
 		)
 		(uuid "2ea2dc66-0a96-5e7a-91fb-33c5829714f6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 199.39 0)
+			(at 55.88 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -7654,7 +7654,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 144.78 193.04 0)
+		(at 68.58 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7662,7 +7662,7 @@
 		(dnp no)
 		(uuid "8d9ad151-f465-5311-9a21-b46818523af5")
 		(property "Reference" "C115"
-			(at 147.32 191.77 0)
+			(at 71.12 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7671,7 +7671,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 147.32 194.31 0)
+			(at 71.12 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7680,7 +7680,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 144.78 193.04 0)
+			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7690,7 +7690,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 193.04 0)
+			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7700,7 +7700,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 144.78 193.04 0)
+			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7710,7 +7710,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 144.78 193.04 0)
+			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7720,7 +7720,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 144.78 193.04 0)
+			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7730,7 +7730,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 144.78 193.04 0)
+			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7756,7 +7756,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 189.23) (xy 144.78 186.69)
+			(xy 68.58 115.57) (xy 68.58 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7766,7 +7766,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 144.78 186.69 90)
+		(at 68.58 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7776,7 +7776,7 @@
 		)
 		(uuid "1213a5f9-3a55-534f-a5a7-7d818fd338e0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.78 186.69 0)
+			(at 68.58 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -7787,7 +7787,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 196.85) (xy 144.78 199.39)
+			(xy 68.58 123.19) (xy 68.58 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7797,7 +7797,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 144.78 199.39 270)
+		(at 68.58 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7807,7 +7807,7 @@
 		)
 		(uuid "f1ae5665-cad4-569a-a359-b38148c28f0f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.78 199.39 0)
+			(at 68.58 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -7818,7 +7818,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 157.48 193.04 0)
+		(at 81.28 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7826,7 +7826,7 @@
 		(dnp no)
 		(uuid "c4898af5-90da-5848-8c09-074b31fbc918")
 		(property "Reference" "C116"
-			(at 160.02 191.77 0)
+			(at 83.82 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7835,7 +7835,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 160.02 194.31 0)
+			(at 83.82 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7844,7 +7844,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 157.48 193.04 0)
+			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7854,7 +7854,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 157.48 193.04 0)
+			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7864,7 +7864,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 157.48 193.04 0)
+			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7874,7 +7874,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 157.48 193.04 0)
+			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7884,7 +7884,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 157.48 193.04 0)
+			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7894,7 +7894,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 157.48 193.04 0)
+			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -7920,7 +7920,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 189.23) (xy 157.48 186.69)
+			(xy 81.28 115.57) (xy 81.28 113.03)
 		)
 		(stroke
 			(width 0)
@@ -7930,7 +7930,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 157.48 186.69 90)
+		(at 81.28 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7940,7 +7940,7 @@
 		)
 		(uuid "d32d80c6-65b7-55fa-8ea9-b5cfa9fc307e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 157.48 186.69 0)
+			(at 81.28 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -7951,7 +7951,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 196.85) (xy 157.48 199.39)
+			(xy 81.28 123.19) (xy 81.28 125.73)
 		)
 		(stroke
 			(width 0)
@@ -7961,7 +7961,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 157.48 199.39 270)
+		(at 81.28 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7971,7 +7971,7 @@
 		)
 		(uuid "de43329c-5316-59cb-9c50-39e92d84cf84")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 157.48 199.39 0)
+			(at 81.28 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -7982,7 +7982,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 170.18 193.04 0)
+		(at 93.98 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7990,7 +7990,7 @@
 		(dnp no)
 		(uuid "eb99ac82-cf0a-52d9-91c8-bdc98b837d84")
 		(property "Reference" "C117"
-			(at 172.72 191.77 0)
+			(at 96.52 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7999,7 +7999,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 172.72 194.31 0)
+			(at 96.52 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8008,7 +8008,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 170.18 193.04 0)
+			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8018,7 +8018,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 170.18 193.04 0)
+			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8028,7 +8028,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 170.18 193.04 0)
+			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8038,7 +8038,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 170.18 193.04 0)
+			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8048,7 +8048,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 170.18 193.04 0)
+			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8058,7 +8058,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 170.18 193.04 0)
+			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8084,7 +8084,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 189.23) (xy 170.18 186.69)
+			(xy 93.98 115.57) (xy 93.98 113.03)
 		)
 		(stroke
 			(width 0)
@@ -8094,7 +8094,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 170.18 186.69 90)
+		(at 93.98 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8104,7 +8104,7 @@
 		)
 		(uuid "f76c2434-bbd9-5a83-864b-2d6c99b287e2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 186.69 0)
+			(at 93.98 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -8115,7 +8115,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 196.85) (xy 170.18 199.39)
+			(xy 93.98 123.19) (xy 93.98 125.73)
 		)
 		(stroke
 			(width 0)
@@ -8125,7 +8125,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 170.18 199.39 270)
+		(at 93.98 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8135,7 +8135,7 @@
 		)
 		(uuid "c25a5c25-917e-5677-b9e8-1fad2fa6b4c2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 199.39 0)
+			(at 93.98 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -8146,7 +8146,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 182.88 193.04 0)
+		(at 106.68 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8154,7 +8154,7 @@
 		(dnp no)
 		(uuid "b64ff7f8-4f1d-52cf-884c-966130d7097e")
 		(property "Reference" "C118"
-			(at 185.42 191.77 0)
+			(at 109.22 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8163,7 +8163,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 185.42 194.31 0)
+			(at 109.22 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8172,7 +8172,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 182.88 193.04 0)
+			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8182,7 +8182,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 193.04 0)
+			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8192,7 +8192,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 182.88 193.04 0)
+			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8202,7 +8202,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 182.88 193.04 0)
+			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8212,7 +8212,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 182.88 193.04 0)
+			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8222,7 +8222,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 182.88 193.04 0)
+			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8248,7 +8248,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 189.23) (xy 182.88 186.69)
+			(xy 106.68 115.57) (xy 106.68 113.03)
 		)
 		(stroke
 			(width 0)
@@ -8258,7 +8258,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 182.88 186.69 90)
+		(at 106.68 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8268,7 +8268,7 @@
 		)
 		(uuid "d927a6db-f367-5bfd-9656-67d393c27807")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 182.88 186.69 0)
+			(at 106.68 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -8279,7 +8279,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 196.85) (xy 182.88 199.39)
+			(xy 106.68 123.19) (xy 106.68 125.73)
 		)
 		(stroke
 			(width 0)
@@ -8289,7 +8289,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 182.88 199.39 270)
+		(at 106.68 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8299,7 +8299,7 @@
 		)
 		(uuid "e76468de-7d20-5f32-9e83-47fc3ae9f067")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 182.88 199.39 0)
+			(at 106.68 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -8310,7 +8310,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 195.58 193.04 0)
+		(at 30.48 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8318,7 +8318,7 @@
 		(dnp no)
 		(uuid "c29c92a2-6772-5629-b83f-38279b1594cf")
 		(property "Reference" "C119"
-			(at 198.12 191.77 0)
+			(at 33.02 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8327,7 +8327,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 198.12 194.31 0)
+			(at 33.02 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8336,7 +8336,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 195.58 193.04 0)
+			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8346,7 +8346,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 193.04 0)
+			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8356,7 +8356,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 195.58 193.04 0)
+			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8366,7 +8366,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 195.58 193.04 0)
+			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8376,7 +8376,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 195.58 193.04 0)
+			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8386,7 +8386,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 195.58 193.04 0)
+			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8412,7 +8412,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 189.23) (xy 195.58 186.69)
+			(xy 30.48 115.57) (xy 30.48 113.03)
 		)
 		(stroke
 			(width 0)
@@ -8422,7 +8422,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 195.58 186.69 90)
+		(at 30.48 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8432,7 +8432,7 @@
 		)
 		(uuid "226e7365-8bf0-507c-9001-e2235ad9d24c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 195.58 186.69 0)
+			(at 30.48 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -8443,7 +8443,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 196.85) (xy 195.58 199.39)
+			(xy 30.48 123.19) (xy 30.48 125.73)
 		)
 		(stroke
 			(width 0)
@@ -8453,7 +8453,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 195.58 199.39 270)
+		(at 30.48 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8463,7 +8463,7 @@
 		)
 		(uuid "21c8a66c-5292-5934-88a2-8ab5ec217b45")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 195.58 199.39 0)
+			(at 30.48 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -8474,7 +8474,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 208.28 193.04 0)
+		(at 43.18 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8482,7 +8482,7 @@
 		(dnp no)
 		(uuid "c422510c-804b-543d-b2c9-19a6ad826ebc")
 		(property "Reference" "C120"
-			(at 210.82 191.77 0)
+			(at 45.72 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8491,7 +8491,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 210.82 194.31 0)
+			(at 45.72 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8500,7 +8500,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 208.28 193.04 0)
+			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8510,7 +8510,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 208.28 193.04 0)
+			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8520,7 +8520,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 208.28 193.04 0)
+			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8530,7 +8530,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 208.28 193.04 0)
+			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8540,7 +8540,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 208.28 193.04 0)
+			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8550,7 +8550,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 208.28 193.04 0)
+			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
 				(font
@@ -8576,7 +8576,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 189.23) (xy 208.28 186.69)
+			(xy 43.18 115.57) (xy 43.18 113.03)
 		)
 		(stroke
 			(width 0)
@@ -8586,7 +8586,7 @@
 	)
 	(global_label "+0V95"
 		(shape passive)
-		(at 208.28 186.69 90)
+		(at 43.18 113.03 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8596,7 +8596,7 @@
 		)
 		(uuid "95b7a0f7-4f41-5d93-8731-7ca727147fde")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 208.28 186.69 0)
+			(at 43.18 113.03 0)
 			(hide yes)
 			(effects
 				(font
@@ -8607,7 +8607,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 196.85) (xy 208.28 199.39)
+			(xy 43.18 123.19) (xy 43.18 125.73)
 		)
 		(stroke
 			(width 0)
@@ -8617,7 +8617,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 208.28 199.39 270)
+		(at 43.18 125.73 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8627,7 +8627,7 @@
 		)
 		(uuid "be7c921f-e76c-57c5-911d-fb98e0c62687")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 208.28 199.39 0)
+			(at 43.18 125.73 0)
 			(hide yes)
 			(effects
 				(font
@@ -8638,7 +8638,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 43.18 238.76 0)
+		(at 233.68 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8646,7 +8646,7 @@
 		(dnp no)
 		(uuid "3a674707-9d3f-5f32-b9d8-97bde807fbed")
 		(property "Reference" "C122"
-			(at 45.72 237.49 0)
+			(at 236.22 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8655,7 +8655,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 45.72 240.03 0)
+			(at 236.22 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8664,7 +8664,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 43.18 238.76 0)
+			(at 233.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8674,7 +8674,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 43.18 238.76 0)
+			(at 233.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8684,7 +8684,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 43.18 238.76 0)
+			(at 233.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8694,7 +8694,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 43.18 238.76 0)
+			(at 233.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8704,7 +8704,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 43.18 238.76 0)
+			(at 233.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8714,7 +8714,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 43.18 238.76 0)
+			(at 233.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8740,7 +8740,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 234.95) (xy 43.18 232.41)
+			(xy 233.68 148.59) (xy 233.68 146.05)
 		)
 		(stroke
 			(width 0)
@@ -8750,7 +8750,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 43.18 232.41 90)
+		(at 233.68 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8760,7 +8760,7 @@
 		)
 		(uuid "718e3752-017f-5044-9932-24453519588d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 43.18 232.41 0)
+			(at 233.68 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -8771,7 +8771,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 242.57) (xy 43.18 245.11)
+			(xy 233.68 156.21) (xy 233.68 158.75)
 		)
 		(stroke
 			(width 0)
@@ -8781,7 +8781,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 43.18 245.11 270)
+		(at 233.68 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8791,7 +8791,7 @@
 		)
 		(uuid "c2f2b192-538c-583e-ad7a-ded10913ab9f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 43.18 245.11 0)
+			(at 233.68 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -8802,7 +8802,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 55.88 238.76 0)
+		(at 30.48 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8810,7 +8810,7 @@
 		(dnp no)
 		(uuid "6d8cdcc1-2aa4-5461-b6ca-32f9221db423")
 		(property "Reference" "C123"
-			(at 58.42 237.49 0)
+			(at 33.02 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8819,7 +8819,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 58.42 240.03 0)
+			(at 33.02 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8828,7 +8828,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 55.88 238.76 0)
+			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8838,7 +8838,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 238.76 0)
+			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8848,7 +8848,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 55.88 238.76 0)
+			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8858,7 +8858,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 55.88 238.76 0)
+			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8868,7 +8868,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 55.88 238.76 0)
+			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8878,7 +8878,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 55.88 238.76 0)
+			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -8904,7 +8904,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 234.95) (xy 55.88 232.41)
+			(xy 30.48 148.59) (xy 30.48 146.05)
 		)
 		(stroke
 			(width 0)
@@ -8914,7 +8914,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 55.88 232.41 90)
+		(at 30.48 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8924,7 +8924,7 @@
 		)
 		(uuid "813537a8-03b3-57af-a89c-434129d7c419")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.88 232.41 0)
+			(at 30.48 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -8935,7 +8935,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 242.57) (xy 55.88 245.11)
+			(xy 30.48 156.21) (xy 30.48 158.75)
 		)
 		(stroke
 			(width 0)
@@ -8945,7 +8945,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 55.88 245.11 270)
+		(at 30.48 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8955,7 +8955,7 @@
 		)
 		(uuid "d7b27edb-b46e-585b-97f1-72f0ce45d5d0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.88 245.11 0)
+			(at 30.48 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -8966,7 +8966,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 68.58 238.76 0)
+		(at 43.18 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8974,7 +8974,7 @@
 		(dnp no)
 		(uuid "abcdd719-4fc1-5ef6-8a92-94ea2aad3f1c")
 		(property "Reference" "C124"
-			(at 71.12 237.49 0)
+			(at 45.72 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8983,7 +8983,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 71.12 240.03 0)
+			(at 45.72 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8992,7 +8992,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 68.58 238.76 0)
+			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9002,7 +9002,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 238.76 0)
+			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9012,7 +9012,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 68.58 238.76 0)
+			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9022,7 +9022,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 68.58 238.76 0)
+			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9032,7 +9032,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 68.58 238.76 0)
+			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9042,7 +9042,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 68.58 238.76 0)
+			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9068,7 +9068,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 234.95) (xy 68.58 232.41)
+			(xy 43.18 148.59) (xy 43.18 146.05)
 		)
 		(stroke
 			(width 0)
@@ -9078,7 +9078,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 68.58 232.41 90)
+		(at 43.18 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9088,7 +9088,7 @@
 		)
 		(uuid "e3fc29ef-4902-599f-9df1-0103fa7d40db")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 232.41 0)
+			(at 43.18 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -9099,7 +9099,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 242.57) (xy 68.58 245.11)
+			(xy 43.18 156.21) (xy 43.18 158.75)
 		)
 		(stroke
 			(width 0)
@@ -9109,7 +9109,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 68.58 245.11 270)
+		(at 43.18 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9119,7 +9119,7 @@
 		)
 		(uuid "41bc763f-c597-5a1f-8cc3-4a13d4e37ee2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 245.11 0)
+			(at 43.18 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -9130,7 +9130,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 81.28 238.76 0)
+		(at 259.08 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9138,7 +9138,7 @@
 		(dnp no)
 		(uuid "54768a89-0f88-532e-af39-51fc9a4c0921")
 		(property "Reference" "C125"
-			(at 83.82 237.49 0)
+			(at 261.62 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9147,7 +9147,7 @@
 			)
 		)
 		(property "Value" "47u"
-			(at 83.82 240.03 0)
+			(at 261.62 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9156,7 +9156,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 81.28 238.76 0)
+			(at 259.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9166,7 +9166,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 238.76 0)
+			(at 259.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9176,7 +9176,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 81.28 238.76 0)
+			(at 259.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9186,7 +9186,7 @@
 			)
 		)
 		(property "LCSC" "C140782"
-			(at 81.28 238.76 0)
+			(at 259.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9196,7 +9196,7 @@
 			)
 		)
 		(property "MPN" "GRM188R60J476ME15D"
-			(at 81.28 238.76 0)
+			(at 259.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9206,7 +9206,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 81.28 238.76 0)
+			(at 259.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9232,7 +9232,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 234.95) (xy 81.28 232.41)
+			(xy 259.08 148.59) (xy 259.08 146.05)
 		)
 		(stroke
 			(width 0)
@@ -9242,7 +9242,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 81.28 232.41 90)
+		(at 259.08 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9252,7 +9252,7 @@
 		)
 		(uuid "2b55e47c-ed8f-5c8f-bada-ba2e4562746f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.28 232.41 0)
+			(at 259.08 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -9263,7 +9263,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 242.57) (xy 81.28 245.11)
+			(xy 259.08 156.21) (xy 259.08 158.75)
 		)
 		(stroke
 			(width 0)
@@ -9273,7 +9273,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 81.28 245.11 270)
+		(at 259.08 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9283,7 +9283,7 @@
 		)
 		(uuid "c21a35c3-726e-5d05-81c5-942c219ac612")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.28 245.11 0)
+			(at 259.08 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -9294,7 +9294,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 132.08 238.76 0)
+		(at 246.38 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9302,7 +9302,7 @@
 		(dnp no)
 		(uuid "8f5344d6-641b-56fb-8233-839a86864d92")
 		(property "Reference" "C129"
-			(at 134.62 237.49 0)
+			(at 248.92 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9311,7 +9311,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 134.62 240.03 0)
+			(at 248.92 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9320,7 +9320,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 132.08 238.76 0)
+			(at 246.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9330,7 +9330,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 238.76 0)
+			(at 246.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9340,7 +9340,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 132.08 238.76 0)
+			(at 246.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9350,7 +9350,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 132.08 238.76 0)
+			(at 246.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9360,7 +9360,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 132.08 238.76 0)
+			(at 246.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9370,7 +9370,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 132.08 238.76 0)
+			(at 246.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9396,7 +9396,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 234.95) (xy 132.08 232.41)
+			(xy 246.38 148.59) (xy 246.38 146.05)
 		)
 		(stroke
 			(width 0)
@@ -9406,7 +9406,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 132.08 232.41 90)
+		(at 246.38 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9416,7 +9416,7 @@
 		)
 		(uuid "5f133e4c-ba1e-528f-be3b-ba95085d976b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 232.41 0)
+			(at 246.38 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -9427,7 +9427,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 242.57) (xy 132.08 245.11)
+			(xy 246.38 156.21) (xy 246.38 158.75)
 		)
 		(stroke
 			(width 0)
@@ -9437,7 +9437,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 132.08 245.11 270)
+		(at 246.38 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9447,7 +9447,7 @@
 		)
 		(uuid "d4a7ecf4-3cf8-552e-8436-ae6913f5515a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 245.11 0)
+			(at 246.38 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -9458,7 +9458,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 157.48 238.76 0)
+		(at 55.88 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9466,7 +9466,7 @@
 		(dnp no)
 		(uuid "f560b622-2d80-5e70-91e9-ab77c0a69a37")
 		(property "Reference" "C131"
-			(at 160.02 237.49 0)
+			(at 58.42 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9475,7 +9475,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 160.02 240.03 0)
+			(at 58.42 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9484,7 +9484,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 157.48 238.76 0)
+			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9494,7 +9494,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 157.48 238.76 0)
+			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9504,7 +9504,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 157.48 238.76 0)
+			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9514,7 +9514,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 157.48 238.76 0)
+			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9524,7 +9524,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 157.48 238.76 0)
+			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9534,7 +9534,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 157.48 238.76 0)
+			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9560,7 +9560,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 234.95) (xy 157.48 232.41)
+			(xy 55.88 148.59) (xy 55.88 146.05)
 		)
 		(stroke
 			(width 0)
@@ -9570,7 +9570,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 157.48 232.41 90)
+		(at 55.88 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9580,7 +9580,7 @@
 		)
 		(uuid "0f1c2508-bfba-5891-a7f2-b6d6967f4299")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 157.48 232.41 0)
+			(at 55.88 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -9591,7 +9591,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 242.57) (xy 157.48 245.11)
+			(xy 55.88 156.21) (xy 55.88 158.75)
 		)
 		(stroke
 			(width 0)
@@ -9601,7 +9601,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 157.48 245.11 270)
+		(at 55.88 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9611,7 +9611,7 @@
 		)
 		(uuid "d8f84c9e-2fad-543c-b4c4-7344097f789f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 157.48 245.11 0)
+			(at 55.88 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -9622,7 +9622,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 182.88 238.76 0)
+		(at 68.58 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9630,7 +9630,7 @@
 		(dnp no)
 		(uuid "7bf6bd3b-cc70-5dfa-8396-6313320cf666")
 		(property "Reference" "C133"
-			(at 185.42 237.49 0)
+			(at 71.12 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9639,7 +9639,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 185.42 240.03 0)
+			(at 71.12 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9648,7 +9648,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 182.88 238.76 0)
+			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9658,7 +9658,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 238.76 0)
+			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9668,7 +9668,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 182.88 238.76 0)
+			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9678,7 +9678,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 182.88 238.76 0)
+			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9688,7 +9688,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 182.88 238.76 0)
+			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9698,7 +9698,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 182.88 238.76 0)
+			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -9724,7 +9724,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 234.95) (xy 182.88 232.41)
+			(xy 68.58 148.59) (xy 68.58 146.05)
 		)
 		(stroke
 			(width 0)
@@ -9734,7 +9734,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 182.88 232.41 90)
+		(at 68.58 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9744,7 +9744,7 @@
 		)
 		(uuid "18bab9fb-4f39-5699-9889-61150df5d09c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 182.88 232.41 0)
+			(at 68.58 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -9755,7 +9755,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 242.57) (xy 182.88 245.11)
+			(xy 68.58 156.21) (xy 68.58 158.75)
 		)
 		(stroke
 			(width 0)
@@ -9765,7 +9765,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 182.88 245.11 270)
+		(at 68.58 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9775,7 +9775,7 @@
 		)
 		(uuid "e23d9dfb-716a-54e6-9672-7495f457295a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 182.88 245.11 0)
+			(at 68.58 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -9786,7 +9786,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 55.88 287.02 0)
+		(at 30.48 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9794,7 +9794,7 @@
 		(dnp no)
 		(uuid "5bae5415-7a97-5c79-8208-69ab84b8d77d")
 		(property "Reference" "C146"
-			(at 58.42 285.75 0)
+			(at 33.02 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9803,7 +9803,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 58.42 288.29 0)
+			(at 33.02 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9812,7 +9812,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 55.88 287.02 0)
+			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9822,7 +9822,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 287.02 0)
+			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9832,7 +9832,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 55.88 287.02 0)
+			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9842,7 +9842,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 55.88 287.02 0)
+			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9852,7 +9852,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 55.88 287.02 0)
+			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9862,7 +9862,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 55.88 287.02 0)
+			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9888,7 +9888,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 283.21) (xy 55.88 280.67)
+			(xy 30.48 181.61) (xy 30.48 179.07)
 		)
 		(stroke
 			(width 0)
@@ -9898,7 +9898,7 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 55.88 280.67 90)
+		(at 30.48 179.07 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9908,7 +9908,7 @@
 		)
 		(uuid "27b19d10-85e9-5d4e-9752-d4b1547ca0e4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.88 280.67 0)
+			(at 30.48 179.07 0)
 			(hide yes)
 			(effects
 				(font
@@ -9919,7 +9919,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 290.83) (xy 55.88 293.37)
+			(xy 30.48 189.23) (xy 30.48 191.77)
 		)
 		(stroke
 			(width 0)
@@ -9929,7 +9929,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 55.88 293.37 270)
+		(at 30.48 191.77 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9939,7 +9939,7 @@
 		)
 		(uuid "8bc1c205-2de8-5cdf-b6a9-61c0e4a42f55")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.88 293.37 0)
+			(at 30.48 191.77 0)
 			(hide yes)
 			(effects
 				(font
@@ -9950,7 +9950,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 68.58 287.02 0)
+		(at 93.98 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9958,7 +9958,7 @@
 		(dnp no)
 		(uuid "7302ca21-65af-57a9-913a-51b5ad614647")
 		(property "Reference" "C147"
-			(at 71.12 285.75 0)
+			(at 96.52 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9967,7 +9967,7 @@
 			)
 		)
 		(property "Value" "47u"
-			(at 71.12 288.29 0)
+			(at 96.52 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9976,7 +9976,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 68.58 287.02 0)
+			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9986,7 +9986,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 287.02 0)
+			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -9996,7 +9996,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 68.58 287.02 0)
+			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10006,7 +10006,7 @@
 			)
 		)
 		(property "LCSC" "C2880368"
-			(at 68.58 287.02 0)
+			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10016,7 +10016,7 @@
 			)
 		)
 		(property "MPN" "JDK063BBJ475MV-AT"
-			(at 68.58 287.02 0)
+			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10026,7 +10026,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 68.58 287.02 0)
+			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10052,7 +10052,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 283.21) (xy 68.58 280.67)
+			(xy 93.98 181.61) (xy 93.98 179.07)
 		)
 		(stroke
 			(width 0)
@@ -10062,7 +10062,7 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 68.58 280.67 90)
+		(at 93.98 179.07 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10072,7 +10072,7 @@
 		)
 		(uuid "38747afc-8e5c-59af-ae00-c94c8527a8bc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 280.67 0)
+			(at 93.98 179.07 0)
 			(hide yes)
 			(effects
 				(font
@@ -10083,7 +10083,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 290.83) (xy 68.58 293.37)
+			(xy 93.98 189.23) (xy 93.98 191.77)
 		)
 		(stroke
 			(width 0)
@@ -10093,7 +10093,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 68.58 293.37 270)
+		(at 93.98 191.77 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10103,7 +10103,7 @@
 		)
 		(uuid "92b7a947-5c88-5d45-86da-9fbd26dc8683")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 293.37 0)
+			(at 93.98 191.77 0)
 			(hide yes)
 			(effects
 				(font
@@ -10114,7 +10114,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 93.98 287.02 0)
+		(at 43.18 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10122,7 +10122,7 @@
 		(dnp no)
 		(uuid "a7e80a95-6990-5204-98e3-408360bc5407")
 		(property "Reference" "C149"
-			(at 96.52 285.75 0)
+			(at 45.72 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10131,7 +10131,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 96.52 288.29 0)
+			(at 45.72 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10140,7 +10140,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 93.98 287.02 0)
+			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10150,7 +10150,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 93.98 287.02 0)
+			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10160,7 +10160,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 93.98 287.02 0)
+			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10170,7 +10170,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 93.98 287.02 0)
+			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10180,7 +10180,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 93.98 287.02 0)
+			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10190,7 +10190,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 93.98 287.02 0)
+			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10216,7 +10216,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 283.21) (xy 93.98 280.67)
+			(xy 43.18 181.61) (xy 43.18 179.07)
 		)
 		(stroke
 			(width 0)
@@ -10226,7 +10226,7 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 93.98 280.67 90)
+		(at 43.18 179.07 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10236,7 +10236,7 @@
 		)
 		(uuid "67b18687-e9a2-5522-9de5-b7ba8fe3eb20")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 93.98 280.67 0)
+			(at 43.18 179.07 0)
 			(hide yes)
 			(effects
 				(font
@@ -10247,7 +10247,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 290.83) (xy 93.98 293.37)
+			(xy 43.18 189.23) (xy 43.18 191.77)
 		)
 		(stroke
 			(width 0)
@@ -10257,7 +10257,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 93.98 293.37 270)
+		(at 43.18 191.77 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10267,7 +10267,7 @@
 		)
 		(uuid "6faaeca8-b4b5-5d6e-8cc7-e806bf341ba5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 93.98 293.37 0)
+			(at 43.18 191.77 0)
 			(hide yes)
 			(effects
 				(font
@@ -10278,7 +10278,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 132.08 287.02 0)
+		(at 55.88 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10286,7 +10286,7 @@
 		(dnp no)
 		(uuid "ce0f2a53-f457-5cd6-ba13-939304dd0c29")
 		(property "Reference" "C152"
-			(at 134.62 285.75 0)
+			(at 58.42 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10295,7 +10295,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 134.62 288.29 0)
+			(at 58.42 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10304,7 +10304,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 132.08 287.02 0)
+			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10314,7 +10314,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 287.02 0)
+			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10324,7 +10324,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 132.08 287.02 0)
+			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10334,7 +10334,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 132.08 287.02 0)
+			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10344,7 +10344,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 132.08 287.02 0)
+			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10354,7 +10354,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 132.08 287.02 0)
+			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10380,7 +10380,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 283.21) (xy 132.08 280.67)
+			(xy 55.88 181.61) (xy 55.88 179.07)
 		)
 		(stroke
 			(width 0)
@@ -10390,7 +10390,7 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 132.08 280.67 90)
+		(at 55.88 179.07 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10400,7 +10400,7 @@
 		)
 		(uuid "b5d7b10f-17fb-55f0-b5c3-4dd25fe88f12")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 280.67 0)
+			(at 55.88 179.07 0)
 			(hide yes)
 			(effects
 				(font
@@ -10411,7 +10411,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 290.83) (xy 132.08 293.37)
+			(xy 55.88 189.23) (xy 55.88 191.77)
 		)
 		(stroke
 			(width 0)
@@ -10421,7 +10421,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 132.08 293.37 270)
+		(at 55.88 191.77 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10431,7 +10431,7 @@
 		)
 		(uuid "38ab9490-2312-5f52-b9be-149391b984a7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 293.37 0)
+			(at 55.88 191.77 0)
 			(hide yes)
 			(effects
 				(font
@@ -10442,7 +10442,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 144.78 287.02 0)
+		(at 81.28 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10450,7 +10450,7 @@
 		(dnp no)
 		(uuid "24c82b50-5fac-5c90-b83d-662a990fc8eb")
 		(property "Reference" "C153"
-			(at 147.32 285.75 0)
+			(at 83.82 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10459,7 +10459,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 147.32 288.29 0)
+			(at 83.82 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10468,7 +10468,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 144.78 287.02 0)
+			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10478,7 +10478,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 287.02 0)
+			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10488,7 +10488,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 144.78 287.02 0)
+			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10498,7 +10498,7 @@
 			)
 		)
 		(property "LCSC" "C2880368"
-			(at 144.78 287.02 0)
+			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10508,7 +10508,7 @@
 			)
 		)
 		(property "MPN" "JDK063BBJ475MV-AT"
-			(at 144.78 287.02 0)
+			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10518,7 +10518,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 144.78 287.02 0)
+			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10544,7 +10544,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 283.21) (xy 144.78 280.67)
+			(xy 81.28 181.61) (xy 81.28 179.07)
 		)
 		(stroke
 			(width 0)
@@ -10554,7 +10554,7 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 144.78 280.67 90)
+		(at 81.28 179.07 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10564,7 +10564,7 @@
 		)
 		(uuid "e30da75b-c90c-54f5-b98a-0ef7029e5787")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.78 280.67 0)
+			(at 81.28 179.07 0)
 			(hide yes)
 			(effects
 				(font
@@ -10575,7 +10575,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 290.83) (xy 144.78 293.37)
+			(xy 81.28 189.23) (xy 81.28 191.77)
 		)
 		(stroke
 			(width 0)
@@ -10585,7 +10585,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 144.78 293.37 270)
+		(at 81.28 191.77 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10595,7 +10595,7 @@
 		)
 		(uuid "f6acb610-a89a-57e5-baa4-09e483582fb1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.78 293.37 0)
+			(at 81.28 191.77 0)
 			(hide yes)
 			(effects
 				(font
@@ -10606,7 +10606,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 170.18 287.02 0)
+		(at 68.58 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10614,7 +10614,7 @@
 		(dnp no)
 		(uuid "0b8aa2a1-c8a8-5c20-8073-e42e7eabafb3")
 		(property "Reference" "C155"
-			(at 172.72 285.75 0)
+			(at 71.12 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10623,7 +10623,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 172.72 288.29 0)
+			(at 71.12 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10632,7 +10632,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 170.18 287.02 0)
+			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10642,7 +10642,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 170.18 287.02 0)
+			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10652,7 +10652,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 170.18 287.02 0)
+			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10662,7 +10662,7 @@
 			)
 		)
 		(property "LCSC" "C49062"
-			(at 170.18 287.02 0)
+			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10672,7 +10672,7 @@
 			)
 		)
 		(property "MPN" "CL03A104KP3NNNC"
-			(at 170.18 287.02 0)
+			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10682,7 +10682,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 170.18 287.02 0)
+			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
 				(font
@@ -10708,7 +10708,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 283.21) (xy 170.18 280.67)
+			(xy 68.58 181.61) (xy 68.58 179.07)
 		)
 		(stroke
 			(width 0)
@@ -10718,7 +10718,7 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 170.18 280.67 90)
+		(at 68.58 179.07 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10728,7 +10728,7 @@
 		)
 		(uuid "b323b247-7499-56d2-a83a-f680eb91806d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 280.67 0)
+			(at 68.58 179.07 0)
 			(hide yes)
 			(effects
 				(font
@@ -10739,7 +10739,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 290.83) (xy 170.18 293.37)
+			(xy 68.58 189.23) (xy 68.58 191.77)
 		)
 		(stroke
 			(width 0)
@@ -10749,7 +10749,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 170.18 293.37 270)
+		(at 68.58 191.77 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10759,7 +10759,7 @@
 		)
 		(uuid "b48ac54f-7327-5129-a111-4dc5b51ceee2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 293.37 0)
+			(at 68.58 191.77 0)
 			(hide yes)
 			(effects
 				(font
@@ -10770,7 +10770,7 @@
 	)
 	(symbol
 		(lib_id "power:PWR_FLAG")
-		(at 208.28 251.46 0)
+		(at 218.44 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10778,7 +10778,7 @@
 		(dnp no)
 		(uuid "284ed46c-d2d0-589f-bfc7-8463f2659071")
 		(property "Reference" "#FLG17"
-			(at 210.82 250.19 0)
+			(at 220.98 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10787,7 +10787,7 @@
 			)
 		)
 		(property "Value" "PWR_FLAG"
-			(at 210.82 252.73 0)
+			(at 220.98 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10796,7 +10796,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 208.28 251.46 0)
+			(at 218.44 53.34 0)
 			(hide yes)
 			(effects
 				(font
@@ -10806,7 +10806,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 208.28 251.46 0)
+			(at 218.44 53.34 0)
 			(hide yes)
 			(effects
 				(font
@@ -10816,7 +10816,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 208.28 251.46 0)
+			(at 218.44 53.34 0)
 			(hide yes)
 			(effects
 				(font
@@ -10826,7 +10826,7 @@
 			)
 		)
 		(property "LCSC" ""
-			(at 208.28 251.46 0)
+			(at 218.44 53.34 0)
 			(hide yes)
 			(effects
 				(font
@@ -10836,7 +10836,7 @@
 			)
 		)
 		(property "MPN" ""
-			(at 208.28 251.46 0)
+			(at 218.44 53.34 0)
 			(hide yes)
 			(effects
 				(font
@@ -10846,7 +10846,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 208.28 251.46 0)
+			(at 218.44 53.34 0)
 			(hide yes)
 			(effects
 				(font
@@ -10869,7 +10869,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 251.46) (xy 208.28 254.0)
+			(xy 218.44 53.34) (xy 218.44 55.88)
 		)
 		(stroke
 			(width 0)
@@ -10878,7 +10878,7 @@
 		(uuid "7d5e219a-6eea-50e3-bc74-dd1fc8058968")
 	)
 	(label "+0V95_VCCA_BL"
-		(at 208.28 254.0 270)
+		(at 218.44 55.88 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10889,7 +10889,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 30.48 327.66 0)
+		(at 81.28 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10897,7 +10897,7 @@
 		(dnp no)
 		(uuid "aedaa8dc-e8c6-58c2-9606-f0b302aa5794")
 		(property "Reference" "C166"
-			(at 33.02 326.39 0)
+			(at 83.82 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10906,7 +10906,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 33.02 328.93 0)
+			(at 83.82 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10915,7 +10915,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 30.48 327.66 0)
+			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -10925,7 +10925,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 30.48 327.66 0)
+			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -10935,7 +10935,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 30.48 327.66 0)
+			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -10945,7 +10945,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 30.48 327.66 0)
+			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -10955,7 +10955,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 30.48 327.66 0)
+			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -10965,7 +10965,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 30.48 327.66 0)
+			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -10991,7 +10991,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 323.85) (xy 30.48 321.31)
+			(xy 81.28 148.59) (xy 81.28 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11001,7 +11001,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 30.48 321.31 90)
+		(at 81.28 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11011,7 +11011,7 @@
 		)
 		(uuid "0db31e90-f9bc-5168-83f7-15909cfc4c18")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 30.48 321.31 0)
+			(at 81.28 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -11022,7 +11022,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 331.47) (xy 30.48 334.01)
+			(xy 81.28 156.21) (xy 81.28 158.75)
 		)
 		(stroke
 			(width 0)
@@ -11032,7 +11032,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 30.48 334.01 270)
+		(at 81.28 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11042,7 +11042,7 @@
 		)
 		(uuid "06962ebe-8ad0-539c-9a4b-d02826c20939")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 30.48 334.01 0)
+			(at 81.28 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -11053,7 +11053,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 43.18 327.66 0)
+		(at 93.98 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11061,7 +11061,7 @@
 		(dnp no)
 		(uuid "16f0ae07-a634-58fa-a18b-3cbb83867c8d")
 		(property "Reference" "C167"
-			(at 45.72 326.39 0)
+			(at 96.52 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11070,7 +11070,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 45.72 328.93 0)
+			(at 96.52 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11079,7 +11079,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 43.18 327.66 0)
+			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11089,7 +11089,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 43.18 327.66 0)
+			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11099,7 +11099,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 43.18 327.66 0)
+			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11109,7 +11109,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 43.18 327.66 0)
+			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11119,7 +11119,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 43.18 327.66 0)
+			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11129,7 +11129,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 43.18 327.66 0)
+			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11155,7 +11155,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 323.85) (xy 43.18 321.31)
+			(xy 93.98 148.59) (xy 93.98 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11165,7 +11165,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 43.18 321.31 90)
+		(at 93.98 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11175,7 +11175,7 @@
 		)
 		(uuid "8623cf3f-d674-5985-8ccb-23050c29fd54")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 43.18 321.31 0)
+			(at 93.98 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -11186,7 +11186,7 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 331.47) (xy 43.18 334.01)
+			(xy 93.98 156.21) (xy 93.98 158.75)
 		)
 		(stroke
 			(width 0)
@@ -11196,7 +11196,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 43.18 334.01 270)
+		(at 93.98 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11206,7 +11206,7 @@
 		)
 		(uuid "9b75e81a-5996-59f2-9ef1-8f4b0fc72424")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 43.18 334.01 0)
+			(at 93.98 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -11217,7 +11217,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 55.88 327.66 0)
+		(at 106.68 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11225,7 +11225,7 @@
 		(dnp no)
 		(uuid "241e9bb4-3241-5431-8588-e98a359c38e6")
 		(property "Reference" "C168"
-			(at 58.42 326.39 0)
+			(at 109.22 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11234,7 +11234,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 58.42 328.93 0)
+			(at 109.22 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11243,7 +11243,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 55.88 327.66 0)
+			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11253,7 +11253,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 327.66 0)
+			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11263,7 +11263,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 55.88 327.66 0)
+			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11273,7 +11273,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 55.88 327.66 0)
+			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11283,7 +11283,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 55.88 327.66 0)
+			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11293,7 +11293,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 55.88 327.66 0)
+			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11319,7 +11319,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 323.85) (xy 55.88 321.31)
+			(xy 106.68 148.59) (xy 106.68 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11329,7 +11329,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 55.88 321.31 90)
+		(at 106.68 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11339,7 +11339,7 @@
 		)
 		(uuid "4c08e912-3778-5a5c-b56e-45df3b37fb89")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.88 321.31 0)
+			(at 106.68 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -11350,7 +11350,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 331.47) (xy 55.88 334.01)
+			(xy 106.68 156.21) (xy 106.68 158.75)
 		)
 		(stroke
 			(width 0)
@@ -11360,7 +11360,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 55.88 334.01 270)
+		(at 106.68 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11370,7 +11370,7 @@
 		)
 		(uuid "274c8317-c4f5-5e65-9890-0a2a85f50436")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.88 334.01 0)
+			(at 106.68 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -11381,7 +11381,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 68.58 327.66 0)
+		(at 119.38 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11389,7 +11389,7 @@
 		(dnp no)
 		(uuid "f8e77443-dd59-5138-8796-09b562e6534a")
 		(property "Reference" "C169"
-			(at 71.12 326.39 0)
+			(at 121.92 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11398,7 +11398,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 71.12 328.93 0)
+			(at 121.92 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11407,7 +11407,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 68.58 327.66 0)
+			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11417,7 +11417,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 327.66 0)
+			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11427,7 +11427,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 68.58 327.66 0)
+			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11437,7 +11437,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 68.58 327.66 0)
+			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11447,7 +11447,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 68.58 327.66 0)
+			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11457,7 +11457,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 68.58 327.66 0)
+			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11483,7 +11483,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 323.85) (xy 68.58 321.31)
+			(xy 119.38 148.59) (xy 119.38 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11493,7 +11493,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 68.58 321.31 90)
+		(at 119.38 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11503,7 +11503,7 @@
 		)
 		(uuid "7d035bd7-8a9f-5f69-bb76-e4b89ec840fc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 321.31 0)
+			(at 119.38 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -11514,7 +11514,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 331.47) (xy 68.58 334.01)
+			(xy 119.38 156.21) (xy 119.38 158.75)
 		)
 		(stroke
 			(width 0)
@@ -11524,7 +11524,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 68.58 334.01 270)
+		(at 119.38 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11534,7 +11534,7 @@
 		)
 		(uuid "d94fac57-b194-5119-ab4b-a0ac8381de9e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 68.58 334.01 0)
+			(at 119.38 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -11545,7 +11545,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 81.28 327.66 0)
+		(at 132.08 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11553,7 +11553,7 @@
 		(dnp no)
 		(uuid "bdc700f5-0e1c-526d-acf6-83b5a79f7b32")
 		(property "Reference" "C170"
-			(at 83.82 326.39 0)
+			(at 134.62 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11562,7 +11562,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 83.82 328.93 0)
+			(at 134.62 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11571,7 +11571,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 81.28 327.66 0)
+			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11581,7 +11581,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 327.66 0)
+			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11591,7 +11591,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 81.28 327.66 0)
+			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11601,7 +11601,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 81.28 327.66 0)
+			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11611,7 +11611,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 81.28 327.66 0)
+			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11621,7 +11621,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 81.28 327.66 0)
+			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11647,7 +11647,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 323.85) (xy 81.28 321.31)
+			(xy 132.08 148.59) (xy 132.08 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11657,7 +11657,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 81.28 321.31 90)
+		(at 132.08 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11667,7 +11667,7 @@
 		)
 		(uuid "05cd447b-41f6-535a-9e4b-08f36e10b68f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.28 321.31 0)
+			(at 132.08 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -11678,7 +11678,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 331.47) (xy 81.28 334.01)
+			(xy 132.08 156.21) (xy 132.08 158.75)
 		)
 		(stroke
 			(width 0)
@@ -11688,7 +11688,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 81.28 334.01 270)
+		(at 132.08 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11698,7 +11698,7 @@
 		)
 		(uuid "e7dc2e5a-5a1c-5eb5-be10-8c6af69d21d0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 81.28 334.01 0)
+			(at 132.08 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -11709,7 +11709,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 93.98 327.66 0)
+		(at 144.78 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11717,7 +11717,7 @@
 		(dnp no)
 		(uuid "ec41e4cd-53ff-5b51-b876-4753459535e2")
 		(property "Reference" "C171"
-			(at 96.52 326.39 0)
+			(at 147.32 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11726,7 +11726,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 96.52 328.93 0)
+			(at 147.32 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11735,7 +11735,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 93.98 327.66 0)
+			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11745,7 +11745,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 93.98 327.66 0)
+			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11755,7 +11755,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 93.98 327.66 0)
+			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11765,7 +11765,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 93.98 327.66 0)
+			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11775,7 +11775,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 93.98 327.66 0)
+			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11785,7 +11785,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 93.98 327.66 0)
+			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11811,7 +11811,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 323.85) (xy 93.98 321.31)
+			(xy 144.78 148.59) (xy 144.78 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11821,7 +11821,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 93.98 321.31 90)
+		(at 144.78 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11831,7 +11831,7 @@
 		)
 		(uuid "f08dcbb5-d100-5955-b317-21675340c980")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 93.98 321.31 0)
+			(at 144.78 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -11842,7 +11842,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 331.47) (xy 93.98 334.01)
+			(xy 144.78 156.21) (xy 144.78 158.75)
 		)
 		(stroke
 			(width 0)
@@ -11852,7 +11852,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 93.98 334.01 270)
+		(at 144.78 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11862,7 +11862,7 @@
 		)
 		(uuid "bbb60d18-6707-5c0f-9e49-af11e5a81568")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 93.98 334.01 0)
+			(at 144.78 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -11873,7 +11873,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 106.68 327.66 0)
+		(at 157.48 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11881,7 +11881,7 @@
 		(dnp no)
 		(uuid "10d716a3-19d2-5ade-a0a5-b23cc5953a8d")
 		(property "Reference" "C172"
-			(at 109.22 326.39 0)
+			(at 160.02 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11890,7 +11890,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 109.22 328.93 0)
+			(at 160.02 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11899,7 +11899,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 106.68 327.66 0)
+			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11909,7 +11909,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 106.68 327.66 0)
+			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11919,7 +11919,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 106.68 327.66 0)
+			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11929,7 +11929,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 106.68 327.66 0)
+			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11939,7 +11939,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 106.68 327.66 0)
+			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11949,7 +11949,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 106.68 327.66 0)
+			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -11975,7 +11975,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 323.85) (xy 106.68 321.31)
+			(xy 157.48 148.59) (xy 157.48 146.05)
 		)
 		(stroke
 			(width 0)
@@ -11985,7 +11985,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 106.68 321.31 90)
+		(at 157.48 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11995,7 +11995,7 @@
 		)
 		(uuid "c2578c9f-fc0d-59e1-bae0-a8e063bc59cd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 106.68 321.31 0)
+			(at 157.48 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -12006,7 +12006,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 331.47) (xy 106.68 334.01)
+			(xy 157.48 156.21) (xy 157.48 158.75)
 		)
 		(stroke
 			(width 0)
@@ -12016,7 +12016,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 106.68 334.01 270)
+		(at 157.48 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12026,7 +12026,7 @@
 		)
 		(uuid "e3816fdd-c8d8-5945-8b9b-15075afb952d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 106.68 334.01 0)
+			(at 157.48 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -12037,7 +12037,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 119.38 327.66 0)
+		(at 170.18 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12045,7 +12045,7 @@
 		(dnp no)
 		(uuid "6cd160ef-d038-56a0-89a6-092b3a3ea47c")
 		(property "Reference" "C173"
-			(at 121.92 326.39 0)
+			(at 172.72 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12054,7 +12054,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 121.92 328.93 0)
+			(at 172.72 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12063,7 +12063,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 119.38 327.66 0)
+			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12073,7 +12073,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 119.38 327.66 0)
+			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12083,7 +12083,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 119.38 327.66 0)
+			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12093,7 +12093,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 119.38 327.66 0)
+			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12103,7 +12103,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 119.38 327.66 0)
+			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12113,7 +12113,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 119.38 327.66 0)
+			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12139,7 +12139,7 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 323.85) (xy 119.38 321.31)
+			(xy 170.18 148.59) (xy 170.18 146.05)
 		)
 		(stroke
 			(width 0)
@@ -12149,7 +12149,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 119.38 321.31 90)
+		(at 170.18 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12159,7 +12159,7 @@
 		)
 		(uuid "e7d53cd1-c6be-52d7-a662-1dbaf2f65d23")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 119.38 321.31 0)
+			(at 170.18 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -12170,7 +12170,7 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 331.47) (xy 119.38 334.01)
+			(xy 170.18 156.21) (xy 170.18 158.75)
 		)
 		(stroke
 			(width 0)
@@ -12180,7 +12180,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 119.38 334.01 270)
+		(at 170.18 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12190,7 +12190,7 @@
 		)
 		(uuid "4f7b4df1-6616-5357-beb1-5226d2643266")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 119.38 334.01 0)
+			(at 170.18 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -12201,7 +12201,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 132.08 327.66 0)
+		(at 182.88 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12209,7 +12209,7 @@
 		(dnp no)
 		(uuid "a731719e-3fcf-5f6c-8a02-fc0aa375dc6d")
 		(property "Reference" "C174"
-			(at 134.62 326.39 0)
+			(at 185.42 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12218,7 +12218,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 134.62 328.93 0)
+			(at 185.42 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12227,7 +12227,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 132.08 327.66 0)
+			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12237,7 +12237,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 327.66 0)
+			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12247,7 +12247,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 132.08 327.66 0)
+			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12257,7 +12257,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 132.08 327.66 0)
+			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12267,7 +12267,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 132.08 327.66 0)
+			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12277,7 +12277,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 132.08 327.66 0)
+			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12303,7 +12303,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 323.85) (xy 132.08 321.31)
+			(xy 182.88 148.59) (xy 182.88 146.05)
 		)
 		(stroke
 			(width 0)
@@ -12313,7 +12313,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 132.08 321.31 90)
+		(at 182.88 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12323,7 +12323,7 @@
 		)
 		(uuid "3040f57f-8fde-51b8-951c-94c119ff1d3c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 321.31 0)
+			(at 182.88 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -12334,7 +12334,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 331.47) (xy 132.08 334.01)
+			(xy 182.88 156.21) (xy 182.88 158.75)
 		)
 		(stroke
 			(width 0)
@@ -12344,7 +12344,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 132.08 334.01 270)
+		(at 182.88 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12354,7 +12354,7 @@
 		)
 		(uuid "2503644e-f869-5be2-9f21-614a4577d40c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 334.01 0)
+			(at 182.88 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -12365,7 +12365,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 144.78 327.66 0)
+		(at 195.58 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12373,7 +12373,7 @@
 		(dnp no)
 		(uuid "c0108504-ab7b-5b63-8bd0-d6982b5cfe3f")
 		(property "Reference" "C175"
-			(at 147.32 326.39 0)
+			(at 198.12 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12382,7 +12382,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 147.32 328.93 0)
+			(at 198.12 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12391,7 +12391,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 144.78 327.66 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12401,7 +12401,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.78 327.66 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12411,7 +12411,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 144.78 327.66 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12421,7 +12421,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 144.78 327.66 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12431,7 +12431,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 144.78 327.66 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12441,7 +12441,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 144.78 327.66 0)
+			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12467,7 +12467,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 323.85) (xy 144.78 321.31)
+			(xy 195.58 148.59) (xy 195.58 146.05)
 		)
 		(stroke
 			(width 0)
@@ -12477,7 +12477,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 144.78 321.31 90)
+		(at 195.58 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12487,7 +12487,7 @@
 		)
 		(uuid "89c9c392-7553-5e61-a6d3-c0cf87fc5a2b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.78 321.31 0)
+			(at 195.58 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -12498,7 +12498,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 331.47) (xy 144.78 334.01)
+			(xy 195.58 156.21) (xy 195.58 158.75)
 		)
 		(stroke
 			(width 0)
@@ -12508,7 +12508,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 144.78 334.01 270)
+		(at 195.58 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12518,7 +12518,7 @@
 		)
 		(uuid "9c357582-a03f-5fef-9d7e-5725549a2485")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.78 334.01 0)
+			(at 195.58 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -12529,7 +12529,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 157.48 327.66 0)
+		(at 208.28 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12537,7 +12537,7 @@
 		(dnp no)
 		(uuid "a7eb8890-184b-5eb4-9527-489e45900915")
 		(property "Reference" "C176"
-			(at 160.02 326.39 0)
+			(at 210.82 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12546,7 +12546,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 160.02 328.93 0)
+			(at 210.82 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12555,7 +12555,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 157.48 327.66 0)
+			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12565,7 +12565,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 157.48 327.66 0)
+			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12575,7 +12575,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 157.48 327.66 0)
+			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12585,7 +12585,7 @@
 			)
 		)
 		(property "LCSC" "C272853"
-			(at 157.48 327.66 0)
+			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12595,7 +12595,7 @@
 			)
 		)
 		(property "MPN" "CC0201KRX7R7BB103"
-			(at 157.48 327.66 0)
+			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12605,7 +12605,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 157.48 327.66 0)
+			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12631,7 +12631,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 323.85) (xy 157.48 321.31)
+			(xy 208.28 148.59) (xy 208.28 146.05)
 		)
 		(stroke
 			(width 0)
@@ -12641,7 +12641,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 157.48 321.31 90)
+		(at 208.28 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12651,7 +12651,7 @@
 		)
 		(uuid "8db63d39-2e34-59ca-80fe-7108b5fbb886")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 157.48 321.31 0)
+			(at 208.28 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -12662,7 +12662,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 331.47) (xy 157.48 334.01)
+			(xy 208.28 156.21) (xy 208.28 158.75)
 		)
 		(stroke
 			(width 0)
@@ -12672,7 +12672,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 157.48 334.01 270)
+		(at 208.28 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12682,7 +12682,7 @@
 		)
 		(uuid "00a98560-8d98-5b72-8036-ed2e1125e87f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 157.48 334.01 0)
+			(at 208.28 158.75 0)
 			(hide yes)
 			(effects
 				(font
@@ -12693,7 +12693,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 170.18 327.66 0)
+		(at 220.98 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12701,7 +12701,7 @@
 		(dnp no)
 		(uuid "ee5c7a40-12bb-538b-9ffd-4004e5f04fec")
 		(property "Reference" "C177"
-			(at 172.72 326.39 0)
+			(at 223.52 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12710,7 +12710,7 @@
 			)
 		)
 		(property "Value" "47n"
-			(at 172.72 328.93 0)
+			(at 223.52 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12719,7 +12719,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 170.18 327.66 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12729,7 +12729,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 170.18 327.66 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12739,7 +12739,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 170.18 327.66 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12749,7 +12749,7 @@
 			)
 		)
 		(property "LCSC" "C66942"
-			(at 170.18 327.66 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12759,7 +12759,7 @@
 			)
 		)
 		(property "MPN" "0201B102K500NT"
-			(at 170.18 327.66 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12769,7 +12769,7 @@
 			)
 		)
 		(property "Group" ""
-			(at 170.18 327.66 0)
+			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
 				(font
@@ -12795,7 +12795,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 323.85) (xy 170.18 321.31)
+			(xy 220.98 148.59) (xy 220.98 146.05)
 		)
 		(stroke
 			(width 0)
@@ -12805,7 +12805,7 @@
 	)
 	(global_label "+1V8"
 		(shape passive)
-		(at 170.18 321.31 90)
+		(at 220.98 146.05 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12815,7 +12815,7 @@
 		)
 		(uuid "30831523-e71d-53f9-a004-d79414448a6f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 321.31 0)
+			(at 220.98 146.05 0)
 			(hide yes)
 			(effects
 				(font
@@ -12826,7 +12826,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 331.47) (xy 170.18 334.01)
+			(xy 220.98 156.21) (xy 220.98 158.75)
 		)
 		(stroke
 			(width 0)
@@ -12836,7 +12836,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 170.18 334.01 270)
+		(at 220.98 158.75 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12846,7 +12846,7 @@
 		)
 		(uuid "6f346a54-0399-560d-aa60-9c745caeb9ed")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 334.01 0)
+			(at 220.98 158.75 0)
 			(hide yes)
 			(effects
 				(font
