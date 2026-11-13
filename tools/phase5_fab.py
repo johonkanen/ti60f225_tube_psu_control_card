@@ -10,11 +10,19 @@
    the board edge. Of the free spots nearest each corner, the three with the largest triangle are kept.
    They are board-only footprints (no schematic symbol), excluded from the BOM and the placement file, so
    schematic parity and the JLC BOM/CPL do not change. Existing FIDn footprints are replaced.
+3. Dangling copper: KiCad DRC (zones refilled, the project's rules) is run on the result; every track or via it
+   flags as dangling (`track_dangling`, `via_dangling`) is deleted by its UUID, and DRC runs again until none is
+   left (deleting one piece can leave the next one of a chain dangling). DRC, not pcbnew's connectivity test, decides,
+   because the latter also calls a stub that ends in a pour dangling.
 """
 import itertools
+import json
 import math
 import os
+import shutil
+import subprocess
 import sys
+import tempfile
 
 import pcbnew
 
@@ -130,6 +138,41 @@ def add_fiducials(b):
     print(f"phase5_fab: {n} fiducials")
 
 
+HW = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "hardware")
+
+
+def dangling(path):
+    """UUIDs of the items KiCad DRC flags as dangling tracks or vias, on a copy with the project's rules."""
+    with tempfile.TemporaryDirectory() as d:
+        shutil.copy(path, os.path.join(d, "control_card.kicad_pcb"))
+        for x in ("kicad_pro", "kicad_dru"):
+            shutil.copy(os.path.join(HW, f"control_card.{x}"), d)
+        out = os.path.join(d, "drc.json")
+        subprocess.run(["kicad-cli", "pcb", "drc", "--refill-zones", "--severity-all", "--format", "json", "-o", out,
+                        os.path.join(d, "control_card.kicad_pcb")], check=True, capture_output=True)
+        rep = json.load(open(out))
+    return {i["uuid"]: i["description"] for v in rep["violations"] if v["type"] in ("track_dangling", "via_dangling")
+            for i in v["items"]}
+
+
+def clean_dangling(path):
+    total = 0
+    for _ in range(10):
+        flagged = dangling(path)
+        if not flagged:
+            break
+        b = pcbnew.LoadBoard(path)
+        for t in list(b.GetTracks()):
+            if t.m_Uuid.AsString() in flagged:
+                print(f"  removed {flagged[t.m_Uuid.AsString()]}")
+                b.Delete(t)
+                total += 1
+        b.Save(path)
+    else:
+        print("  dangling copper left after 10 rounds")
+    print(f"phase5_fab: {total} dangling tracks/vias removed")
+
+
 def main(src, dst):
     b = pcbnew.LoadBoard(src)
     fix_vias(b)
@@ -137,6 +180,7 @@ def main(src, dst):
     b = pcbnew.LoadBoard(dst)
     add_fiducials(b)
     b.Save(dst)
+    clean_dangling(dst)
 
 
 if __name__ == "__main__":
