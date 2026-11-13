@@ -14,6 +14,7 @@ import pcbnew
 NETS = ("/Power/PG_1V8", "/Power/PG_0V95")
 JTAG = ("/Configuration/TCK", "/Configuration/TMS", "/Configuration/TDI", "/Configuration/TDO")
 FIELD = (86.9, 107.9, 97.1, 118.1)      # U1's ball field with its fan-out escapes: copper in here stays
+KEEP = (87.3, 108.3, 96.7, 117.7)       # the ball field itself, inside the escapes' ends: the router's keep-out
 
 
 def outside(t):
@@ -32,7 +33,7 @@ def main(src, dst):
     box.SetShape(pcbnew.SHAPE_T_POLY)
     box.SetLayer(pcbnew.User_2)
     box.SetPolyPoints([pcbnew.VECTOR2I(pcbnew.FromMM(x), pcbnew.FromMM(y)) for x, y in
-                       ((FIELD[0], FIELD[1]), (FIELD[2], FIELD[1]), (FIELD[2], FIELD[3]), (FIELD[0], FIELD[3]))])
+                       ((KEEP[0], KEEP[1]), (KEEP[2], KEEP[1]), (KEEP[2], KEEP[3]), (KEEP[0], KEEP[3]))])
     box.SetWidth(pcbnew.FromMM(0.05))
     b.Add(box)
     b.Save(dst)

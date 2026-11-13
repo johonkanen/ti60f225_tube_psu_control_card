@@ -151,5 +151,13 @@
  ],
  "led_k": [
   "/Header and LEDs/LED*"
+ ],
+ "adc_sel": [
+  "ADASEL0",
+  "ADASEL1",
+  "ADASEL2",
+  "ADBSEL0",
+  "ADBSEL1",
+  "ADBSEL2"
  ]
 }

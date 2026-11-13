@@ -12,7 +12,7 @@
 #  band   translator outputs (F.Cu only, second-row nets first), translator inputs (F.Cu only, innermost fan
 #         first, so every later net passes outside the earlier ones), then the direct header nets
 #  rest   HyperRAM, flash, ADC, LEDs, JTAG, configuration, power control
-#  pour   +1V8 on L3 around the tracks (KRT route_planes), then the supply stubs
+#  pour   +1V8 on L3 around the tracks (KRT route_planes), filled, then the supply stubs and a repair step
 set -euo pipefail
 R="$(cd "$(dirname "$0")/.." && pwd)"
 IN="${1:-$R/build/phase5/placed.kicad_pcb}"
@@ -55,12 +55,13 @@ step xlat_oe xlat_oe "${BOT[@]}";                                lock xlat_oe
 # rest
 step hyperram hyperram --layers F.Cu --ordering original        # (reports the two bottom pull-ups as open)
 step hr_pullups hr_pullups "${BOT[@]}";                          lock hyperram
+step flash flash --layer-costs 1 4;                              lock flash
 # LEDs: around U9 and along the top edge on F.Cu, the inner one first (ball order = resistor order)
 step leds leds --layers F.Cu --ordering original
 step leds_l3 leds --layer-costs 3 1 --via-cost 50 --ordering original --keepout;   lock leds   # the rest: two vias each
-step flash flash --layer-costs 1 4;                              lock flash
 # JTAG crosses the whole board from the BGA's north-west corner to J2: on L3 its four tracks fenced VCCIO vias off
-# the +1V8 pour, so it goes down at the escapes and runs on B.Cu to the header pins and their pull-ups
+# the +1V8 pour (and with the keep-out under the BGA only one of the four routes), so it goes down at the escapes
+# and runs on B.Cu to the header pins and their pull-ups
 step jtag jtag --layers F.Cu In2.Cu B.Cu --layer-costs 2 10 1 --via-cost 100;   lock jtag
 step adc adc "${BOT[@]}";                                        lock adc
 step config config --layers F.Cu In2.Cu B.Cu --layer-costs 1 5 1.5;  lock config
@@ -68,15 +69,19 @@ step config config --layers F.Cu In2.Cu B.Cu --layer-costs 1 5 1.5;  lock config
 step power_ctl power_ctl,adc_analog --layers F.Cu In2.Cu B.Cu --layer-costs 2 8 1
 # whatever a step left open, with B.Cu allowed as the last resort
 step leftovers leds,led_k,jtag,config,bottom_cfg,adc,flash,j1_east,hyperram --layers F.Cu In2.Cu B.Cu --layer-costs 1 10 2
-# pour, then the supply stubs (with the pour dropped the router would join the +1V8 pads by tracks)
+# pour, then the supply stubs (with the pour dropped or not filled the router joins the +1V8 pads by tracks)
 N=$((N + 1)); P="$W/$(printf %02d "$N")_pour.kicad_pcb"
 (cd "$K" && $KP py_router/route_planes.py "$CUR" "$P" --nets +1V8 --plane-layers In2.Cu \
     --zone-clearance 0.15 --min-thickness 0.15 --no-thermal-vias --clearance 0.125 --fab-tier advanced \
     --escalation off --no-fix-drc-settings > "${P%.kicad_pcb}.log" 2>&1) || { tail -20 "${P%.kicad_pcb}.log"; exit 1; }
+kpy "$R/tools/phase5_fill.py" "$P" "$P" | tail -1     # the router reads a pour's connectivity from its fill
 CUR="$P"; sib "$CUR"
 if [ "$LAST" = "pour" ]; then kpy "$R/tools/phase5_lock_tracks.py" "$CUR" unlock | tail -1; cp "$CUR" "$OUT"; echo "stopped after pour: wrote $OUT"; exit 0; fi
-step supply supply "${BOT[@]}" --power-nets '+0V95' '+1V8' '+3V3' '+5V' '+3V3A' '*VCCA*' '+1V8_OSC' \
+step supply supply --layers F.Cu In2.Cu B.Cu --layer-costs 1 6 1 --power-nets '+0V95' '+1V8' '+3V3' '+5V' '+3V3A' '*VCCA*' '+1V8_OSC' \
     --power-nets-widths 0.3 0.3 0.3 0.3 0.25 0.2 0.2
 kpy "$R/tools/phase5_lock_tracks.py" "$CUR" unlock | tail -1
+# the six mux select lines share the west edge's south end and one of them (ADASEL0) stays open in the adc step:
+# all six ripped and routed again together, that one first
+step adc_sel adc_sel --layers F.Cu In2.Cu B.Cu --layer-costs 1 4 2 --force-reroute --ordering original
 cp "$CUR" "$OUT"
 echo "wrote $OUT"

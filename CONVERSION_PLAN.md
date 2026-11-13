@@ -335,6 +335,30 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   3. **HyperRAM matching:** routed 10.9–16.9 mm, no room for meanders; the `.kicad_dru` rule (10.8 ± 0.1 mm,
      Agilex geometry) needs a new target or a window.
 
+- [x] **I/O routing on F.Cu + L3 with pin swaps** (2026-11-13, `docs/io_routing_brief.md`; board in
+  `hardware/control_card.kicad_pcb`, renders in `docs/render/`). Rebuild: `tools/phase5_layout.sh
+  build/phase5/placed.kicad_pcb`, then `tools/phase5_route.sh` (→ `build/phase5/routed.kicad_pcb`), check with
+  `tools/phase5_check.sh`.
+  Result: 0 unconnected items, schematic parity 0, DRC 3 dangling-track warnings (old +5V Agilex stubs) plus
+  silkscreen; 88 signal vias on 51 nets (the one-pass chain on F.Cu + L3 gave 74 unconnected items and 136 vias).
+  The 32 translator nets, the 8 south-west header nets and the 12 HyperRAM nets run on F.Cu without a via.
+  - *Chain:* one router step per net group (`tools/phase5/route_groups.json`, `tools/krt_route.py`), finished
+    groups locked. Scripted before the router: J1 second-row stubs through the first-row gaps and the PFC_PWM2
+    loop south of row 2 (`phase5_j1.py`; KRT cannot thread the 0.37 mm gaps), old power-good / JTAG copper
+    stripped (`phase5_strip.py`). The L3 pour is made and filled before the supply stubs (`phase5_fill.py`).
+  - *Swaps* (`docs/io_swap_groups.md`): translator inputs of U19–U21 in pin order on rows A/B of 2A/2B, those of
+    U22 and XLAT_OE_N on bank 3A's south edge (C178/C179 added at F14/G12); TR and BR header nets in J1 pin
+    order; all ADC nets on the west edge's two outer rows; LEDs in resistor order. Translator channels unchanged.
+  - *Placement:* R40/R41 at J1 pins 9/11 and the JTAG pull-ups R60–R63 at their J2 pins, on the bottom, joined
+    to the through-hole pin without a via; no cap via in the strips north/south of a translator's pins or in the
+    line of a free outer ball; REF_RES_2A, CRESET_N, J1_P26 and FLASH_IO2 go down in the ball pad (no fan-out).
+  - *Open:* (1) the L3 +1V8 pour has 8 small islands (0.1–17 mm², 13 vias: pull-up feeds north of the BGA fenced
+    by the four LED nets that fall back to L3, and translator cap vias between the J1 fan tracks); every via
+    is joined by other copper, but the pour is not one island. (2) B.Cu carries 318 mm of signal track: JTAG
+    (kept off L3, where it fenced VCCIO vias), the power-good lines, CLK100M, mux B selects, LED hops. (3)
+    HyperRAM is not length-matched: 8.6–14.2 mm; the `hyperram_length` rule now holds that window. (4) Via
+    count per net is uneven: CUK_SDATA 5, FLASH_IO2 4, XLAT_OE_N 4 (one per chip), LED1_B 4.
+
 ### Phase 6: verification and production
 - [ ] Independent reviews as for the Agilex card: Efinix hardware checklist, electrical review, JLC production check.
 - [ ] BOM/CPL via `tools/jlc`; stock check for 10 boards; FPGA through Global Sourcing if JLC doesn't stock it.

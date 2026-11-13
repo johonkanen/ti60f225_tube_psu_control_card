@@ -79,7 +79,7 @@ TL, TR and BR are at 6 now, BL at 1), e.g. output for output, or an input for an
 
 | Bank | Used (in = input) | Free |
 |---|---|---|
-| TL | A3 LED1_R, A4 LED2_G, B3 LED1_G, B5 LED2_B, C3 LED1_B, C4 LED2_R, C5 HT_SDATA (in) | – |
+| TL | C4 LED2_G, B3 LED2_B, A3 LED2_R, C3 LED1_G, A4 LED1_B, B5 LED1_R, C5 HT_SDATA (in) | – |
 | TR | B12 CUK_SDATA (in), A12 J1_P17, A13 J1_P19, C12 J1_P22, A14 J1_P24, B14 TX, D12 J1_P26 | – |
 | BR | N13 RX (in), N14 J1_P27, P15 J1_P28, R14 J1_P29, P14 J1_P30, R13 J1_P31, P13 J1_P32 | – |
 | BL | R3 J1_P33 (JTAG also on this bank: M4/N3/N4/P3) | R4 |
