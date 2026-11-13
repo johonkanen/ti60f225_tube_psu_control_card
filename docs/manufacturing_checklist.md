@@ -94,7 +94,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 
 | ✓ | Check | How |
 |---|---|---|
-| [ ] | Gerbers, drill, BOM, CPL generated from the final board | `KICAD_ROOT=<squashfs-root> tools/jlc/fab_outputs.sh hardware/control_card.kicad_pcb hardware/fab --skip J1,J2` (skip only if THT is hand-soldered) |
+| [ ] | Gerbers, drill, BOM, CPL generated from the final board | `KICAD_ROOT=<squashfs-root> tools/jlc/fab_outputs.sh hardware/control_card.kicad_pcb hardware/fab --no-silk --skip J1,J2` (skip only if THT is hand-soldered) |
 | [ ] | Gerbers reviewed in a viewer (JLC's online viewer or gerbv): every layer, drill, mask, paste, outline; no silkscreen layers | upload preview |
 | [ ] | Order options: 6 layers, 1.6 mm, via-in-pad POFV, surface finish (ENIG recommended for 0.65 mm BGA and 0201), stackup chosen, assembly both sides, X-ray | order form |
 | [ ] | Files and order settings committed / noted with the commit hash they came from | git |
