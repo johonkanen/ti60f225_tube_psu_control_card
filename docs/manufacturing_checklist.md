@@ -15,7 +15,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 
 | ✓ | Check | How | Status |
 |---|---|---|---|
-| [ ] | DRC clean, zones refilled | `tools/phase5_check.sh hardware/control_card.kicad_pcb` | 0 errors; 26 silk-to-edge, 1 silk overlap, 6 library warnings (no dangling copper) |
+| [ ] | DRC clean, zones refilled | `tools/phase5_check.sh hardware/control_card.kicad_pcb` | 0 errors; 6 library warnings (no dangling copper; silkscreen rules set to ignore, no silkscreen is printed) |
 | [ ] | 0 unconnected items | same | 0 |
 | [ ] | Schematic parity 0 | same | 0 |
 | [ ] | ERC 0, schematic check 0 errors | `tools/sch_check.sh` | 0 / 0 at merge |
@@ -37,7 +37,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 | [ ] | Copper to board edge ≥ 0.3 mm | DRC `copper_edge_clearance` | passes |
 | [ ] | Annular rings of J1/J2 pads | footprint vs capability | check |
 | [ ] | Solder-mask dams between BGA pads (0.3 mm pads, 0.35 mm gaps) | mask layer view, JLC minimum dam | check mask expansion; with too small a dam JLC removes the dam (bridging risk) |
-| [ ] | Silkscreen: line ≥ 0.15 mm, text ≥ 0.8 mm high, not on pads, not off board | DRC silk warnings, Gerber view | 26 silk-to-edge, 1 overlap: fix or accept each |
+| [x] | Silkscreen | – | **no silkscreen printed** (decided 2026-11-13); silk DRC rules set to ignore in the project. Leave the silk layers out of the Gerbers, or choose no silkscreen in the order if JLC offers it |
 | [ ] | Stackup / impedance | JLC stackup choice | no controlled-impedance nets required; HyperRAM short (< 15 mm): note the stackup used |
 
 ## 3. Design items still open (from routing)
@@ -58,7 +58,7 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 | [ ] | Every SMT part has an LCSC number and is in stock for the order quantity | `fab_outputs.sh`, then `python3 -I tools/jlc/stock_check.py hardware/fab/bom_jlcpcb.csv --boards N` | no LCSC: U1 (FPGA: Global Sourcing or consigned), J1, J2 (THT) |
 | [ ] | Extended-part count and cost acceptable | JLC BOM view | check |
 | [ ] | CPL rotations correct, especially bottom side (110 parts) and polarised parts | JLC's placement preview after upload | check every IC, LED, diode, the flash (BGA-24), U1, translators (UQFN-16) |
-| [ ] | Pin 1 / polarity marks visible on silk for every IC, LED, diode, electrolytic | Gerber view | check |
+| [ ] | Orientation without silkscreen: no pin-1 marks on the board, so assembly relies on the CPL; check every polarised part in JLC's placement preview, and keep a printed assembly drawing (fab layer) for hand rework | JLC preview, fab-layer PDF | check |
 | [ ] | Two-sided assembly: heavy parts on the bottom (bucks, inductors) are fine for second reflow | part masses | check L1–L3, U2–U4 |
 | [ ] | Parts not too close to the edge for JLC's handling; rails or panel needed? | closest SMD pad centre 0.85 mm from the edge (D1) | check JLC's edge rule for this board size; add rails/panel if required |
 | [x] | Fiducials (global fiducials help with the 0.65 mm BGA) | footprint list | FID1–3 top (76.65, 102.35), (101.65, 107.10), (84.15, 123.60); FID4–6 bottom (77.40, 96.35), (101.65, 102.10), (89.15, 124.60): 1 mm copper, 2 mm mask, board-only, not in BOM/CPL (`tools/phase5_fab.py`) |
@@ -95,6 +95,6 @@ THT: J1 (power-board header), J2 (JTAG). Ti60F225 BGA, 0.65 mm pitch, via-in-pad
 | ✓ | Check | How |
 |---|---|---|
 | [ ] | Gerbers, drill, BOM, CPL generated from the final board | `KICAD_ROOT=<squashfs-root> tools/jlc/fab_outputs.sh hardware/control_card.kicad_pcb hardware/fab --skip J1,J2` (skip only if THT is hand-soldered) |
-| [ ] | Gerbers reviewed in a viewer (JLC's online viewer or gerbv): every layer, drill, mask, paste, outline | upload preview |
+| [ ] | Gerbers reviewed in a viewer (JLC's online viewer or gerbv): every layer, drill, mask, paste, outline; no silkscreen layers | upload preview |
 | [ ] | Order options: 6 layers, 1.6 mm, via-in-pad POFV, surface finish (ENIG recommended for 0.65 mm BGA and 0201), stackup chosen, assembly both sides, X-ray | order form |
 | [ ] | Files and order settings committed / noted with the commit hash they came from | git |
