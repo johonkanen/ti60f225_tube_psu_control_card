@@ -79,15 +79,15 @@ def main():
     chk(len(U1) == 225, f"U1 has {len(U1)} pins")
     for bx, r in pins.items():
         p, n = r["pad"], U1.get(bx, "")
-        want = ("+0V95" if p == "VCC" else "+0V95_" + p if p.startswith("VCCA_") else
+        want = ("+0V95" if p in ("VCC", "VCCA_TL", "VCCA_TR", "VCCA_BR") else "+0V95_" + p if p == "VCCA_BL" else
                 "+1V8" if p == "VCCAUX" or re.match(r"VCCIO\d[AB]$", p) else
                 "+3V3" if p.startswith("VCCIO33") else "GND" if p in ("GND", "VQPS_GND") else None)
         if want:
             chk(n == want, f"{bx} {p} on {n}")
-    for c in ("TL", "TR", "BL", "BR"):
-        refs = [r for r, _ in A[f"+0V95_VCCA_{c}"]]
-        chk(sum(r.startswith("FB") for r in refs) == 1 and sum(r.startswith("C") for r in refs) == 5,
-            f"VCCA_{c} filter: {refs}")
+    # only PLL_BL0 is used: VCCA_BL filtered (bead, 1u + 47n), the other VCCA straight on VCC (tools/sch_decoupling_47n.py)
+    refs = [r for r, _ in A["+0V95_VCCA_BL"]]
+    chk(sum(r.startswith("FB") for r in refs) == 1 and sum(r.startswith("C") for r in refs) == 2,
+        f"VCCA_BL filter: {refs}")
 
     # HyperRAM and flash
     for net, bx in HYPERRAM.items():

@@ -51,6 +51,14 @@ HWC also asks for at least one 47 µF at each regulator output, and a π or τ f
 outlet, with VCCA filtered separately. The proven card used much less (10 µF out, no per-rail beads) and works;
 this card follows the checklist where it fits, prioritising VCCA filters and the 47 µF bulk caps.
 
+**As built (2026-11-13, user's decision, `tools/sch_decoupling_47n.py`):** leaner than the HWC table. One 47 nF 0201
+at every used power ball (8 VCC, 4 VCCAUX, 12 HSIO VCCIO, 4 VCCIO33, 1 VCCA_BL), one 100 nF per rail (VCC, VCCAUX,
+HSIO VCCIO, VCCIO33), one 47 µF per rail at its regulator's output (0.95 V C106, 1.8 V C125, 3.3 V C147), no
+1 nF/10 nF and no FPGA-side 10/4.7/1 µF. The low source impedance comes from the planes and the bulk at the
+regulators. Only PLL_BL0 is used (HyperRAM clock), so VCCA_TL/TR/BR sit on VCC without bead or caps (HWC: unused
+PLLs need no decoupling, VCCA always on VCC); VCCA_BL keeps its bead FB8 with 1 µF + 47 nF. A design that starts
+another PLL needs that VCCA's filter back. VCCIO33_BL stays decoupled: bank BL carries JTAG.
+
 ## 3. Power-up order (DS p. 57/58, HWC)
 
 1. VCC and VCCA first (any order).

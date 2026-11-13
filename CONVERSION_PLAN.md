@@ -303,6 +303,14 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
   Also: the placers keep the SW netclass's 0.15 mm from the switch nodes; `phase5_planes.py notch` keeps a via's
   holes in the +3V3 fill test (a via in a hole of the island was taken as joined), starts the channel at the via,
   tries 1.5 mm wide and closer to +0V95 vias when 0.9 mm fails, and rejects a channel that cuts a +0V95 via off.
+- [x] **Leaner decoupling** (2026-11-13, user's scheme, `tools/sch_decoupling_47n.py`; see docs/ti60_requirements.md).
+  One 47n per used power ball, one 100n per rail, one 47u per rail at its regulator; no 1n/10n, no FPGA-side
+  bulk; VCCA_TL/TR/BR on VCC (only PLL_BL0 is used), VCCA_BL: FB8 + 1u + 47n. 44 parts removed (41 caps,
+  FB6/FB7/FB9) plus 3 PWR_FLAGs, 29 caps re-valued to 47n, C147 now 47u 0603. J1_P33 stays on HVIO BL: that bank
+  carries JTAG, so moving it would not make BL unused (BR and TR are full anyway). ERC 0, check_schematic 0 errors.
+  Layout: every 47n placed at its own ball (VCC 0–2.2 mm, mean 1.0; HSIO 0.2–4.1, mean 2.1; VCCAUX 2.1–3.4;
+  VCCIO33 0.5–0.8 mm), the 47u caps 1.7–2.2 mm from their inductor's output pad; planes one island each, parity 0,
+  unconnected 162 (was 183).
 - [ ] **Planes and routing** (`tools/phase5_route.sh` → `build/phase5/routed.kicad_pcb`, not yet in `hardware/`):
   L4 split by KRT route_planes (+0V95 island, +3V3 around) with notches for the +3V3 vias it caught
   (`phase5_planes.py`); L3 +1V8 pour dropped before routing and poured again after; HyperRAM; all nets on a

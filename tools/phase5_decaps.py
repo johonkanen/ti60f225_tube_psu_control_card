@@ -16,9 +16,10 @@ Every pose is checked with pcbnew's own collision tests: 0.1 mm copper clearance
 hole to hole, against every other net's pads, tracks, vias and F.Cu/B.Cu zone outlines; courtyards may not overlap
 other bottom courtyards, and stay inside the board.
 
-Which balls each cap serves follows the schematic's order (tools/phase3_schematic.py): VCC caps at the VCC
-balls; VCCAUX 4u7/100n/10n/1n at the VCCAUX balls; 1n/10n/100n/1u per used HSIO bank (none on 3A/3B) at that
-bank's VCCIO balls; 4u7/1u/100n per HVIO bank at its VCCIO33 ball; each VCCA's five caps and bead at its VCCA ball. Smallest caps first.
+Which balls each cap serves (tools/sch_decoupling_47n.py): one 47n at every power ball (VCC, VCCA_BL, the used
+HSIO banks' VCCIO, VCCAUX, VCCIO33), each at its own ball, first; then one 100n per rail along its balls; the
+PLL_BL0 filter (1u, bead) at VCCA_BL; one 47u per rail at its regulator's inductor output. 47n/100n 0201s may sit
+under the ball field (Lattice); nothing else goes there.
 """
 import math
 import sys
@@ -32,16 +33,15 @@ VIA_D, VIA_DRILL = 0.30, 0.15
 STUB_W, STUB_MAX = 0.2, 0.8
 # The band between the BGA's south edge and J1 carries the translator outputs and the direct HVIO header nets
 # (the translator inputs come from banks 2A/2B, down the east side): no FPGA decap there; only the translators' own
-# caps, the OE pull-up and FB7 (VCCA_TR, G10), which finds no room nearer: the band's middle is free since
-# banks 3A/3B are unused.
+# caps and the OE pull-up.
 SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
-BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67", "FB7"}
+BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67"}
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
 UNUSED_BANKS = {"3A", "3B"}                     # no caps (tools/sch_vccio_caps.py)
-USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]   # 10n/1n C166-C177 in this order
+USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]   # 47n C166-C177 in this order, 2 per bank
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]
-UNDER_BGA = {"1n", "10n", "100n"}               # 0201s of these values may sit under the ball field (Lattice)
+UNDER_BGA = {"47n", "100n"}                     # 0201s of these values may sit under the ball field (Lattice)
 
 
 def refs(a, b, p="C"):
@@ -60,33 +60,24 @@ def pin_balls(u1):
 
 
 def plan(u1):
-    """(ref, target balls) in placement order."""
+    """(ref, target balls) in placement order (decoupling as in tools/sch_decoupling_47n.py)."""
     pb = pin_balls(u1)
     jobs = []
-    vcc = pb["VCC"]
-    jobs += [(r, vcc) for r in refs(119, 120) + refs(114, 118) + refs(109, 113)]   # core first: 1n, 10n, 100n
-    vcca = [(refs(86 + 5 * i, 90 + 5 * i), pb[f"VCCA_{c}"]) for i, c in enumerate(["TL", "TR", "BL", "BR"])]
-    jobs += [(c[-1], balls) for c, balls in vcca]                                  # each VCCA's 1n
-    # the small caps of the I/O supplies before the VCCA's 10n/100n: under the ball field there is room for only
-    # about half of all 1n/10n/100n (UNDER_BGA)
-    used = [(i, bank, USED_BANKS.index(bank)) for i, bank in enumerate(BANK_ORDER) if bank not in UNUSED_BANKS]
-    jobs += [(r, pb[f"VCCIO{bank}"]) for i, bank, k in used for r in (f"C{167 + 2 * k}", f"C{166 + 2 * k}")]  # 1n, 10n
-    jobs += [(c[-2], balls) for c, balls in vcca]                                  # one 10n per VCCA (PLL supply)
-    jobs += [(f"C{129 + 2 * i}", pb[f"VCCIO{bank}"]) for i, bank, k in used]      # then each bank's 100n
-    aux = pb["VCCAUX"]
-    jobs += [(r, aux) for r in ["C124", "C123", "C122"]]           # VCCAUX 1n, 10n, 100n
-    jobs += [(f"C{146 + 3 * i}", pb[f"VCCIO33_{bank}"]) for i, bank in enumerate(HVIO_ORDER)]   # HVIO 100n
-    jobs += [(r, balls) for c, balls in vcca for r in reversed(c[:-2])]           # each VCCA's other 10n, 100n
-    jobs += [(r, vcc) for r in ["C108", "C107"]]                                   # VCC 1u, 4u7
-    for i, bank in enumerate(BANK_ORDER):                           # 1u per used HSIO bank
-        if bank not in UNUSED_BANKS:
-            jobs.append((f"C{128 + 2 * i}", pb[f"VCCIO{bank}"]))
-    jobs.append(("C121", aux))                                      # VCCAUX 4u7
-    for i, bank in enumerate(HVIO_ORDER):                          # 1u, 4u7 per HVIO bank
-        jobs += [(f"C{146 + 3 * i - k}", pb[f"VCCIO33_{bank}"]) for k in (1, 2)]
-    vccio = [b for k, v in pb.items() if k.startswith("VCCIO") and not k.startswith("VCCIO33") for b in v]
-    jobs += [("C127", vccio), ("C126", vccio), ("C125", vccio), ("C106", vcc)]
-    jobs += [(f"FB{6 + i}", pb[f"VCCA_{c}"]) for i, c in enumerate(["TL", "TR", "BL", "BR"])]
+    # one 47n per power ball, each at its own ball: VCC, VCCA_BL, HSIO VCCIO (2 per used bank), VCCAUX, VCCIO33
+    jobs += [(f"C{r}", [bl]) for r, bl in zip((119, 120, 114, 115, 116, 117, 118, 110), pb["VCC"])]
+    jobs.append(("C100", pb["VCCA_BL"]))
+    for k, bank in enumerate(USED_BANKS):
+        jobs += [(f"C{166 + 2 * k + j}", [bl]) for j, bl in enumerate(pb[f"VCCIO{bank}"])]
+    jobs += [(f"C{r}", [bl]) for r, bl in zip((123, 124, 131, 133), pb["VCCAUX"])]
+    jobs += [(f"C{146 + 3 * i}", pb[f"VCCIO33_{bank}"]) for i, bank in enumerate(HVIO_ORDER)]
+    # one 100n per rail, anywhere along its balls
+    hsio = [bl for bank in USED_BANKS for bl in pb[f"VCCIO{bank}"]]
+    vccio33 = [bl for bank in HVIO_ORDER for bl in pb[f"VCCIO33_{bank}"]]
+    jobs += [("C109", pb["VCC"]), ("C122", pb["VCCAUX"]), ("C129", hsio), ("C153", vccio33)]
+    # the PLL_BL0 filter: 1u and the bead at VCCA_BL (the unused PLLs' VCCA sit on VCC, no filter)
+    jobs += [("C96", pb["VCCA_BL"]), ("FB8", pb["VCCA_BL"])]
+    # one 47u per rail at its regulator's output (the inductor's output pad)
+    jobs += [("C106", ["L1.2"]), ("C125", ["L2.2"]), ("C147", ["L3.2"])]
     # the translators (U19-U22, schematic order): VCCA (pin 14) 100n and VCCB (pin 13) 100n each, under the part;
     # the OE pull-up under U19, next to its OE pin
     for i in range(4):
