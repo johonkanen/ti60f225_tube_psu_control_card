@@ -16,6 +16,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from phase3_schematic import PARTS  # noqa: E402
 from sch_edit import Sheet, check_geometry, load_project_lib, normalize_labels  # noqa: E402
 
 HW = Path(__file__).resolve().parent.parent / "hardware"
@@ -33,6 +34,12 @@ DROP = (C(107, 108, 111, 112, 113)                                          # VC
         + C(144, 145, 148, 150, 151, 154))                                  # VCCIO33
 DIRECT = ["TL", "TR", "BR"]                      # VCCA of unused PLLs: on +0V95
 FLAGS = {"TL": "#FLG15", "TR": "#FLG16", "BR": "#FLG18"}   # their PWR_FLAGs (+0V95 has its own)
+
+
+def part(kind):
+    """Value, footprint, LCSC and MPN of a PARTS entry (the re-valued caps must not keep their old part numbers)."""
+    _, fp, lcsc, mpn = PARTS[kind]
+    return {"Value": kind, "Footprint": fp, "LCSC": lcsc, "MPN": mpn}
 
 
 def main():
@@ -53,10 +60,10 @@ def main():
     for ref in DROP + [FLAGS[c] for c in DIRECT]:
         sh.remove(ref)
     for ref in C47N:
-        sh.set_props(ref, Value="47n")
+        sh.set_props(ref, **part("47n"))
     for ref, v in SET.items():
-        sh.set_props(ref, Value=v)
-    sh.set_props(C47U, Value="47u", Footprint="Capacitor_SMD:C_0603_1608Metric")
+        sh.set_props(ref, **part(v))
+    sh.set_props(C47U, **part("47u"))
     for c in DIRECT:
         n = sh.relabel(f"+0V95_VCCA_{c}", "+0V95")
         if n != 1:

@@ -39,6 +39,7 @@ PARTS = {
     "1u": ("Device:C", C0201, "C170152", "CL03A105MQ3CSNC"),
     "1u_0402": ("Device:C", C0402, "C52923", "CL05A105KA5NQNC"),
     "100n": ("Device:C", C0201, "C49062", "CL03A104KP3NNNC"),
+    "47n": ("Device:C", C0201, "C85925", "GRM033R60J473KE19D"),
     "100n_0402": ("Device:C", C0402, "C1525", "CL05B104KO5NNNC"),
     "10n": ("Device:C", C0201, "C272853", "CC0201KRX7R7BB103"),
     "1n": ("Device:C", C0201, "C66942", "0201B102K500NT"),

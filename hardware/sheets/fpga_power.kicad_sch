@@ -6747,7 +6747,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C170152"
 			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
@@ -6757,7 +6757,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "CL03A105MQ3CSNC"
 			(at 193.04 55.88 0)
 			(hide yes)
 			(effects
@@ -6900,7 +6900,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
@@ -6910,7 +6910,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 205.74 55.88 0)
 			(hide yes)
 			(effects
@@ -7381,7 +7381,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
@@ -7391,7 +7391,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 119.38 119.38 0)
 			(hide yes)
 			(effects
@@ -7545,7 +7545,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
@@ -7555,7 +7555,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 55.88 119.38 0)
 			(hide yes)
 			(effects
@@ -7709,7 +7709,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
@@ -7719,7 +7719,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 68.58 119.38 0)
 			(hide yes)
 			(effects
@@ -7873,7 +7873,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
@@ -7883,7 +7883,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 81.28 119.38 0)
 			(hide yes)
 			(effects
@@ -8037,7 +8037,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
@@ -8047,7 +8047,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 93.98 119.38 0)
 			(hide yes)
 			(effects
@@ -8201,7 +8201,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
@@ -8211,7 +8211,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 106.68 119.38 0)
 			(hide yes)
 			(effects
@@ -8365,7 +8365,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
@@ -8375,7 +8375,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 30.48 119.38 0)
 			(hide yes)
 			(effects
@@ -8529,7 +8529,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
@@ -8539,7 +8539,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 43.18 119.38 0)
 			(hide yes)
 			(effects
@@ -8857,7 +8857,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
@@ -8867,7 +8867,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 30.48 152.4 0)
 			(hide yes)
 			(effects
@@ -9021,7 +9021,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
@@ -9031,7 +9031,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 43.18 152.4 0)
 			(hide yes)
 			(effects
@@ -9513,7 +9513,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
@@ -9523,7 +9523,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 55.88 152.4 0)
 			(hide yes)
 			(effects
@@ -9677,7 +9677,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
@@ -9687,7 +9687,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 68.58 152.4 0)
 			(hide yes)
 			(effects
@@ -9841,7 +9841,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
@@ -9851,7 +9851,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 30.48 185.42 0)
 			(hide yes)
 			(effects
@@ -10005,7 +10005,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C2880368"
+		(property "LCSC" "C140782"
 			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
@@ -10015,7 +10015,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "JDK063BBJ475MV-AT"
+		(property "MPN" "GRM188R60J476ME15D"
 			(at 93.98 185.42 0)
 			(hide yes)
 			(effects
@@ -10169,7 +10169,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
@@ -10179,7 +10179,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 43.18 185.42 0)
 			(hide yes)
 			(effects
@@ -10333,7 +10333,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
@@ -10343,7 +10343,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 55.88 185.42 0)
 			(hide yes)
 			(effects
@@ -10497,7 +10497,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C2880368"
+		(property "LCSC" "C49062"
 			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
@@ -10507,7 +10507,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "JDK063BBJ475MV-AT"
+		(property "MPN" "CL03A104KP3NNNC"
 			(at 81.28 185.42 0)
 			(hide yes)
 			(effects
@@ -10661,7 +10661,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C49062"
+		(property "LCSC" "C85925"
 			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
@@ -10671,7 +10671,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CL03A104KP3NNNC"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 68.58 185.42 0)
 			(hide yes)
 			(effects
@@ -10944,7 +10944,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
@@ -10954,7 +10954,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 81.28 152.4 0)
 			(hide yes)
 			(effects
@@ -11108,7 +11108,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
@@ -11118,7 +11118,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 93.98 152.4 0)
 			(hide yes)
 			(effects
@@ -11272,7 +11272,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
@@ -11282,7 +11282,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 106.68 152.4 0)
 			(hide yes)
 			(effects
@@ -11436,7 +11436,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
@@ -11446,7 +11446,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 119.38 152.4 0)
 			(hide yes)
 			(effects
@@ -11600,7 +11600,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
@@ -11610,7 +11610,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 132.08 152.4 0)
 			(hide yes)
 			(effects
@@ -11764,7 +11764,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
@@ -11774,7 +11774,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 144.78 152.4 0)
 			(hide yes)
 			(effects
@@ -11928,7 +11928,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
@@ -11938,7 +11938,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 157.48 152.4 0)
 			(hide yes)
 			(effects
@@ -12092,7 +12092,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
@@ -12102,7 +12102,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 170.18 152.4 0)
 			(hide yes)
 			(effects
@@ -12256,7 +12256,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
@@ -12266,7 +12266,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 182.88 152.4 0)
 			(hide yes)
 			(effects
@@ -12420,7 +12420,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
@@ -12430,7 +12430,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 195.58 152.4 0)
 			(hide yes)
 			(effects
@@ -12584,7 +12584,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C272853"
+		(property "LCSC" "C85925"
 			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
@@ -12594,7 +12594,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "CC0201KRX7R7BB103"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 208.28 152.4 0)
 			(hide yes)
 			(effects
@@ -12748,7 +12748,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC" "C66942"
+		(property "LCSC" "C85925"
 			(at 220.98 152.4 0)
 			(hide yes)
 			(effects
@@ -12758,7 +12758,7 @@
 				(justify left)
 			)
 		)
-		(property "MPN" "0201B102K500NT"
+		(property "MPN" "GRM033R60J473KE19D"
 			(at 220.98 152.4 0)
 			(hide yes)
 			(effects

@@ -70,7 +70,8 @@ plane, and pin plan, schematic and board agreeing.
 **Banks 3A and 3B are free to use** (40 balls, VCCIO on +1V8, south side of the BGA facing the translators and
 J1) for any 1.8 V net of the translator-input or ADC groups, if that shortens routes or saves vias. Using either
 bank means its VCCIO balls need decoupling like the other banks: one 47 nF 0201 per ball (3A: F14, G12;
-3B: J11, L14), added on the `fpga_power` sheet (follow `tools/sch_decoupling_47n.py` / `place_passive`) and
+3B: J11, L14), added on the `fpga_power` sheet with `place_passive(sh, flow, None, "47n", "+1V8", "GND", ref=...)` from
+`tools/phase3_schematic.py` (its `PARTS["47n"]` sets value, footprint, LCSC and MPN; see `tools/sch_vccio_caps.py`) and
 placed by `tools/phase5_decaps.py` (add them to `plan()`, one per ball, and drop the bank from `UNUSED_BANKS`).
 
 Procedure for every swap:
