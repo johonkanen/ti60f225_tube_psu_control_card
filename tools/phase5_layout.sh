@@ -7,6 +7,10 @@
 #  2. phase5_place    floorplan: U1 rotated, memories swapped, translators in a row
 #  3. phase5_vias     a 0.30/0.15 via in the pad of every U1 plane ball (JLC fills and caps via-in-pad on 6 layers)
 #  4. bga_fanout      KRT, under-pad: 0.09 mm tracks at 0.125 mm clearance (0.2 mm to every 0.15 mm hole)
+#                     (not REF_RES_2A on F6 and CRESET_N on J5: deep balls whose parts sit on the bottom; their
+#                     F.Cu escapes came out on the south edge among the translator inputs, so the routing chain
+#                     takes them down in the pad instead; nor J1_P26 on D12, which
+#                     goes to J1 on L3 from a via in the ball pad: tools/phase5_j1.py)
 #  5. phase5_decaps   Ti60 decoupling, VCCA filters, configuration parts, translator caps on the bottom at their pins
 #  6. place_simple    KRT places the flash and JTAG pull-ups (tools/phase5/groups.json, intent.json); 8 seeds,
 #                     the first judged one is kept, then phase5_decaps --legalise moves them off other nets' copper
@@ -38,7 +42,7 @@ cp "$W/b0.kicad_pro" "$W/b1.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b1.kicad_dru"
 # 4. fan-out (plane balls already have their via; signals only)
 (cd "$K" && $KP py_router/bga_fanout.py "$W/b1.kicad_pcb" -o "$W/b2.kicad_pcb" --component U1 --layers F.Cu B.Cu \
     --track-width 0.09 --clearance 0.125 --via-size 0.30 --via-drill 0.15 --escape-method underpad \
-    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' --plane-drop off \
+    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' '!J1_P26' --plane-drop off \
     --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/fanout.log" 2>&1) || { tail -20 "$W/fanout.log"; exit 1; }
 grep -E "Under-pad escape" "$W/fanout.log" | head -1
 # 5. decoupling and the rest at their pins

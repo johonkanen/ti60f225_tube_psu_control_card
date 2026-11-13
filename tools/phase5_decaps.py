@@ -35,11 +35,14 @@ STUB_W, STUB_MAX = 0.2, 0.8
 # (the translator inputs come from banks 2A/2B, down the east side): no FPGA decap there; only the translators' own
 # caps and the OE pull-up.
 SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
-BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67"}
+BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67", "R40", "R41"}
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
-UNUSED_BANKS = {"3A", "3B"}                     # no caps (tools/sch_vccio_caps.py)
-USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]   # 47n C166-C177 in this order, 2 per bank
+UNUSED_BANKS = {"3B"}                           # no caps (tools/sch_vccio_caps.py)
+USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]
+# 47n per VCCIO ball: C166-C177 for the first six banks in use (2 per bank), C178/C179 for 3A, added later
+# (tools/sch_bank3a_caps.py) when translator inputs moved onto it
+BANK_CAP0 = {"1A": 166, "1B": 168, "2A": 170, "2B": 172, "4A": 174, "4B": 176, "3A": 178}
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]
 UNDER_BGA = {"47n", "100n"}                     # 0201s of these values may sit under the ball field (Lattice)
 
@@ -66,8 +69,8 @@ def plan(u1):
     # one 47n per power ball, each at its own ball: VCC, VCCA_BL, HSIO VCCIO (2 per used bank), VCCAUX, VCCIO33
     jobs += [(f"C{r}", [bl]) for r, bl in zip((119, 120, 114, 115, 116, 117, 118, 110), pb["VCC"])]
     jobs.append(("C100", pb["VCCA_BL"]))
-    for k, bank in enumerate(USED_BANKS):
-        jobs += [(f"C{166 + 2 * k + j}", [bl]) for j, bl in enumerate(pb[f"VCCIO{bank}"])]
+    for bank in USED_BANKS:
+        jobs += [(f"C{BANK_CAP0[bank] + j}", [bl]) for j, bl in enumerate(pb[f"VCCIO{bank}"])]
     jobs += [(f"C{r}", [bl]) for r, bl in zip((123, 124, 131, 133), pb["VCCAUX"])]
     jobs += [(f"C{146 + 3 * i}", pb[f"VCCIO33_{bank}"]) for i, bank in enumerate(HVIO_ORDER)]
     # one 100n per rail, anywhere along its balls
@@ -78,6 +81,9 @@ def plan(u1):
     jobs += [("C96", pb["VCCA_BL"]), ("FB8", pb["VCCA_BL"])]
     # one 47u per rail at its regulator's output (the inductor's output pad)
     jobs += [("C106", ["L1.2"]), ("C125", ["L2.2"]), ("C147", ["L3.2"])]
+    # the EPWM2A / EPWM2B pull-downs at their J1 pins (through-hole: reached on the bottom without a via), before
+    # the translator caps, which then keep off them
+    jobs += [("R40", ["J1.9^"]), ("R41", ["J1.11^"])]
     # the translators (U19-U22, schematic order): VCCA (pin 14) 100n and VCCB (pin 13) 100n each, under the part;
     # the OE pull-up under U19, next to its OE pin
     for i in range(4):
@@ -97,6 +103,7 @@ class Board:
         self.holes = []                             # (pos, radius, net)
         self.court = []                             # bottom courtyard bboxes: (box, ref)
         self.vias = []                              # (pos, net, radius)
+        self.no_via = []                            # boxes (IU) closed to new vias (reserve_translators)
         self.field = None                           # U1's ball field: on the bottom only UNDER_BGA caps (set_field)
         # nets of a wider netclass clearance (the project's SW class: the buck switch nodes, 0.15 mm)
         self.net_clr = {n.GetNetCode(): SW_CLR for name, n in b.GetNetsByName().items()
@@ -135,6 +142,22 @@ class Board:
                                        pcbnew.VECTOR2L(abs(a.x - e.x) + 1, abs(a.y - e.y) + 1))
                     box.Inflate(t.GetWidth())
                     self.items[t.GetLayer()].append((seg, -1, box))
+                    n += 1
+        # a free ball of the outermost row leaves a slot between two escapes: a via exactly in it sits at the
+        # clearance limit of both neighbours and the router cannot pass it, so that line is kept free as well
+        for p in u1.Pads():
+            c = p.GetPosition()
+            if not p.GetNetname().startswith("unconnected"):
+                continue
+            for dx, dy, edge in ((1, 0, c.x == bb.GetRight()), (-1, 0, c.x == bb.GetX()),
+                                 (0, 1, c.y == bb.GetBottom()), (0, -1, c.y == bb.GetY())):
+                if edge:
+                    a = pcbnew.VECTOR2I(c.x + dx * IU(0.35), c.y + dy * IU(0.35))
+                    e = pcbnew.VECTOR2I(c.x + dx * IU(0.35 + length), c.y + dy * IU(0.35 + length))
+                    box = pcbnew.BOX2I(pcbnew.VECTOR2I(min(a.x, e.x), min(a.y, e.y)),
+                                       pcbnew.VECTOR2L(abs(a.x - e.x) + 1, abs(a.y - e.y) + 1))
+                    box.Inflate(IU(0.09))
+                    self.items[pcbnew.F_Cu].append((pcbnew.SHAPE_SEGMENT(a, e, IU(0.09)), -1, box))
                     n += 1
         return n
 
@@ -179,7 +202,18 @@ class Board:
         for hp, hrr, hn in self.holes:
             if math.hypot(hp.x - pos.x, hp.y - pos.y) < hr + hrr + IU(HOLE_HOLE) and not (hn == net and hp == pos):
                 return False
+        if any(x0 <= pos.x <= x1 and y0 <= pos.y <= y1 for x0, y0, x1, y1 in self.no_via):
+            return False
         return self.edge.Contains(pos)
+
+    def reserve_translators(self, refs=("U19", "U20", "U21", "U22"), half=0.95, near=1.2, far=2.6):
+        """No new via in the strips straight north of a translator's A pins and south of its B pins: its four
+        inputs and four outputs leave there on F.Cu at 0.4 mm pitch, with no room to pass a via."""
+        for r in refs:
+            c = self.b.FindFootprintByReference(r).GetPosition()
+            for a, e in ((-far, -near), (near, far)):
+                self.no_via.append((c.x - IU(half), c.y + IU(a), c.x + IU(half), c.y + IU(e)))
+        return len(self.no_via)
 
 
 def same_net_via_in(board, pad):
@@ -325,6 +359,7 @@ def main(src, dst, legalise=()):
     print("escape corridors reserved:", board.reserve_escapes(u1))
     if not legalise:
         board.set_field(u1)
+        board.reserve_translators()
     for f in b.GetFootprints():
         if f.GetReference() not in moving:
             board.add_footprint(f)
@@ -333,6 +368,9 @@ def main(src, dst, legalise=()):
     for f in b.GetFootprints():
         if f.GetReference() != "U1":    # (a legalised part's own pad is read here, before it moves)
             ball.update({f"{f.GetReference()}.{p.GetNumber()}": p.GetPosition() for p in f.Pads()})
+    j1 = b.FindFootprintByReference("J1")   # "J1.n^": 1.5 mm north of a first-row pin (beyond the +5V rail on L3)
+    ball.update({f"J1.{p.GetNumber()}^": pcbnew.VECTOR2I(p.GetPosition().x, p.GetPosition().y - IU(1.50))
+                 for p in j1.Pads()})
     report = []
     for ref, targets in jobs:
         f = b.FindFootprintByReference(ref)
@@ -361,6 +399,14 @@ def main(src, dst, legalise=()):
                     cands.append((pcbnew.VECTOR2I(vpos.x - off.x, vpos.y - off.y), rot))
         if under_bga_ok(f):
             cands += lattice_poses(f, lat, tpos)
+        if targets[0].endswith("^"):    # upright on the pin's axis, signal pad at the pin, the other pad north:
+            cands = []                  # its via then sits clear of the tracks through the first-row gaps
+            for rot in (90, 270):
+                f.SetPosition(pcbnew.VECTOR2I(0, 0)); f.SetOrientationDegrees(rot)
+                rp = next(p for p in f.Pads() if p.GetNumber() and netname(p) == rail).GetPosition()
+                if rp.y > 0:            # (the first legal height north of the pin is taken)
+                    cands += [(pcbnew.VECTOR2I(tpos[0].x - rp.x, tpos[0].y - rp.y - IU(0.05 * k)), rot)
+                              for k in range(-14, 30)]
         best = None
         for c in sorted(cands, key=rail_dist):
             if best is not None and rail_dist(c) >= best[0]:

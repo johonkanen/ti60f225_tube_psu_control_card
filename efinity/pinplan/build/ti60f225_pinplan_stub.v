@@ -14,24 +14,24 @@ module ti60f225_pinplan (
     input clk100m,
     input adca_sdo,
     input adcb_sdo,
-    output tx,
+    output j1_p17,
+    output j1_p19,
     output j1_p24,
     output led1_r,
     output led2_g,
-    output j1_p17,
-    output j1_p22,
+    output tx,
     output led1_g,
     output led2_b,
-    output j1_p19,
+    output j1_p22,
     output led1_b,
     output led2_r,
     output j1_p26,
-    output j1_p28,
-    output j1_p30,
     output j1_p27,
-    output j1_p29,
     output j1_p32,
+    output j1_p30,
+    output j1_p28,
     output j1_p31,
+    output j1_p29,
     output j1_p33,
     output [2:0] hbc_cal_SHIFT,
     output hbc_cal_SHIFT_ENA,
@@ -46,57 +46,57 @@ module ti60f225_pinplan (
     output [0:0] hbc_rwds_OUT_HI,
     output [0:0] hbc_rwds_OUT_LO,
     output [0:0] hbc_rwds_OE,
-    output cuk_clk_1v8,
-    output ht_clk_1v8,
-    output pri_dhb_hi_1v8,
-    output epwm6a_1v8,
-    output epwm5a_1v8,
-    output ht_cs_1v8,
-    output synch_2_1v8,
     output synch_1_1v8,
+    output pri_dhb_hi_1v8,
     output pri_dhb_lo_1v8,
     output cuk_cs_1v8,
     output epwm2a_1v8,
     output epwm2b_1v8,
-    output epwm1a_1v8,
-    output xlat_oe_n,
+    output cuk_clk_1v8,
+    output ht_clk_1v8,
+    output epwm6a_1v8,
+    output epwm5a_1v8,
+    output ht_cs_1v8,
+    output synch_2_1v8,
     output gpio_bypass_rly_1v8,
     output pfc_pwm1_1v8,
+    output epwm1a_1v8,
     output pfc_pwm2_1v8,
-    output adca_sclk,
-    output adasel2,
-    output adasel1,
-    output adca_cs_n,
-    output adasel0,
-    output adcb_cs_n,
-    output adbsel1,
-    output adcb_sclk,
+    output xlat_oe_n,
     output adbsel0,
-    output adbsel2
+    output adbsel2,
+    output adca_sclk,
+    output adasel1,
+    output adbsel1,
+    output adca_cs_n,
+    output adcb_cs_n,
+    output adcb_sclk,
+    output adasel2,
+    output adasel0
 );
     reg [31:0] lfsr = 32'h1;
     reg [31:0] cal_q = 32'h0;
     always @(posedge ram_clk_cal) cal_q <= {cal_q[30:0], (^hbc_dq_IN_HI) ^ (^hbc_dq_IN_LO) ^ (^hbc_rwds_IN_HI) ^ (^hbc_rwds_IN_LO)};
     always @(posedge ram_clk)
         lfsr <= {lfsr[30:0], lfsr[31] ^ lfsr[21] ^ lfsr[1] ^ lfsr[0] ^ cal_q[31] ^ (^cuk_sdata) ^ (^ht_sdata) ^ (^rx) ^ (^pll_locked) ^ (^adca_sdo) ^ (^adcb_sdo)};
-    assign tx = {lfsr[0]};
-    assign j1_p24 = {lfsr[1]};
-    assign led1_r = {lfsr[2]};
-    assign led2_g = {lfsr[3]};
-    assign j1_p17 = {lfsr[4]};
-    assign j1_p22 = {lfsr[5]};
+    assign j1_p17 = {lfsr[0]};
+    assign j1_p19 = {lfsr[1]};
+    assign j1_p24 = {lfsr[2]};
+    assign led1_r = {lfsr[3]};
+    assign led2_g = {lfsr[4]};
+    assign tx = {lfsr[5]};
     assign led1_g = {lfsr[6]};
     assign led2_b = {lfsr[7]};
-    assign j1_p19 = {lfsr[8]};
+    assign j1_p22 = {lfsr[8]};
     assign led1_b = {lfsr[9]};
     assign led2_r = {lfsr[10]};
     assign j1_p26 = {lfsr[11]};
-    assign j1_p28 = {lfsr[12]};
-    assign j1_p30 = {lfsr[13]};
-    assign j1_p27 = {lfsr[14]};
-    assign j1_p29 = {lfsr[15]};
-    assign j1_p32 = {lfsr[16]};
-    assign j1_p31 = {lfsr[17]};
+    assign j1_p27 = {lfsr[12]};
+    assign j1_p32 = {lfsr[13]};
+    assign j1_p30 = {lfsr[14]};
+    assign j1_p28 = {lfsr[15]};
+    assign j1_p31 = {lfsr[16]};
+    assign j1_p29 = {lfsr[17]};
     assign j1_p33 = {lfsr[18]};
     assign hbc_cal_SHIFT = 3'd0;
     assign hbc_cal_SHIFT_ENA = 1'd0;
@@ -111,31 +111,31 @@ module ti60f225_pinplan (
     assign hbc_rwds_OUT_HI = {lfsr[13]};
     assign hbc_rwds_OUT_LO = {lfsr[14]};
     assign hbc_rwds_OE = {lfsr[15]};
-    assign cuk_clk_1v8 = {lfsr[16]};
-    assign ht_clk_1v8 = {lfsr[17]};
-    assign pri_dhb_hi_1v8 = {lfsr[18]};
-    assign epwm6a_1v8 = {lfsr[19]};
-    assign epwm5a_1v8 = {lfsr[20]};
-    assign ht_cs_1v8 = {lfsr[21]};
-    assign synch_2_1v8 = {lfsr[22]};
-    assign synch_1_1v8 = {lfsr[23]};
-    assign pri_dhb_lo_1v8 = {lfsr[24]};
-    assign cuk_cs_1v8 = {lfsr[25]};
-    assign epwm2a_1v8 = {lfsr[26]};
-    assign epwm2b_1v8 = {lfsr[27]};
-    assign epwm1a_1v8 = {lfsr[28]};
-    assign xlat_oe_n = {lfsr[29]};
-    assign gpio_bypass_rly_1v8 = {lfsr[30]};
-    assign pfc_pwm1_1v8 = {lfsr[31]};
-    assign pfc_pwm2_1v8 = {lfsr[0]};
-    assign adca_sclk = {lfsr[1]};
-    assign adasel2 = {lfsr[2]};
-    assign adasel1 = {lfsr[3]};
-    assign adca_cs_n = {lfsr[4]};
-    assign adasel0 = {lfsr[5]};
-    assign adcb_cs_n = {lfsr[6]};
-    assign adbsel1 = {lfsr[7]};
+    assign synch_1_1v8 = {lfsr[16]};
+    assign pri_dhb_hi_1v8 = {lfsr[17]};
+    assign pri_dhb_lo_1v8 = {lfsr[18]};
+    assign cuk_cs_1v8 = {lfsr[19]};
+    assign epwm2a_1v8 = {lfsr[20]};
+    assign epwm2b_1v8 = {lfsr[21]};
+    assign cuk_clk_1v8 = {lfsr[22]};
+    assign ht_clk_1v8 = {lfsr[23]};
+    assign epwm6a_1v8 = {lfsr[24]};
+    assign epwm5a_1v8 = {lfsr[25]};
+    assign ht_cs_1v8 = {lfsr[26]};
+    assign synch_2_1v8 = {lfsr[27]};
+    assign gpio_bypass_rly_1v8 = {lfsr[28]};
+    assign pfc_pwm1_1v8 = {lfsr[29]};
+    assign epwm1a_1v8 = {lfsr[30]};
+    assign pfc_pwm2_1v8 = {lfsr[31]};
+    assign xlat_oe_n = {lfsr[0]};
+    assign adbsel0 = {lfsr[1]};
+    assign adbsel2 = {lfsr[2]};
+    assign adca_sclk = {lfsr[3]};
+    assign adasel1 = {lfsr[4]};
+    assign adbsel1 = {lfsr[5]};
+    assign adca_cs_n = {lfsr[6]};
+    assign adcb_cs_n = {lfsr[7]};
     assign adcb_sclk = {lfsr[8]};
-    assign adbsel0 = {lfsr[9]};
-    assign adbsel2 = {lfsr[10]};
+    assign adasel2 = {lfsr[9]};
+    assign adasel0 = {lfsr[10]};
 endmodule

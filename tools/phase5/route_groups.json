@@ -1,0 +1,149 @@
+{
+ "hyperram_dq3": [
+  "HR_DQ3"
+ ],
+ "hyperram": [
+  "HR_DQ0",
+  "HR_DQ1",
+  "HR_DQ2",
+  "HR_DQ4",
+  "HR_DQ5",
+  "HR_DQ6",
+  "HR_DQ7",
+  "HR_RWDS",
+  "HR_CS_N",
+  "HR_CK",
+  "HR_RESET_N"
+ ],
+ "flash": [
+  "/Configuration/FLASH_CLK",
+  "/Configuration/FLASH_CS_N",
+  "/Configuration/FLASH_IO0",
+  "/Configuration/FLASH_IO1",
+  "/Configuration/FLASH_IO2",
+  "/Configuration/FLASH_IO3",
+  "/Configuration/FLASH_RESET_N"
+ ],
+ "xlat_out": [
+  "/Header and LEDs/EPWM6A",
+  "/Header and LEDs/EPWM5A",
+  "/Header and LEDs/HT_CS",
+  "/Header and LEDs/SYNCH_2",
+  "/Header and LEDs/SYNCH_1",
+  "/Header and LEDs/HT_CLK",
+  "/Header and LEDs/GPIO_BYPASS_RLY",
+  "/Header and LEDs/PFC_PWM1",
+  "/Header and LEDs/PFC_PWM2",
+  "/Header and LEDs/PRI_DHB_HI",
+  "/Header and LEDs/PRI_DHB_LO",
+  "/Header and LEDs/CUK_CS",
+  "/Header and LEDs/EPWM2A",
+  "/Header and LEDs/EPWM2B",
+  "/Header and LEDs/CUK_CLK",
+  "/Header and LEDs/EPWM1A"
+ ],
+ "xlat_in": [
+  "PFC_PWM2_1V8",
+  "EPWM1A_1V8",
+  "PFC_PWM1_1V8",
+  "GPIO_BYPASS_RLY_1V8",
+  "HT_CLK_1V8",
+  "SYNCH_1_1V8",
+  "CUK_CLK_1V8",
+  "EPWM2B_1V8",
+  "SYNCH_2_1V8",
+  "EPWM2A_1V8",
+  "HT_CS_1V8",
+  "CUK_CS_1V8",
+  "EPWM5A_1V8",
+  "PRI_DHB_LO_1V8",
+  "EPWM6A_1V8",
+  "PRI_DHB_HI_1V8"
+ ],
+ "xlat_oe": [
+  "XLAT_OE_N"
+ ],
+ "j1_east": [
+  "CUK_SDATA",
+  "J1_P17",
+  "J1_P19",
+  "J1_P22",
+  "J1_P24",
+  "TX",
+  "J1_P26",
+  "HT_SDATA"
+ ],
+ "j1_west": [
+  "RX",
+  "J1_P27",
+  "J1_P28",
+  "J1_P29",
+  "J1_P30",
+  "J1_P31",
+  "J1_P32",
+  "J1_P33"
+ ],
+ "adc": [
+  "ADCA_CS_N",
+  "ADCA_SCLK",
+  "ADCA_SDO",
+  "ADCB_CS_N",
+  "ADCB_SCLK",
+  "ADCB_SDO",
+  "ADASEL0",
+  "ADASEL1",
+  "ADASEL2",
+  "ADBSEL0",
+  "ADBSEL1",
+  "ADBSEL2"
+ ],
+ "adc_analog": [
+  "/ADC/*",
+  "ADA?",
+  "ADB?"
+ ],
+ "leds": [
+  "LED1_R",
+  "LED1_G",
+  "LED1_B",
+  "LED2_R",
+  "LED2_G",
+  "LED2_B",
+  "/Header and LEDs/LED*"
+ ],
+ "jtag": [
+  "/Configuration/TCK",
+  "/Configuration/TMS",
+  "/Configuration/TDI",
+  "/Configuration/TDO"
+ ],
+ "config": [
+  "/Configuration/CDONE",
+  "/Configuration/CRESET_N",
+  "/Configuration/CSI",
+  "/Configuration/REF_RES_2A",
+  "/Configuration/REF_RES_3A",
+  "/Configuration/REF_RES_4A",
+  "CLK100M",
+  "/HyperRAM and clock/CLK100M_R"
+ ],
+ "power_ctl": [
+  "/Power/EN_0V95",
+  "/Power/FB_0V95",
+  "/Power/FB_1V8",
+  "/Power/FB_3V3",
+  "/Power/PG_0V95",
+  "/Power/PG_1V8"
+ ],
+ "supply": [
+  "+0V95",
+  "+1V8",
+  "+3V3",
+  "+5V",
+  "+3V3A",
+  "GND",
+  "+1V8_OSC",
+  "/FPGA power/+0V95_VCCA_BL",
+  "/Power/SW_*"
+ ]
+}

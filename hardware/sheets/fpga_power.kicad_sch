@@ -12855,4 +12855,332 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "Device:C")
+		(at 30.48 226.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e221c6c2-4920-5ca7-bbd6-065113c414c6")
+		(property "Reference" "C178"
+			(at 33.02 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47n"
+			(at 33.02 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+			(at 30.48 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" ""
+			(at 30.48 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "LCSC" "C85925"
+			(at 30.48 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "MPN" "GRM033R60J473KE19D"
+			(at 30.48 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Group" ""
+			(at 30.48 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "1"
+			(uuid "5d1da30e-f2ed-5e38-997f-e42917c1658e")
+		)
+		(pin "2"
+			(uuid "61eb7890-5172-571e-affa-a12c00f1f232")
+		)
+		(instances
+			(project "control_card"
+				(path "/02cf0cd1-c66b-5c4c-858e-ca84c1bbaba4/157c2c3f-44ba-5dad-bac0-d1255297af1a"
+					(reference "C178")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 30.48 222.25) (xy 30.48 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ad6a1f0-d8e6-53d9-aa3f-b3cd121e99c3")
+	)
+	(global_label "+1V8"
+		(shape passive)
+		(at 30.48 219.71 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "dba599a7-eb4a-585d-8a01-5f44add1af92")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 30.48 219.71 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 30.48 229.87) (xy 30.48 232.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1e919a1-ac51-5fbe-903e-243bedf2cdc3")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 30.48 232.41 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e18881eb-0d77-5539-a676-74e3ab75f361")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 30.48 232.41 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 43.18 226.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "93890d4f-250c-5dbb-8fad-c89df0f6d516")
+		(property "Reference" "C179"
+			(at 45.72 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47n"
+			(at 45.72 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+			(at 43.18 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" ""
+			(at 43.18 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" ""
+			(at 43.18 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "LCSC" "C85925"
+			(at 43.18 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "MPN" "GRM033R60J473KE19D"
+			(at 43.18 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Group" ""
+			(at 43.18 226.06 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "1"
+			(uuid "86ac5f86-a43e-56a7-a079-809bc3311330")
+		)
+		(pin "2"
+			(uuid "19fc2c6f-0c44-5a6f-bf58-a65c51a3b8c0")
+		)
+		(instances
+			(project "control_card"
+				(path "/02cf0cd1-c66b-5c4c-858e-ca84c1bbaba4/157c2c3f-44ba-5dad-bac0-d1255297af1a"
+					(reference "C179")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 222.25) (xy 43.18 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d67350d-f174-5e86-85a7-f55362e6a13f")
+	)
+	(global_label "+1V8"
+		(shape passive)
+		(at 43.18 219.71 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3789eb12-8a9e-50eb-9c46-d4fb749e6836")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 219.71 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 229.87) (xy 43.18 232.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a816f2b6-07ea-5229-b7f9-73d420943236")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 43.18 232.41 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c1df6833-d36f-59c0-b93e-637889e2fe55")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 232.41 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
 )
