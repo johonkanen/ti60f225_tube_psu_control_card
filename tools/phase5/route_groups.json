@@ -1,18 +1,16 @@
 {
- "hyperram_dq3": [
-  "HR_DQ3"
- ],
  "hyperram": [
-  "HR_DQ0",
-  "HR_DQ1",
-  "HR_DQ2",
   "HR_DQ4",
+  "HR_DQ3",
+  "HR_DQ0",
   "HR_DQ5",
+  "HR_DQ1",
   "HR_DQ6",
   "HR_DQ7",
   "HR_RWDS",
-  "HR_CS_N",
+  "HR_DQ2",
   "HR_CK",
+  "HR_CS_N",
   "HR_RESET_N"
  ],
  "flash": [
@@ -103,13 +101,12 @@
   "ADB?"
  ],
  "leds": [
-  "LED1_R",
-  "LED1_G",
-  "LED1_B",
-  "LED2_R",
   "LED2_G",
   "LED2_B",
-  "/Header and LEDs/LED*"
+  "LED2_R",
+  "LED1_G",
+  "LED1_B",
+  "LED1_R"
  ],
  "jtag": [
   "/Configuration/TCK",
@@ -118,12 +115,6 @@
   "/Configuration/TDO"
  ],
  "config": [
-  "/Configuration/CDONE",
-  "/Configuration/CRESET_N",
-  "/Configuration/CSI",
-  "/Configuration/REF_RES_2A",
-  "/Configuration/REF_RES_3A",
-  "/Configuration/REF_RES_4A",
   "CLK100M",
   "/HyperRAM and clock/CLK100M_R"
  ],
@@ -145,5 +136,20 @@
   "+1V8_OSC",
   "/FPGA power/+0V95_VCCA_BL",
   "/Power/SW_*"
+ ],
+ "hr_pullups": [
+  "HR_DQ3",
+  "HR_RESET_N"
+ ],
+ "bottom_cfg": [
+  "/Configuration/REF_RES_4A",
+  "/Configuration/REF_RES_3A",
+  "/Configuration/REF_RES_2A",
+  "/Configuration/CRESET_N",
+  "/Configuration/CDONE",
+  "/Configuration/CSI"
+ ],
+ "led_k": [
+  "/Header and LEDs/LED*"
  ]
 }

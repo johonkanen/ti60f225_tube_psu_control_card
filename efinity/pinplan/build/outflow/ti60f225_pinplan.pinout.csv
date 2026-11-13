@@ -1,7 +1,7 @@
 
 # Efinity Pinout Report
 # Version: 2026.1.132.5.14
-# Date: 2026-11-13 12:35
+# Date: 2026-11-13 13:34
 
 # Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -13,8 +13,8 @@
 Pin Number,Pin Name,Signal Name,Direction,Bank,I/O Bank Voltage,I/O Standard,Pull Type,Function
 A1,GND,,Power,,,,,Ground
 A2,GPIOL_N_18,,,1B,1.8 V,,,User IO/PLL_CLKIN
-A3,GPIOL_03,led1_r,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
-A4,GPIOL_09,led2_g,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+A3,GPIOL_03,led2_r,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+A4,GPIOL_09,led1_b,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 A5,GPIOT_P_03,pri_dhb_hi_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO/MIPI_GCLK/MIPI_RCLK
 A6,GPIOT_N_03,pri_dhb_lo_1v8.N,Output,2A,1.8 V,1.8 V LVCMOS,,User IO/MIPI_GCLK/MIPI_RCLK
 A7,GPIOT_N_06,cuk_cs_1v8.N,Output,2A,1.8 V,1.8 V LVCMOS,,User IO
@@ -28,9 +28,9 @@ A14,GPIOR_19,j1_p24,Output,TR,3.3 V,3.3 V LVCMOS,,User IO
 A15,GND,,Power,,,,,Ground
 B1,GPIOL_P_17_EXTFB,hbc_rst_n.P,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/PLL_EXTFB
 B2,GPIOL_P_18_PLLIN0,hbc_cs_n.P,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/PLL_CLKIN
-B3,GPIOL_04,led1_g,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+B3,GPIOL_04,led2_b,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 B4,VCCIO33_TL,,Power,TL,3.3 V,,,VCCIO Power
-B5,GPIOL_10,led2_b,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+B5,GPIOL_10,led1_r,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 B6,GPIOT_P_01,epwm6a_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO
 B7,GPIOT_P_06,epwm5a_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO
 B8,GPIOT_P_07_CLK4_P,ht_cs_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO/GCLK/RCLK
@@ -43,8 +43,8 @@ B14,GPIOR_18,tx,Output,TR,3.3 V,3.3 V LVCMOS,,User IO
 B15,REF_RES_3A,,Input,3A,1.8 V,,,
 C1,GPIOL_N_16,hbc_ck_p.N,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/MIPI_GCLK/MIPI_RCLK
 C2,GPIOL_N_17,hbc_dq2.N,Bidirectional,1B,1.8 V,1.8 V LVCMOS,,User IO/PLL_EXTFB
-C3,GPIOL_06,led1_b,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
-C4,GPIOL_07,led2_r,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+C3,GPIOL_06,led1_g,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+C4,GPIOL_07,led2_g,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 C5,GPIOL_11_PLLIN2,ht_sdata,Input,TL,3.3 V,3.3 V LVCMOS,,User IO/PLL_CLKIN
 C6,GPIOT_N_01,,,2A,1.8 V,,,User IO
 C7,VCCIO2A,,Power,2A,1.8 V,,,VCCIO Power

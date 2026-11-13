@@ -1,7 +1,7 @@
 
 Efinity Interface Designer Report
 Version: 2026.1.132.5.14
-Date: 2026-11-13 12:35
+Date: 2026-11-13 13:34
 
 Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -194,12 +194,12 @@ Global Unused Setting: input with weak pullup
 |        j1_p31       |  GPIOR_29  | output |                 |              |    BR    | 3.3 V LVCMOS |  GPIOR_29_PLLIN2   |     R13     |
 |        j1_p32       |  GPIOR_27  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_27      |     P13     |
 |        j1_p33       |  GPIOL_01  | output |                 |              |    BL    | 3.3 V LVCMOS |      GPIOL_01      |      R3     |
-|        led1_b       |  GPIOL_06  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_06      |      C3     |
-|        led1_g       |  GPIOL_04  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_04      |      B3     |
-|        led1_r       |  GPIOL_03  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_03      |      A3     |
-|        led2_b       |  GPIOL_10  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_10      |      B5     |
-|        led2_g       |  GPIOL_09  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_09      |      A4     |
-|        led2_r       |  GPIOL_07  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_07      |      C4     |
+|        led1_b       |  GPIOL_09  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_09      |      A4     |
+|        led1_g       |  GPIOL_06  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_06      |      C3     |
+|        led1_r       |  GPIOL_10  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_10      |      B5     |
+|        led2_b       |  GPIOL_04  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_04      |      B3     |
+|        led2_g       |  GPIOL_07  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_07      |      C4     |
+|        led2_r       |  GPIOL_03  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_03      |      A3     |
 |     pfc_pwm1_1v8    | GPIOR_P_16 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_16     |     E15     |
 |     pfc_pwm2_1v8    | GPIOR_P_13 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_13     |     G15     |
 |    pri_dhb_hi_1v8   | GPIOT_P_03 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_03     |      A5     |

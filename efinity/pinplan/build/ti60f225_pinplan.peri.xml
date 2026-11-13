@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<efxpt:design_db name="ti60f225_pinplan" device_def="Ti60F225" version="2026.1.132.5.14" db_version="20262006" last_change_date="Fri Nov 13 12:35:12 2026" xmlns:efxpt="http://www.efinixinc.com/peri_design_db" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/peri_design_db peri_design_db.xsd ">
+<efxpt:design_db name="ti60f225_pinplan" device_def="Ti60F225" version="2026.1.132.5.14" db_version="20262006" last_change_date="Fri Nov 13 13:34:32 2026" xmlns:efxpt="http://www.efinixinc.com/peri_design_db" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/peri_design_db peri_design_db.xsd ">
     <efxpt:device_info>
         <efxpt:iobank_info>
             <efxpt:iobank name="1A" iostd="1.8 V LVCMOS" is_dyn_voltage="false" mode_sel_name="1A_MODE_SEL"/>
@@ -247,22 +247,22 @@
         <efxpt:comp_gpio name="j1_p33" gpio_def="GPIOL_01" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="j1_p33" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
-        <efxpt:comp_gpio name="led1_b" gpio_def="GPIOL_06" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
+        <efxpt:comp_gpio name="led1_b" gpio_def="GPIOL_09" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="led1_b" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
-        <efxpt:comp_gpio name="led1_g" gpio_def="GPIOL_04" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
+        <efxpt:comp_gpio name="led1_g" gpio_def="GPIOL_06" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="led1_g" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
-        <efxpt:comp_gpio name="led1_r" gpio_def="GPIOL_03" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
+        <efxpt:comp_gpio name="led1_r" gpio_def="GPIOL_10" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="led1_r" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
-        <efxpt:comp_gpio name="led2_b" gpio_def="GPIOL_10" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
+        <efxpt:comp_gpio name="led2_b" gpio_def="GPIOL_04" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="led2_b" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
-        <efxpt:comp_gpio name="led2_g" gpio_def="GPIOL_09" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
+        <efxpt:comp_gpio name="led2_g" gpio_def="GPIOL_07" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="led2_g" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
-        <efxpt:comp_gpio name="led2_r" gpio_def="GPIOL_07" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
+        <efxpt:comp_gpio name="led2_r" gpio_def="GPIOL_03" mode="output" bus_name="" io_standard="3.3 V LVCMOS">
             <efxpt:output_config name="led2_r" name_ddio_lo="" register_option="none" clock_name="" is_clock_inverted="false" is_slew_rate="false" tied_option="none" ddio_type="none" delay="0" is_serial="false" drive_strength="4" fastclk_name=""/>
         </efxpt:comp_gpio>
         <efxpt:comp_gpio name="pfc_pwm1_1v8" gpio_def="GPIOR_P_16" mode="output" bus_name="" io_standard="1.8 V LVCMOS">

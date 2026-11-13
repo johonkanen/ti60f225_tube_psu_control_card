@@ -12,8 +12,8 @@ ending north of the first row at STUB_Y, where the router picks it up:
 F.Cu for the nets that arrive on top (translator outputs, the south-west HVIO nets), In2.Cu for the direct nets that
 arrive on L3. PFC_PWM2 (pin 34, far west of its translator) instead runs south of the second row and comes up
 through both rows between pins 21/23 and 22/24, so it crosses none of the HVIO nets that drop onto pins 23-33.
-The EPWM2A/EPWM2B pull-downs R40/R41 sit on the bottom just north of pins 9 and 11: a B.Cu stub joins each to its
-(through-hole) pin, so they need no via.
+Mode pulldowns: the EPWM2A/EPWM2B pull-downs R40/R41 sit on the bottom just north of J1 pins 9 and 11, the JTAG
+pull-ups R60-R63 just west of their J2 pins: a B.Cu stub joins each to its (through-hole) pin, so they need no via.
 """
 import sys
 
@@ -26,8 +26,11 @@ STUB_Y = 125.45
 F_PINS = (4, 6, 8, 10, 14, 16, 18, 20, 28, 30, 32)      # second-row pins reached on F.Cu
 L3_PINS = (12, 22, 24, 26)                               # second-row pins reached on In2.Cu
 POCKET = ()                                                      # east-edge escapes, north to south
-BALL = ("J1_P26",)                                               # via in the ball pad
-PULLDOWNS = (("R40", 9), ("R41", 11))                    # placed above their pins by tools/phase5_decaps.py
+BALL = ("J1_P26", "/Configuration/FLASH_IO2")                    # via in the ball pad
+# bottom-side resistors placed at a through-hole pin by tools/phase5_decaps.py: the EPWM2A/2B pull-downs at J1,
+# the JTAG pull-ups at J2
+PULLDOWNS = (("R40", "J1", 9), ("R41", "J1", 11), ("R60", "J2", 1), ("R62", "J2", 2), ("R61", "J2", 3),
+             ("R63", "J2", 4))
 LOOP_PIN, LOOP_GAP_PINS, LOOP_Y = 34, (22, 24), 128.22   # PFC_PWM2: south of row 2, up between pins 22 and 24
 
 
@@ -54,6 +57,32 @@ def add_via(b, net, pos):
     v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
     v.SetNet(net)
     b.Add(v)
+
+
+def clear_strips(b, refs=("U19", "U20", "U21", "U22"), half=0.95, near=1.2, far=2.6):
+    """Old Agilex stitching vias left in the strips north of a translator's A pins or south of its B pins (where
+    tools/phase5_decaps.py puts no new via either) go, with the stub of copper hanging on them."""
+    boxes = []
+    for r in refs:
+        c = b.FindFootprintByReference(r).GetPosition()
+        boxes += [(c.x - IU(half), c.y + IU(a), c.x + IU(half), c.y + IU(e)) for a, e in ((-far, -near), (near, far))]
+    inside = lambda q: any(x0 <= q.x <= x1 and y0 <= q.y <= y1 for x0, y0, x1, y1 in boxes)
+    pads = [p for f in b.GetFootprints() for p in f.Pads()]
+    gone = []
+    for v in list(b.GetTracks()):
+        if v.Type() == pcbnew.PCB_VIA_T and inside(v.GetPosition()):
+            circ = pcbnew.SHAPE_CIRCLE(v.GetPosition(), v.GetWidth(pcbnew.F_Cu) // 2)
+            if any(q.GetNetCode() == v.GetNetCode() and any(q.IsOnLayer(l) and q.GetEffectiveShape(l).Collide(circ, 0)
+                                                           for l in (pcbnew.F_Cu, pcbnew.B_Cu)) for q in pads):
+                continue
+            gone.append(v)
+    for v in gone:
+        for t in list(b.GetTracks()):
+            if t.Type() != pcbnew.PCB_VIA_T and t.GetNetCode() == v.GetNetCode() and t.GetLength() < IU(0.3) \
+                    and v.GetPosition() in (t.GetStart(), t.GetEnd()):
+                b.Delete(t)
+        print(f"  old via {v.GetNetname()} at ({MM(v.GetPosition().x):.2f}, {MM(v.GetPosition().y):.2f}) removed")
+        b.Delete(v)
 
 
 def direct(b):
@@ -105,16 +134,22 @@ def main(src, dst, mode="stubs"):
     xy = {n: (MM(p.GetPosition().x), MM(p.GetPosition().y)) for n, p in pad.items()}
     half = PITCH / 2
     n = 0
-    if mode == "pulldowns":                     # after the translator outputs are routed (else the router ends
-        for ref, k in PULLDOWNS:                # a track on the stub with a via instead of on the pin)
-            f = b.FindFootprintByReference(ref)
-            p = next(p for p in f.Pads() if p.GetNumber() and p.GetNetCode() == pad[k].GetNetCode())
-            px, py = MM(p.GetPosition().x), MM(p.GetPosition().y)
-            x, y = xy[k]
-            pts = [(px, py)] + ([(x, py + abs(x - px))] if abs(x - px) > 0.01 else []) + [(x, y)]
-            path(b, pad[k].GetNet(), pcbnew.B_Cu, pts)
+    if mode == "stubs":
+        clear_strips(b)
         b.Save(dst)
-        print(f"phase5_j1: {len(PULLDOWNS)} pull-down stubs on B.Cu")
+        b = pcbnew.LoadBoard(dst)               # (KiCad 10: save and reload after deleting)
+        j1 = b.FindFootprintByReference("J1")
+        pad = {int(p.GetNumber()): p for p in j1.Pads()}
+    if mode == "pulldowns":
+        for ref, conn, k in PULLDOWNS:
+            f = b.FindFootprintByReference(ref)
+            pin = next(q for q in b.FindFootprintByReference(conn).Pads() if q.GetNumber() == str(k))
+            p = next(p for p in f.Pads() if p.GetNumber() and p.GetNetCode() == pin.GetNetCode())
+            px, py = MM(p.GetPosition().x), MM(p.GetPosition().y)
+            x, y = MM(pin.GetPosition().x), MM(pin.GetPosition().y)
+            path(b, pin.GetNet(), pcbnew.B_Cu, [(px, py), (x, y)])      # one segment: no vertex to end a via on
+        b.Save(dst)
+        print(f"phase5_j1: {len(PULLDOWNS)} resistor stubs on B.Cu")
         return
     for pins, layer in ((F_PINS, pcbnew.F_Cu), (L3_PINS, b.GetLayerID("In2.Cu"))):
         for k in pins:

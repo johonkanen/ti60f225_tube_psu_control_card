@@ -1,11 +1,10 @@
-"""Phase 5 routing: a via in the pad of bottom-side parts on nets that are routed on F.Cu / In2.Cu only.
+"""Phase 5 routing helper: a via in the pad of a bottom-side part, legal on every layer.
 
     $KICAD_MOUNT/bin/python3.11 -I tools/phase5_taps.py IN.kicad_pcb OUT.kicad_pcb
 
-The routing chain keeps B.Cu out of the signal steps, so a bottom-side SMD pad of such a net (the HR_RESET_N
-and TEST_N pull-ups, the ADC B series resistors) has no way in.
-Via-in-pad is free on this order (filled and capped), so each of these pads gets a 0.30/0.15 via at its centre,
-or at the nearest point inside the pad that is legal on every layer; the router then ends on the via.
+Not a step of tools/phase5_route.sh any more: KiCadRoutingTools does not end a track on such a via (it aims at
+the pad's own layer and adds a second via), so the chain lets the router reach bottom pads itself. obstacles()
+and legal() are used by tools/phase5_j1.py for the vias it places in ball pads.
 """
 import math
 import sys

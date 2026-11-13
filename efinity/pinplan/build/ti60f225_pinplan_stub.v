@@ -17,14 +17,14 @@ module ti60f225_pinplan (
     output j1_p17,
     output j1_p19,
     output j1_p24,
-    output led1_r,
-    output led2_g,
-    output tx,
-    output led1_g,
-    output led2_b,
-    output j1_p22,
-    output led1_b,
     output led2_r,
+    output led1_b,
+    output tx,
+    output led2_b,
+    output led1_r,
+    output j1_p22,
+    output led1_g,
+    output led2_g,
     output j1_p26,
     output j1_p27,
     output j1_p32,
@@ -82,14 +82,14 @@ module ti60f225_pinplan (
     assign j1_p17 = {lfsr[0]};
     assign j1_p19 = {lfsr[1]};
     assign j1_p24 = {lfsr[2]};
-    assign led1_r = {lfsr[3]};
-    assign led2_g = {lfsr[4]};
+    assign led2_r = {lfsr[3]};
+    assign led1_b = {lfsr[4]};
     assign tx = {lfsr[5]};
-    assign led1_g = {lfsr[6]};
-    assign led2_b = {lfsr[7]};
+    assign led2_b = {lfsr[6]};
+    assign led1_r = {lfsr[7]};
     assign j1_p22 = {lfsr[8]};
-    assign led1_b = {lfsr[9]};
-    assign led2_r = {lfsr[10]};
+    assign led1_g = {lfsr[9]};
+    assign led2_g = {lfsr[10]};
     assign j1_p26 = {lfsr[11]};
     assign j1_p27 = {lfsr[12]};
     assign j1_p32 = {lfsr[13]};

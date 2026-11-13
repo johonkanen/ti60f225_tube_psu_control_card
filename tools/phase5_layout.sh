@@ -12,7 +12,8 @@
 #                     takes them down in the pad instead; nor J1_P26 on D12, which
 #                     goes to J1 on L3 from a via in the ball pad: tools/phase5_j1.py)
 #  5. phase5_decaps   Ti60 decoupling, VCCA filters, configuration parts, translator caps on the bottom at their pins
-#  6. place_simple    KRT places the flash and JTAG pull-ups (tools/phase5/groups.json, intent.json); 8 seeds,
+#  6. place_simple    KRT places the flash pull-ups (tools/phase5/groups.json, intent.json; the JTAG ones go to
+#                     their J2 pins in step 5); 8 seeds,
 #                     the first judged one is kept, then phase5_decaps --legalise moves them off other nets' copper
 #  7. phase5_power    supply copper fitted to the Ti60: dead Agilex copper out, buck output pours stitched to L4,
 #                     supply/GND pads that lost their via tapped, one +1V8 pour over the whole of L3; then L4 split
@@ -42,7 +43,7 @@ cp "$W/b0.kicad_pro" "$W/b1.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b1.kicad_dru"
 # 4. fan-out (plane balls already have their via; signals only)
 (cd "$K" && $KP py_router/bga_fanout.py "$W/b1.kicad_pcb" -o "$W/b2.kicad_pcb" --component U1 --layers F.Cu B.Cu \
     --track-width 0.09 --clearance 0.125 --via-size 0.30 --via-drill 0.15 --escape-method underpad \
-    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' '!J1_P26' --plane-drop off \
+    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' '!J1_P26' '!/Configuration/FLASH_IO2' --plane-drop off \
     --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/fanout.log" 2>&1) || { tail -20 "$W/fanout.log"; exit 1; }
 grep -E "Under-pad escape" "$W/fanout.log" | head -1
 # 5. decoupling and the rest at their pins
@@ -58,7 +59,7 @@ kpy "$R/tools/phase5_lock.py" "$W/b3.kicad_pcb" "$W/b3.kicad_pcb"
     || { tail -20 "$W/place.log"; exit 1; }
 SEED=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['judge'][0])" "$W/place/judge.json")
 echo "place_simple: seed $SEED kept"
-kpy "$R/tools/phase5_decaps.py" "$W/place/s$SEED.kicad_pcb" "$W/b4.kicad_pcb" --legalise R54 R57 R58 R59 R60 R61 R62 R63 | tail -1
+kpy "$R/tools/phase5_decaps.py" "$W/place/s$SEED.kicad_pcb" "$W/b4.kicad_pcb" --legalise R54 R57 R58 R59 | tail -1
 kpy "$R/tools/phase5_lock.py" "$W/b4.kicad_pcb" "$W/b4.kicad_pcb" --unlock
 # 7. supply copper and the L4 split
 kpy "$R/tools/phase5_power.py" "$W/b4.kicad_pcb" "$W/b5.kicad_pcb" | grep -v "memory leak"

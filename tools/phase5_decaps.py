@@ -354,6 +354,13 @@ def main(src, dst, legalise=()):
             f = b.FindFootprintByReference(r)
             sig = next(p.GetNetCode() for p in f.Pads() if p.GetNumber() and netname(p) not in PLANES)
             jobs.append((r, [p.GetNumber() for p in u1.Pads() if p.GetNetCode() == sig]))
+        # the JTAG pull-ups on the bottom at their J2 pins (through-hole: joined there without a via), which
+        # keeps them out of the translator input fan east of the BGA
+        j2 = b.FindFootprintByReference("J2")
+        for r in ["R60", "R61", "R62", "R63"]:
+            f = b.FindFootprintByReference(r)
+            sig = next(p.GetNetCode() for p in f.Pads() if p.GetNumber() and netname(p) not in PLANES)
+            jobs.append((r, [f"J2.{p.GetNumber()}<" for p in j2.Pads() if p.GetNetCode() == sig]))
     moving = {r for r, _ in jobs}
     board = Board(b)
     print("escape corridors reserved:", board.reserve_escapes(u1))
@@ -371,6 +378,9 @@ def main(src, dst, legalise=()):
     j1 = b.FindFootprintByReference("J1")   # "J1.n^": 1.5 mm north of a first-row pin (beyond the +5V rail on L3)
     ball.update({f"J1.{p.GetNumber()}^": pcbnew.VECTOR2I(p.GetPosition().x, p.GetPosition().y - IU(1.50))
                  for p in j1.Pads()})
+    j2 = b.FindFootprintByReference("J2")   # "J2.n<": just west of a JTAG header pin, clear of its pad
+    ball.update({f"J2.{p.GetNumber()}<": pcbnew.VECTOR2I(p.GetPosition().x - IU(1.25), p.GetPosition().y)
+                 for p in j2.Pads()})
     report = []
     for ref, targets in jobs:
         f = b.FindFootprintByReference(ref)
@@ -380,6 +390,8 @@ def main(src, dst, legalise=()):
                     or netname(p) == "+1V8" and ref.startswith("C")))
         if legalise:
             rail = netname([p for p in f.Pads() if p.GetNumber() == targets[0].split(".")[1]][0])
+        if targets[0].endswith("<"):    # a pull-up at a header pin: its signal pad goes to the pin
+            rail = next(netname(p) for p in f.Pads() if p.GetNumber() and netname(p) not in PLANES)
         tpos = [ball[t] for t in targets]
 
         def rail_dist(pos_rot):

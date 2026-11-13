@@ -1,6 +1,6 @@
 # Efinity Interface Configuration
 # Version: 2026.1.132.5.14
-# Date: 2026-11-13 12:35
+# Date: 2026-11-13 13:34
 #
 # Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 #
@@ -369,12 +369,12 @@ design.assign_pkg_pin("j1_p30","P14")
 design.assign_pkg_pin("j1_p31","R13")
 design.assign_pkg_pin("j1_p32","P13")
 design.assign_pkg_pin("j1_p33","R3")
-design.assign_pkg_pin("led1_b","C3")
-design.assign_pkg_pin("led1_g","B3")
-design.assign_pkg_pin("led1_r","A3")
-design.assign_pkg_pin("led2_b","B5")
-design.assign_pkg_pin("led2_g","A4")
-design.assign_pkg_pin("led2_r","C4")
+design.assign_pkg_pin("led1_b","A4")
+design.assign_pkg_pin("led1_g","C3")
+design.assign_pkg_pin("led1_r","B5")
+design.assign_pkg_pin("led2_b","B3")
+design.assign_pkg_pin("led2_g","C4")
+design.assign_pkg_pin("led2_r","A3")
 design.assign_pkg_pin("pfc_pwm1_1v8","E15")
 design.assign_pkg_pin("pfc_pwm2_1v8","G15")
 design.assign_pkg_pin("pri_dhb_hi_1v8","A5")
