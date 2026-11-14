@@ -124,19 +124,43 @@ def main(path):
                  and f.GetSheetname().startswith("Configuration")]
     cap_on_pair(b, flash_cap[0], "U7", "B4", "B3")
 
-    # R24 (HyperRAM RESET# pull-up): bottom, beside the HyperRAM, first free spot
-    free_spot(b, fp(b, "R24"), fp(b, "U9"), "A4", True)
-    # R25 (CLK100M series resistor, under the HyperRAM since the Agilex card): if the turned HyperRAM's caps now
-    # sit on it, to the nearest free spot by the oscillator's output; its old CLK100M_R copper is redrawn later
-    r25 = fp(b, "R25")
-    if any(courtyard(r25).Intersects(courtyard(o)) for o in b.GetFootprints() if o is not r25 and o.IsFlipped() == r25.IsFlipped()):
-        x1 = next(o for o in b.GetFootprints() if o.GetReference().startswith("X")
-                  and any(p.GetNetCode() == pr.GetNetCode() for p in o.Pads() for pr in r25.Pads()))
-        out = next(p.GetNumber() for p in x1.Pads() if any(p.GetNetCode() == pr.GetNetCode() for pr in r25.Pads()))
-        for tr in [tr for tr in b.GetTracks() if tr.GetNetCode() in {p.GetNetCode() for p in r25.Pads()}]:
-            b.Remove(tr)
-        free_spot(b, r25, x1, out, r25.IsFlipped())
-        print(f"R25 moved off the HyperRAM caps, next to {x1.GetReference()}.{out}")
+    # R24 (HyperRAM RESET# pull-up), R59 (flash RESET#), R57 (FLASH_IO2) and R58 (FLASH_IO3) go to the bottom, onto
+    # the via in their memory ball (tools/phase5_decaps.py). R54 (CS#, the western flash line) sits on top just
+    # south of the flash body, west of the bundle of flash lines
+    for ref, mem_pad, dx in (("R54", "B2", -1.15),):
+        r = fp(b, ref)
+        x0, _ = pad_xy(u7, mem_pad)
+        y0 = max(pad_xy(u7, p.GetNumber())[1] for p in u7.Pads()) + 2.0
+        put(r, x0 + dx, y0, 0, False)
+        sig = next(p for p in r.Pads() if p.GetNumber() and p.GetNetname() not in ("+1V8", "GND"))
+        if (pcbnew.ToMM(sig.GetPosition().x) - (x0 + dx)) * dx > 0:    # the signal pad faces the flash lines
+            r.SetOrientationDegrees(180)
+    # The oscillator with its supply filter and series resistor, and the HyperRAM's bulk cap, sat under the two
+    # memories on the bottom, where their supply vias now meet the memories' F.Cu escapes (and the oscillator's
+    # output pad the flash RESET# ball). The oscillator goes between the memories and the BGA, east of the
+    # HyperRAM fan and west of the flash lines, with R25 at the CLK100M ball (P2, the BGA's north-east corner);
+    # its bead and cap just north of it, the bulk cap under the HyperRAM's west edge. Old copper on them goes.
+    osc = [("X1", 94.9, 104.3, "1", (-1, -1)), ("R25", 96.55, 107.1, "1", (0, -1)), ("C54", 93.6, 101.95, "1", (-1, 0)),
+           ("FB5", 92.9, 99.9, "1", (0, -1)), ("C75", 85.0, 100.4, "1", (0, -1))]
+    nets = set()
+    for ref, x, y, first, (sx, sy) in osc:
+        f = fp(b, ref)
+        nets |= {p.GetNetCode() for p in f.Pads() if p.GetNetname() not in ("GND", "+1V8")}
+        for rot in (0, 90, 180, 270):       # pad `first` on the side (sx, sy) of the part
+            put(f, x, y, rot, True)
+            px, py = pad_xy(f, first)
+            if (sx == 0 or (px - x) * sx > 0.05) and (sy == 0 or (py - y) * sy > 0.05):
+                break
+        else:
+            sys.exit(f"{ref}: no rotation puts pad {first} on side {(sx, sy)}")
+    old = [tr for tr in b.GetTracks() if tr.GetNetCode() in nets]
+    under = [tr for tr in b.GetTracks() if tr.Type() == pcbnew.PCB_VIA_T and tr.GetNetname() in ("GND", "+1V8")
+             and 84.0 < pcbnew.ToMM(tr.GetPosition().x) < 102.5 and pcbnew.ToMM(tr.GetPosition().y) < 102.5
+             and not any(p.GetPosition() == tr.GetPosition() for m in (u7, u9) for p in m.Pads())]
+    for tr in {t.m_Uuid.AsString(): t for t in old + under}.values():
+        b.Remove(tr)
+    print(f"oscillator group and C75 moved: {len(old)} old tracks of their nets and {len(under)} supply vias under "
+          f"the memories dropped")
 
     # translators: row between the BGA (south edge y 118) and J1 (pads from y 125.8)
     xl = sorted((f for f in b.GetFootprints() if str(f.GetFPID().GetLibItemName()).startswith("UQFN-16")

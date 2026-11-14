@@ -1,7 +1,7 @@
 
 # Efinity Pinout Report
 # Version: 2026.1.132.5.14
-# Date: 2026-11-14 08:04
+# Date: 2026-11-14 08:47
 
 # Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -13,7 +13,7 @@
 Pin Number,Pin Name,Signal Name,Direction,Bank,I/O Bank Voltage,I/O Standard,Pull Type,Function
 A1,GND,,Power,,,,,Ground
 A2,GPIOL_N_18,pri_dhb_lo_1v8.N,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/PLL_CLKIN
-A3,GPIOL_03,j1_p19,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+A3,GPIOL_03,j1_p22,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 A4,GPIOL_09,j1_p24,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 A5,GPIOT_P_03,epwm5a_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO/MIPI_GCLK/MIPI_RCLK
 A6,GPIOT_N_03,cuk_cs_1v8.N,Output,2A,1.8 V,1.8 V LVCMOS,,User IO/MIPI_GCLK/MIPI_RCLK
@@ -28,9 +28,9 @@ A14,GPIOR_19,j1_p32,Output,TR,3.3 V,3.3 V LVCMOS,,User IO
 A15,GND,,Power,,,,,Ground
 B1,GPIOL_P_17_EXTFB,epwm6a_1v8.P,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/PLL_EXTFB
 B2,GPIOL_P_18_PLLIN0,,,1B,1.8 V,,,User IO/PLL_CLKIN
-B3,GPIOL_04,cuk_sdata,Input,TL,3.3 V,3.3 V LVCMOS,,User IO
+B3,GPIOL_04,j1_p19,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 B4,VCCIO33_TL,,Power,TL,3.3 V,,,VCCIO Power
-B5,GPIOL_10,j1_p26,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+B5,GPIOL_10,tx,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
 B6,GPIOT_P_01,ht_cs_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO
 B7,GPIOT_P_06,synch_2_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO
 B8,GPIOT_P_07_CLK4_P,cuk_clk_1v8.P,Output,2A,1.8 V,1.8 V LVCMOS,,User IO/GCLK/RCLK
@@ -43,9 +43,9 @@ B14,GPIOR_18,j1_p33,Output,TR,3.3 V,3.3 V LVCMOS,,User IO
 B15,REF_RES_3A,,Input,3A,1.8 V,,,
 C1,GPIOL_N_16,pri_dhb_hi_1v8.N,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/MIPI_GCLK/MIPI_RCLK
 C2,GPIOL_N_17,,,1B,1.8 V,,,User IO/PLL_EXTFB
-C3,GPIOL_06,j1_p22,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
-C4,GPIOL_07,tx,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
-C5,GPIOL_11_PLLIN2,j1_p27,Output,TL,3.3 V,3.3 V LVCMOS,,User IO/PLL_CLKIN
+C3,GPIOL_06,cuk_sdata,Input,TL,3.3 V,3.3 V LVCMOS,,User IO
+C4,GPIOL_07,j1_p27,Output,TL,3.3 V,3.3 V LVCMOS,,User IO
+C5,GPIOL_11_PLLIN2,j1_p26,Output,TL,3.3 V,3.3 V LVCMOS,,User IO/PLL_CLKIN
 C6,GPIOT_N_01,,,2A,1.8 V,,,User IO
 C7,VCCIO2A,,Power,2A,1.8 V,,,VCCIO Power
 C8,GPIOT_P_10_CLK7_P,,,2B,1.8 V,,,User IO/GCLK/RCLK
@@ -72,7 +72,7 @@ D13,GPIOR_N_17,,,3A,1.8 V,,,User IO/MIPI_GCLK/MIPI_RCLK
 D14,GPIOR_N_18,,,3A,1.8 V,,,User IO
 D15,GPIOR_P_18,adbsel2.P,Output,3A,1.8 V,1.8 V LVCMOS,,User IO
 E1,GPIOL_P_15_NSTATUS,,,1B,1.8 V,,,User IO/VREF/Configuration
-E2,GPIOL_N_15_TEST_N,test_n.N,Output,1B,1.8 V,1.8 V LVCMOS,,User IO/Configuration
+E2,GPIOL_N_15_TEST_N,,,1B,1.8 V,,,User IO/Configuration
 E3,GPIOL_N_13_CBSEL1,,,1B,1.8 V,,,User IO
 E4,REF_RES_1B,,Input,1B,1.8 V,,,
 E5,VCCA_TL,,Power,,,,,0.95 V PLL Power

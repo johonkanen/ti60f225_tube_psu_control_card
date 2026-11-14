@@ -23,6 +23,7 @@ L4 = "In3.Cu"
 NOTCH_W, NOTCH_KEEP, NOTCH_MAX, NOTCH_PAST = 0.9, 0.5, 8.0, 0.6
 NOTCH_TRIES = ((NOTCH_W, NOTCH_KEEP), (1.5, NOTCH_KEEP), (NOTCH_W, 0.05), (1.5, 0.05))   # width, keep from +0V95
 NOTCH_BACK = 0.25                   # the channel starts this far behind the via (its pad is 0.15 in radius)
+BAY_KEEP = 0.6                      # the north bay's edges keep this far from the nearest +0V95 via
 
 
 def drop(b, layer=L4):
@@ -69,12 +70,43 @@ def main_fill(b, lay, core):
     return largest(fill("+3V3")), sum(not island.Contains(p) for p in core)
 
 
+def north_bay(b, z):
+    """route_planes draws the +0V95 island as the box of all +0V95 vias plus a margin. Its north edge follows the
+    buck's output caps east of the BGA, so north of the BGA's own +0V95 balls it covers ball rows that hold no
+    +0V95 via at all, the +3V3 ball P4 (VCCIO33_BL) among them; the straight notch that joined P4 to the +3V3
+    plane ran through the place where the router puts the vias of the north-edge escapes, and was cut by them.
+    That bay is given back to +3V3: everything north of the northernmost +0V95 via under and around the BGA
+    (less BAY_KEEP), from the island's west edge to BAY_KEEP short of the eastern +0V95 vias that reach so far
+    north."""
+    u1 = b.FindFootprintByReference("U1")
+    x_split = max(p.GetPosition().x for p in u1.Pads()) + IU(1.0)
+    core = [v.GetPosition() for v in b.GetTracks() if v.Type() == pcbnew.PCB_VIA_T and v.GetNetname() == "+0V95"]
+    core += [p.GetPosition() for f in b.GetFootprints() for p in f.Pads() if p.GetNetname() == "+0V95" and p.HasHole()]
+    west = [p for p in core if p.x < x_split]
+    if not west:
+        return
+    y_cut = min(p.y for p in west) - IU(BAY_KEEP)
+    east = [p.x for p in core if p.x >= x_split and p.y < y_cut + IU(BAY_KEEP)]
+    bb = z.Outline().BBox()
+    x_cut = (min(east) - IU(BAY_KEEP)) if east else bb.GetRight() + IU(1)
+    if y_cut <= bb.GetY() or x_cut <= bb.GetX():
+        return
+    s = pcbnew.SHAPE_POLY_SET()
+    s.NewOutline()
+    for px, py in ((bb.GetX() - IU(1), bb.GetY() - IU(1)), (x_cut, bb.GetY() - IU(1)), (x_cut, y_cut),
+                   (bb.GetX() - IU(1), y_cut)):
+        s.Append(int(px), int(py))
+    z.Outline().BooleanSubtract(s)
+    print(f"phase5_planes: north bay of the +0V95 island given to +3V3: north of y {MM(y_cut):.2f}, west of x {MM(x_cut):.2f}")
+
+
 def notch(b):
     lay = b.GetLayerID(L4)
     island = [z for z in b.Zones() if z.IsOnLayer(lay) and z.GetNetname() == "+0V95"]
     if len(island) != 1:
         sys.exit(f"expected one +0V95 zone on {L4}, found {len(island)}")
     z = island[0]
+    north_bay(b, z)
     vias = [v for v in b.GetTracks() if v.Type() == pcbnew.PCB_VIA_T]
     core = [v.GetPosition() for v in vias if v.GetNetname() == "+0V95"]
     core += [p.GetPosition() for f in b.GetFootprints() for p in f.Pads()

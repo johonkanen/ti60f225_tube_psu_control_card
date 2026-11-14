@@ -12,9 +12,8 @@
 #                     takes them down in the pad instead; nor J1_P26 on D12, which
 #                     goes to J1 on L3 from a via in the ball pad: tools/phase5_j1.py)
 #  5. phase5_decaps   Ti60 decoupling, VCCA filters, configuration parts, translator caps on the bottom at their pins
-#  6. place_simple    KRT places the flash pull-ups (tools/phase5/groups.json, intent.json; the JTAG ones go to
-#                     their J2 pins in step 5); 8 seeds,
-#                     the first judged one is kept, then phase5_decaps --legalise moves them off other nets' copper
+#  6. (none)          the flash pull-ups: R54/R58 on top south of the flash (phase5_place), R57/R59 and the
+#                     HyperRAM's R24 on the bottom at a via in their memory ball (phase5_decaps)
 #  7. phase5_power    supply copper fitted to the Ti60: dead Agilex copper out, buck output pours stitched to L4,
 #                     supply/GND pads that lost their via tapped, one +1V8 pour over the whole of L3; then L4 split
 #                     between +0V95 and +3V3 (KRT route_planes) and phase5_planes notch for the +3V3 vias it caught
@@ -44,28 +43,23 @@ kpy "$R/tools/phase5_vias.py" "$W/b0.kicad_pcb" "$W/b1.kicad_pcb"
 cp "$W/b0.kicad_pro" "$W/b1.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b1.kicad_dru"
 # 4. fan-out (plane balls already have their via; signals only). Not the seven header nets of HVIO bank TL (the
 #    BGA's south-east corner) and the two on TR's inner balls C12/D12 (south-west): they go to J1 on L3 from a via
-#    in the ball pad (tools/phase5_j1.py)
-TL=('!J1_P19' '!J1_P22' '!J1_P24' '!J1_P26' '!J1_P27' '!TX' '!CUK_SDATA' '!J1_P29' '!J1_P31')
+#    in the ball pad (tools/phase5_vias.py). Nor CLK100M on P2: down in the pad to R25 on the bottom, which keeps
+#    one escape and its via out of the crowded north-east corner (JTAG, J1_P17, HT_SDATA)
+TL=('!J1_P19' '!J1_P22' '!J1_P24' '!J1_P26' '!J1_P27' '!TX' '!CUK_SDATA' '!J1_P29' '!J1_P31' '!CLK100M')
 (cd "$K" && $KP py_router/bga_fanout.py "$W/b1.kicad_pcb" -o "$W/b2.kicad_pcb" --component U1 --layers F.Cu B.Cu \
     --track-width 0.09 --clearance 0.125 --via-size 0.30 --via-drill 0.15 --escape-method underpad \
-    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' '!/Configuration/FLASH_IO2' "${TL[@]}" --plane-drop off \
+    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' "${TL[@]}" --plane-drop off \
     --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/fanout.log" 2>&1) || { tail -20 "$W/fanout.log"; exit 1; }
 grep -E "Under-pad escape" "$W/fanout.log" | head -1
-# 5. decoupling and the rest at their pins
+# 5. decoupling and the rest at their pins (first the vias of CSI and CDONE at their escapes' ends, between the
+#    flash lines that tools/phase5_mem.py draws in the routing chain, and those of J1_P17 and HT_SDATA)
+kpy "$R/tools/phase5_mem.py" "$W/b2.kicad_pcb" "$W/b2.kicad_pcb" edge
 kpy "$R/tools/phase5_lock.py" "$W/b2.kicad_pcb" "$W/b2.kicad_pcb"
 kpy "$R/tools/phase5_decaps.py" "$W/b2.kicad_pcb" "$W/b3.kicad_pcb" > "$W/decaps.log"
 grep -E "NO LEGAL|placed" "$W/decaps.log"
 cp "$W/b0.kicad_pro" "$W/b3.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b3.kicad_dru"
-# 6. KRT placer for the flash and JTAG pull-ups
-kpy "$R/tools/phase5_lock.py" "$W/b3.kicad_pcb" "$W/b3.kicad_pcb"
-(cd "$K" && $KP py_placer/place_simple.py "$W/b3.kicad_pcb" "$W/place/s{seed}.kicad_pcb" \
-    --groups "$R/tools/phase5/groups.json" --intent "$R/tools/phase5/intent.json" \
-    --scattered 4 --clustered 4 --judge 4 --jobs 4 --json "$W/place/s{seed}.json" > "$W/place.log" 2>&1) \
-    || { tail -20 "$W/place.log"; exit 1; }
-SEED=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['judge'][0])" "$W/place/judge.json")
-echo "place_simple: seed $SEED kept"
-kpy "$R/tools/phase5_decaps.py" "$W/place/s$SEED.kicad_pcb" "$W/b4.kicad_pcb" --legalise R54 R57 R58 R59 | tail -1
-kpy "$R/tools/phase5_lock.py" "$W/b4.kicad_pcb" "$W/b4.kicad_pcb" --unlock
+# 6. (the flash pull-ups are placed by phase5_place and phase5_decaps now: no KRT placer step)
+cp "$W/b3.kicad_pcb" "$W/b4.kicad_pcb"
 # 7. supply copper and the L4 split
 kpy "$R/tools/phase5_power.py" "$W/b4.kicad_pcb" "$W/b5.kicad_pcb" | grep -v "memory leak"
 kpy "$R/tools/phase5_planes.py" drop "$W/b5.kicad_pcb" "$W/b5.kicad_pcb" In3.Cu | grep -v "memory leak"
@@ -73,5 +67,5 @@ cp "$W/b0.kicad_pro" "$W/b5.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b5.kicad_dru"
 (cd "$K" && $KP py_router/route_planes.py "$W/b5.kicad_pcb" "$W/b6.kicad_pcb" --nets +0V95 +3V3 \
     --plane-layers In3.Cu In3.Cu --zone-clearance 0.15 --min-thickness 0.15 --no-thermal-vias --clearance 0.125 \
     --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/planes.log" 2>&1) || { tail -20 "$W/planes.log"; exit 1; }
-kpy "$R/tools/phase5_planes.py" notch "$W/b6.kicad_pcb" "$OUT" | grep -E "NO NOTCH|notches"
+kpy "$R/tools/phase5_planes.py" notch "$W/b6.kicad_pcb" "$OUT" | grep -E "NO NOTCH|notches|north bay"
 echo "wrote $OUT"

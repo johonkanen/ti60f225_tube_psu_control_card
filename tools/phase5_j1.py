@@ -30,7 +30,7 @@ BALL = ()       # via in the ball pad: now made by tools/phase5_vias.py, before 
 # bottom-side resistors placed at a through-hole pin by tools/phase5_decaps.py: the EPWM2A/2B pull-downs at J1,
 # the JTAG pull-ups at J2
 PULLDOWNS = (("R40", "J1", 9), ("R41", "J1", 11), ("R60", "J2", 1), ("R62", "J2", 2), ("R61", "J2", 3),
-             ("R63", "J2", 4))
+             ("R63", "J2", 4), ("R25", "X1", 3))    # (and the oscillator's series resistor to its output pad)
 LOOP_PIN, LOOP_GAP_PINS, LOOP_Y = 34, (22, 24), 128.22   # PFC_PWM2: south of row 2, up between pins 22 and 24
 # J1_P17 comes down the east side on L3, CUK_SDATA (pin 15) from the west: pin 17 is reached between the two rows,
 # from the first-row gap east of pin 15, so the two do not cross

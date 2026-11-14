@@ -16,15 +16,15 @@ module ti60f225_pinplan (
     input adca_sdo,
     output j1_p30,
     output j1_p32,
-    output j1_p19,
+    output j1_p22,
     output j1_p24,
     output j1_p28,
     output j1_p33,
-    output j1_p26,
-    output j1_p29,
-    output j1_p22,
+    output j1_p19,
     output tx,
+    output j1_p29,
     output j1_p27,
+    output j1_p26,
     output j1_p31,
     output led1_r,
     output led2_b,
@@ -67,7 +67,6 @@ module ti60f225_pinplan (
     output xlat_oe_n,
     output adbsel2,
     output adasel2,
-    output test_n,
     output adasel1,
     output adasel0,
     output adcb_cs_n,
@@ -82,15 +81,15 @@ module ti60f225_pinplan (
         lfsr <= {lfsr[30:0], lfsr[31] ^ lfsr[21] ^ lfsr[1] ^ lfsr[0] ^ cal_q[31] ^ (^rx) ^ (^cuk_sdata) ^ (^ht_sdata) ^ (^pll_locked) ^ (^adcb_sdo) ^ (^adca_sdo)};
     assign j1_p30 = {lfsr[0]};
     assign j1_p32 = {lfsr[1]};
-    assign j1_p19 = {lfsr[2]};
+    assign j1_p22 = {lfsr[2]};
     assign j1_p24 = {lfsr[3]};
     assign j1_p28 = {lfsr[4]};
     assign j1_p33 = {lfsr[5]};
-    assign j1_p26 = {lfsr[6]};
-    assign j1_p29 = {lfsr[7]};
-    assign j1_p22 = {lfsr[8]};
-    assign tx = {lfsr[9]};
-    assign j1_p27 = {lfsr[10]};
+    assign j1_p19 = {lfsr[6]};
+    assign tx = {lfsr[7]};
+    assign j1_p29 = {lfsr[8]};
+    assign j1_p27 = {lfsr[9]};
+    assign j1_p26 = {lfsr[10]};
     assign j1_p31 = {lfsr[11]};
     assign led1_r = {lfsr[12]};
     assign led2_b = {lfsr[13]};
@@ -133,11 +132,10 @@ module ti60f225_pinplan (
     assign xlat_oe_n = {lfsr[2]};
     assign adbsel2 = {lfsr[3]};
     assign adasel2 = {lfsr[4]};
-    assign test_n = {lfsr[5]};
-    assign adasel1 = {lfsr[6]};
-    assign adasel0 = {lfsr[7]};
-    assign adcb_cs_n = {lfsr[8]};
-    assign adcb_sclk = {lfsr[9]};
-    assign adca_cs_n = {lfsr[10]};
-    assign adca_sclk = {lfsr[11]};
+    assign adasel1 = {lfsr[5]};
+    assign adasel0 = {lfsr[6]};
+    assign adcb_cs_n = {lfsr[7]};
+    assign adcb_sclk = {lfsr[8]};
+    assign adca_cs_n = {lfsr[9]};
+    assign adca_sclk = {lfsr[10]};
 endmodule

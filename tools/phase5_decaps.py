@@ -36,6 +36,13 @@ STUB_W, STUB_MAX = 0.2, 0.8
 # caps and the OE pull-up.
 SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
 BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67", "R40", "R41"}
+# No new via where the scripted memory buses run on F.Cu (tools/phase5_mem.py): the HyperRAM fan between U9 and the
+# BGA's north edge (three boxes following its 45 deg west flank) and the flash lines from the BGA's east edge north
+# to U7. Parts may sit there on the bottom, on vias that exist or outside the boxes.
+BUS_NO_VIA = ((85.5, 101.4, 93.05, 105.6), (87.0, 105.6, 93.05, 107.2), (88.75, 107.2, 93.05, 108.05),
+              (96.95, 101.4, 100.5, 113.6),
+              # and where J1_P17 and HT_SDATA run on L3 from their vias north of the BGA east and down the east side
+              (93.4, 106.45, 96.95, 107.8), (98.55, 113.6, 99.9, 120.0))
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
 UNUSED_BANKS = set()                            # every bank has its caps (3B: tools/sch_rot180.py)
@@ -104,6 +111,7 @@ class Board:
         self.court = []                             # bottom courtyard bboxes: (box, ref)
         self.vias = []                              # (pos, net, radius)
         self.no_via = []                            # boxes (IU) closed to new vias (reserve_translators)
+        self.pth = []                               # pad holes (pos, radius): none inside a part's courtyard
         self.field = None                           # U1's ball field: on the bottom only UNDER_BGA caps (set_field)
         # nets of a wider netclass clearance (the project's SW class: the buck switch nodes, 0.15 mm)
         self.net_clr = {n.GetNetCode(): SW_CLR for name, n in b.GetNetsByName().items()
@@ -181,6 +189,7 @@ class Board:
                     self.items[l].append((p.GetEffectiveShape(l), p.GetNetCode(), p.GetBoundingBox()))
             if p.HasHole():
                 self.holes.append((p.GetPosition(), max(p.GetDrillSize().x, p.GetDrillSize().y) // 2, p.GetNetCode()))
+                self.pth.append((p.GetPosition(), max(p.GetDrillSize().x, p.GetDrillSize().y) // 2))
         c = f.GetCourtyard(pcbnew.B_CrtYd if f.IsFlipped() else pcbnew.F_CrtYd)
         self.court.append((c.BBox() if not c.IsEmpty() else f.GetBoundingBox(False), f.GetReference(), f.IsFlipped()))
 
@@ -244,6 +253,9 @@ def try_pose(board, f, pos, rot, netname):
             return None
     for ob, _, flipped in board.court:
         if flipped == f.IsFlipped() and ob.Intersects(cb):
+            return None
+    for hp, hr in board.pth:        # a connector pin's hole in the courtyard is a DRC error (pth_inside_courtyard)
+        if cb.GetX() - hr < hp.x < cb.GetRight() + hr and cb.GetY() - hr < hp.y < cb.GetBottom() + hr:
             return None
     if board.field is not None and board.field.Intersects(cb) and not under_bga_ok(f):
         return None
@@ -354,6 +366,9 @@ def main(src, dst, legalise=()):
             f = b.FindFootprintByReference(r)
             sig = next(p.GetNetCode() for p in f.Pads() if p.GetNumber() and netname(p) not in PLANES)
             jobs.append((r, [p.GetNumber() for p in u1.Pads() if p.GetNetCode() == sig]))
+        # the memories' pull-ups that sit on a via in the memory ball (tools/phase5_vias.py): flash IO2 and RESET#,
+        # HyperRAM RESET#
+        jobs += [("R57", ["U7.C4"]), ("R58", ["U7.D4"]), ("R59", ["U7.A4"]), ("R24", ["U9.A4"])]
         # the JTAG pull-ups on the bottom at their J2 pins (through-hole: joined there without a via), which
         # keeps them out of the translator input fan east of the BGA
         j2 = b.FindFootprintByReference("J2")
@@ -367,6 +382,7 @@ def main(src, dst, legalise=()):
     if not legalise:
         board.set_field(u1)
         board.reserve_translators()
+        board.no_via += [tuple(IU(v) for v in box) for box in BUS_NO_VIA]
     for f in b.GetFootprints():
         if f.GetReference() not in moving:
             board.add_footprint(f)

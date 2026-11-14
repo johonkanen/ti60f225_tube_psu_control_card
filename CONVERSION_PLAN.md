@@ -359,6 +359,50 @@ Pipeline, rerunnable from the copied Agilex board (`git checkout` the board firs
     HyperRAM is not length-matched: 8.6–14.2 mm; the `hyperram_length` rule now holds that window. (4) Via
     count per net is uneven: CUK_SDATA 5, FLASH_IO2 4, XLAT_OE_N 4 (one per chip), LED1_B 4.
 
+- [ ] **Experiment: U1 at 180° (2026-11-14, branch `worktree-agent-a32798ac2aa80f39a`, not merged).** Idea: turn
+  U1 a further 90° clockwise (−90° → 180°) and trade the memories' places, so the JTAG balls and bank 1A's flash
+  balls sit in the package's north-east corner next to J2. Geometry: at 180° row R is north and column 1 east, so
+  rows L–P × columns 1–5 are the north-east corner (TCK N4 at (94.60, 109.75), was (88.75, 110.40)); the JTAG balls
+  are 11.4–15.7 mm from their J2 pins in a straight line (was 16.3–20.5 mm).
+  Result against the routed board of the entry above (`tools/phase5_check.sh`):
+
+  | | U1 −90° (main) | U1 180° |
+  |---|---|---|
+  | unconnected / DRC / parity | 0 / clean / 0 | 0 / 0 violations / 0 |
+  | signal vias | 88 | 62 |
+  | L3 +1V8 pour | main + 8 islands (13 vias) | main + 2 islands (18.7 and 5.0 mm², 2 vias each) |
+  | L4 | +0V95 1, +3V3 1 | +0V95 1, +3V3 1 |
+  | signal track on B.Cu | 318 mm | 241 mm |
+  | HyperRAM (12 nets, F.Cu) | 8.6–14.2 mm, 3 vias | 8.3–13.1 mm, 1 via (RESET# pull-up) |
+  | JTAG (4 nets) | 129 mm, 4 vias, all on B.Cu | 63 mm, 6 vias (TDO 3), B.Cu |
+  | flash (6 nets) | 75 mm, 12 vias | 96 mm, 2 vias (pull-ups in the ball pad), all on F.Cu |
+  | CLK100M | 21 mm, 1 via | 1.7 mm, 2 vias |
+
+  - *Needs a decision:* bank 1B lands on the east edge's south half, 20 mm from any place the HyperRAM can sit, so
+    the **HyperRAM moved to banks 4A/4B** (north edge, straight under U9); the rule so far kept it in 1B. Efinity
+    compiles the stub design with the same hold/setup margins (`efinity/pinplan/run.sh --compile`: PASS). With the
+    HyperRAM in 1B the bus would be about 25–30 mm long and cross the flash and JTAG lines. Bank 1B's three outer
+    balls at the south-east corner (A2, B1, C1) and D1 now carry three translator inputs and XLAT_OE_N.
+  - *Pin plan* (`docs/io_swap_groups.md`): translator inputs on the south edge, in translator pin order; ADC on
+    3A/3B (west edge, C180/C181 added for 3B); LEDs on BR (north-west); header nets on TR (south-west, F.Cu) and TL
+    (south-east, L3 from a via in the ball pad, as TR was before); J1_P17 and HT_SDATA on BL (19 HVIO outputs for
+    18 places on TL/TR/BR). TEST_N (E2) keeps R56 on a net of its own.
+  - *Placement:* flash U7 east, HyperRAM U9 west (their Agilex places), both at 90°; oscillator X1 with R25, FB5,
+    C54 from under the memories to between them and the BGA (X1's pad sat under the flash RESET# ball), C75 to
+    U9's west edge; flash pull-ups R57/R58/R59 and R24 on the bottom on a via in the memory ball, R54 on top.
+  - *Chain:* the HyperRAM bus, the six flash lines and the L3 pair of J1_P17/HT_SDATA are drawn by
+    `tools/phase5_mem.py` and locked (the router took HyperRAM nets around the package and crossed the flash with
+    13 vias); `tools/phase5_prep_check.py` stops the chain when scripted copper is not legal; no decap via in the
+    buses' way (`BUS_NO_VIA`); in-pad vias are made before the decoupling is placed; the L4 +0V95 island gives
+    its north bay back to +3V3 (`phase5_planes.py north_bay`: the straight notch for ball P4 was cut by router
+    vias); `FROM=step` resumes the routing chain; KRT gets `KICAD_PYTHON`; `tools/kpy.sh` keeps exit codes.
+  - *Open:* (1) HyperRAM is not length-matched (4.8 mm spread; rule window 8.2–13.2 mm). (2) The flash lines are
+    longer than before (11.7–24.1 mm): the flash still sits 8 mm north of the BGA, IO2 enters its ball from the
+    north; moving both memories about 2 mm south would shorten 18 nets. (3) PLL filter: C96 6.7 mm and FB8 7.7 mm
+    from ball L5 (the bus keep-outs pushed them east), C100 2.9 mm. (4) Two L3 islands left (pockets between TX
+    and J1_P26, and at the J1 end of the BL pair). (5) +5V is routed by KRT at 0.3 mm and C15 sits in its Agilex
+    place: the hand fixes of 7962419 (0.8 mm +5V on B.Cu, C15 moved) are not in the chain.
+
 ### Phase 6: verification and production
 - [ ] Independent reviews as for the Agilex card: Efinix hardware checklist, electrical review, JLC production check.
 - [ ] BOM/CPL via `tools/jlc`; stock check for 10 boards; FPGA through Global Sourcing if JLC doesn't stock it.

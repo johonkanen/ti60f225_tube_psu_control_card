@@ -5,7 +5,7 @@
 
 # Efinity Interface Designer SDC
 # Version: 2026.1.132.5.14
-# Date: 2026-11-14 08:04
+# Date: 2026-11-14 08:47
 
 # Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -132,8 +132,6 @@ set_output_delay -clock ram_clk -reference_pin [get_ports {ram_clk~CLKOUT~174~1}
 # set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -min <MIN CALCULATION> [get_ports {synch_1_1v8}]
 # set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -max <MAX CALCULATION> [get_ports {synch_2_1v8}]
 # set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -min <MIN CALCULATION> [get_ports {synch_2_1v8}]
-# set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -max <MAX CALCULATION> [get_ports {test_n}]
-# set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -min <MIN CALCULATION> [get_ports {test_n}]
 # set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -max <MAX CALCULATION> [get_ports {xlat_oe_n}]
 # set_output_delay -clock <CLOCK> [-reference_pin <clkout_pad>] -min <MIN CALCULATION> [get_ports {xlat_oe_n}]
 set_input_delay -clock ram_clk_cal -reference_pin [get_ports {ram_clk_cal~CLKOUT~82~1}] -max 0.414 [get_ports {hbc_dq_IN_LO[0] hbc_dq_IN_HI[0]}]

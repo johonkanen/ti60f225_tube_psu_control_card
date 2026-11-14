@@ -17,9 +17,13 @@ import pcbnew
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 # U1 signal balls that go down in their pad instead of an F.Cu escape (left out of the fan-out by
 # tools/phase5_layout.sh): the header nets of HVIO bank TL and of TR's inner balls, which run to J1 on L3, and
-# FLASH_IO2 on its deep ball. Their vias are made here, before the decoupling is placed, so no cap pad lands on one.
+# CLK100M. Their vias are made here, before the decoupling is placed, so no cap pad lands on one. (The JTAG balls
+# were tried this way too: from a via in the pad the router needed L3 hops under the BGA to get past the caps.)
 SIGNAL_IN_PAD = {"J1_P19", "J1_P22", "J1_P24", "J1_P26", "J1_P27", "TX", "CUK_SDATA", "J1_P29", "J1_P31",
-                 "/Configuration/FLASH_IO2"}
+                 "CLK100M"}     # (CLK100M: R25 sits on the bottom 1.5 mm from ball P2)
+# Memory balls with a via in the pad, for a pull-up on the bottom at that via (tools/phase5_decaps.py): the flash's
+# IO2, IO3 and RESET#, the HyperRAM's RESET#
+MEMORY_IN_PAD = {("U7", "C4"), ("U7", "D4"), ("U7", "A4"), ("U9", "A4")}
 b = pcbnew.LoadBoard(sys.argv[1])
 have = {(v.GetPosition().x, v.GetPosition().y) for v in b.GetTracks() if v.Type() == pcbnew.PCB_VIA_T}
 n = 0
@@ -27,7 +31,9 @@ for p in [p for r in ("U1", "U7", "U9") for p in b.FindFootprintByReference(r).P
     pos = p.GetPosition()
     if (pos.x, pos.y) in have:
         continue
-    if p.GetNetname() not in PLANES and not (p.GetParentFootprint().GetReference() == "U1" and p.GetNetname() in SIGNAL_IN_PAD):
+    ref = p.GetParentFootprint().GetReference()
+    if p.GetNetname() not in PLANES and not (ref == "U1" and p.GetNetname() in SIGNAL_IN_PAD) \
+            and (ref, p.GetNumber()) not in MEMORY_IN_PAD:
         continue
     v = pcbnew.PCB_VIA(b)
     v.SetPosition(pos)

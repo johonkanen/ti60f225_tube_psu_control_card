@@ -1,7 +1,7 @@
 
 Efinity Interface Designer Report
 Version: 2026.1.132.5.14
-Date: 2026-11-14 08:04
+Date: 2026-11-14 08:47
 
 Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -37,8 +37,8 @@ Configuration Mode: active (x4)
 clkmux: 4 / 4 (100.0%)
 control: 0 / 1 (0.0%)
 gpio: 22 / 23 (95.65%)
-hsio: 21.5 / 70 (30.71%)
-	gpio: 43
+hsio: 21.0 / 70 (30.0%)
+	gpio: 42
 hsio_bg: 0 / 8 (0.0%)
 hvio_poc: 0 / 4 (0.0%)
 jtag: 0 / 4 (0.0%)
@@ -136,7 +136,6 @@ Option Register File: ti60f225_pinplan_or.ini
 |    hbc_dq5    |   CDI4   |
 |    hbc_dq6    |   CDI5   |
 |    hbc_rwds   |  CDI17   |
-|     test_n    |  TEST_N  |
 +---------------+----------+
 
 ---------- Dual-Function Configuration Pin Usage (end) ----------
@@ -163,7 +162,7 @@ Global Unused Setting: input with weak pullup
 |       clk100m       | GPIOL_P_00 | input  |                 |              |    1A    | 1.8 V LVCMOS | GPIOL_P_00_PLLIN0  |      P2     |
 |     cuk_clk_1v8     | GPIOT_P_07 | output |                 |              |    2A    | 1.8 V LVCMOS | GPIOT_P_07_CLK4_P  |      B8     |
 |      cuk_cs_1v8     | GPIOT_N_03 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_N_03     |      A6     |
-|      cuk_sdata      |  GPIOL_04  | input  |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_04      |      B3     |
+|      cuk_sdata      |  GPIOL_06  | input  |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_06      |      C3     |
 |      epwm1a_1v8     | GPIOT_P_17 | output |                 |              |    2B    | 1.8 V LVCMOS | GPIOT_P_17_PLLIN1  |     A11     |
 |      epwm2a_1v8     | GPIOT_N_06 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_N_06     |      A7     |
 |      epwm2b_1v8     | GPIOT_N_07 | output |                 |              |    2A    | 1.8 V LVCMOS | GPIOT_N_07_CLK4_N  |      A8     |
@@ -186,11 +185,11 @@ Global Unused Setting: input with weak pullup
 |      ht_cs_1v8      | GPIOT_P_01 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_01     |      B6     |
 |       ht_sdata      |  GPIOL_02  | input  |                 |              |    BL    | 3.3 V LVCMOS |      GPIOL_02      |      R4     |
 |        j1_p17       |  GPIOL_01  | output |                 |              |    BL    | 3.3 V LVCMOS |      GPIOL_01      |      R3     |
-|        j1_p19       |  GPIOL_03  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_03      |      A3     |
-|        j1_p22       |  GPIOL_06  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_06      |      C3     |
+|        j1_p19       |  GPIOL_04  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_04      |      B3     |
+|        j1_p22       |  GPIOL_03  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_03      |      A3     |
 |        j1_p24       |  GPIOL_09  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_09      |      A4     |
-|        j1_p26       |  GPIOL_10  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_10      |      B5     |
-|        j1_p27       |  GPIOL_11  | output |                 |              |    TL    | 3.3 V LVCMOS |  GPIOL_11_PLLIN2   |      C5     |
+|        j1_p26       |  GPIOL_11  | output |                 |              |    TL    | 3.3 V LVCMOS |  GPIOL_11_PLLIN2   |      C5     |
+|        j1_p27       |  GPIOL_07  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_07      |      C4     |
 |        j1_p28       |  GPIOR_15  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_15      |     B12     |
 |        j1_p29       |  GPIOR_16  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_16      |     C12     |
 |        j1_p30       |  GPIOR_12  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_12      |     A13     |
@@ -210,8 +209,7 @@ Global Unused Setting: input with weak pullup
 |          rx         |  GPIOR_13  | input  |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_13      |     A12     |
 |     synch_1_1v8     | GPIOT_N_11 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_11     |      A9     |
 |     synch_2_1v8     | GPIOT_P_06 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_06     |      B7     |
-|        test_n       | GPIOL_N_15 | output |                 |              |    1B    | 1.8 V LVCMOS | GPIOL_N_15_TEST_N  |      E2     |
-|          tx         |  GPIOL_07  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_07      |      C4     |
+|          tx         |  GPIOL_10  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_10      |      B5     |
 |      xlat_oe_n      | GPIOL_P_16 | output |                 |              |    1B    | 1.8 V LVCMOS |     GPIOL_P_16     |      D1     |
 +---------------------+------------+--------+-----------------+--------------+----------+--------------+--------------------+-------------+
 
@@ -286,7 +284,6 @@ Output GPIO Configuration:
 |    pri_dhb_lo_1v8   |      pri_dhb_lo_1v8     |                  |        |    Disable    |       4        |  Disable  |   0   |
 |     synch_1_1v8     |       synch_1_1v8       |                  |        |    Disable    |       4        |  Disable  |   0   |
 |     synch_2_1v8     |       synch_2_1v8       |                  |        |    Disable    |       4        |  Disable  |   0   |
-|        test_n       |          test_n         |                  |        |    Disable    |       4        |  Disable  |   0   |
 |          tx         |            tx           |                  |        |    Disable    |       4        |  Disable  |   0   |
 |      xlat_oe_n      |        xlat_oe_n        |                  |        |    Disable    |       4        |  Disable  |   0   |
 +---------------------+-------------------------+------------------+--------+---------------+----------------+-----------+-------+

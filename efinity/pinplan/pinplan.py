@@ -95,7 +95,7 @@ def main():
 
     # every other user I/O from the schematic
     rows = []
-    skip = set(HR_GPIO.values()) | CONFIG_NETS | {"CLK100M"}
+    skip = set(HR_GPIO.values()) | CONFIG_NETS | {"CLK100M", "TEST_N"}    # TEST_N (E2): pull-up only, no user I/O
     for ball, net in sorted(fpga.items()):
         r = pins[ball]
         if r["type"] not in ("HSIO", "HVIO") or net.startswith("unconnected") or net in skip:
