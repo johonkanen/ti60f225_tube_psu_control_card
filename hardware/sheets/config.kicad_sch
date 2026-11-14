@@ -7776,37 +7776,6 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 116.84 173.99) (xy 116.84 176.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "89c51543-acae-5f13-b225-5a0b1c2d5233")
-	)
-	(global_label "HR_DQ3"
-		(shape passive)
-		(at 116.84 176.53 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "33a43557-2140-5315-93c7-82853068b099")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 116.84 176.53 0)
-			(hide yes)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
 	(symbol
 		(lib_id "Device:R")
 		(at 129.54 170.18 0)
@@ -9329,6 +9298,37 @@
 		(uuid "365917ef-3cc3-589c-8f58-67912c1d868c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 264.16 181.61 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 116.84 173.99) (xy 116.84 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "64080465-68fe-56ac-8a7b-82d96964f2d3")
+	)
+	(global_label "TEST_N"
+		(shape passive)
+		(at 116.84 176.53 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c9892945-bab1-5fe8-8b09-e6aba5330429")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 116.84 176.53 0)
 			(hide yes)
 			(effects
 				(font

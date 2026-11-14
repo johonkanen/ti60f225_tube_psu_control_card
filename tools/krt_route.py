@@ -38,6 +38,10 @@ def main():
            *base, *opts, "--json-out", str(dst.with_suffix(".json"))]
     env = dict(os.environ)
     env.setdefault("KICAD_RIP_PREEXISTING", "0")
+    if "KICAD_PYTHON" not in env:               # KRT's pour and plane checks need a python with pcbnew
+        kenv = os.environ.get("KICAD_ENV", str(Path.home() / "dev/proteus2kicad/bin/kicad_env.sh"))
+        env["KICAD_PYTHON"] = subprocess.run([kenv, "bash", "-c", 'echo "$KICAD_MOUNT/bin/python3.11"'],
+                                             capture_output=True, text=True).stdout.strip()
     with open(dst.with_suffix(".log"), "w") as log:
         rc = subprocess.run(cmd, cwd=K, env=env, stdout=log, stderr=subprocess.STDOUT).returncode
     for x in ("kicad_pro", "kicad_dru"):

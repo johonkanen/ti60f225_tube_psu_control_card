@@ -25,6 +25,8 @@ W="$R/build/phase5"
 K="${KRT:-$HOME/dev/KiCadRoutingTools}"
 E="${KICAD_ENV:-$HOME/dev/proteus2kicad/bin/kicad_env.sh}"
 KP="$K/.venv/bin/python -X utf8"
+# KRT checks pours and planes with KiCad's own filler when it finds a python with pcbnew
+KICAD_PYTHON="$("$E" bash -c 'echo "$KICAD_MOUNT/bin/python3.11"')"; export KICAD_PYTHON
 kpy() { "$E" bash -c '"$KICAD_MOUNT/bin/python3.11" -I "$@"' kpy "$@"; }
 mkdir -p "$W/agilex" "$W/place"
 
@@ -40,10 +42,13 @@ kpy "$R/tools/phase5_sync.py" "$W/old.net" "$W/new.net" "$W/b0.kicad_pcb"
 kpy "$R/tools/phase5_place.py" "$W/b0.kicad_pcb"
 kpy "$R/tools/phase5_vias.py" "$W/b0.kicad_pcb" "$W/b1.kicad_pcb"
 cp "$W/b0.kicad_pro" "$W/b1.kicad_pro"; cp "$W/b0.kicad_dru" "$W/b1.kicad_dru"
-# 4. fan-out (plane balls already have their via; signals only)
+# 4. fan-out (plane balls already have their via; signals only). Not the seven header nets of HVIO bank TL (the
+#    BGA's south-east corner) and the two on TR's inner balls C12/D12 (south-west): they go to J1 on L3 from a via
+#    in the ball pad (tools/phase5_j1.py)
+TL=('!J1_P19' '!J1_P22' '!J1_P24' '!J1_P26' '!J1_P27' '!TX' '!CUK_SDATA' '!J1_P29' '!J1_P31')
 (cd "$K" && $KP py_router/bga_fanout.py "$W/b1.kicad_pcb" -o "$W/b2.kicad_pcb" --component U1 --layers F.Cu B.Cu \
     --track-width 0.09 --clearance 0.125 --via-size 0.30 --via-drill 0.15 --escape-method underpad \
-    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' '!J1_P26' '!/Configuration/FLASH_IO2' --plane-drop off \
+    --same-net-pad-clearance -1 --grid-step 0.025 --nets '*' '!GND' '!+1V8' '!+0V95' '!+3V3' '!/Configuration/REF_RES_2A' '!/Configuration/CRESET_N' '!/Configuration/FLASH_IO2' "${TL[@]}" --plane-drop off \
     --fab-tier advanced --escalation off --no-fix-drc-settings > "$W/fanout.log" 2>&1) || { tail -20 "$W/fanout.log"; exit 1; }
 grep -E "Under-pad escape" "$W/fanout.log" | head -1
 # 5. decoupling and the rest at their pins

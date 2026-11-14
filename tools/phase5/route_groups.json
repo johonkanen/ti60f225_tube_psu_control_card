@@ -2,16 +2,16 @@
  "hyperram": [
   "HR_DQ4",
   "HR_DQ3",
-  "HR_DQ0",
-  "HR_DQ5",
-  "HR_DQ1",
-  "HR_DQ6",
-  "HR_DQ7",
-  "HR_RWDS",
   "HR_DQ2",
+  "HR_RWDS",
+  "HR_DQ0",
+  "HR_DQ1",
   "HR_CK",
   "HR_CS_N",
-  "HR_RESET_N"
+  "HR_RESET_N",
+  "HR_DQ7",
+  "HR_DQ6",
+  "HR_DQ5"
  ],
  "flash": [
   "/Configuration/FLASH_CLK",
@@ -62,22 +62,18 @@
   "XLAT_OE_N"
  ],
  "j1_east": [
-  "CUK_SDATA",
-  "J1_P17",
-  "J1_P19",
-  "J1_P22",
-  "J1_P24",
-  "TX",
+  "J1_P27",
   "J1_P26",
-  "HT_SDATA"
+  "TX",
+  "J1_P24",
+  "J1_P22",
+  "J1_P19",
+  "CUK_SDATA"
  ],
  "j1_west": [
   "RX",
-  "J1_P27",
   "J1_P28",
-  "J1_P29",
   "J1_P30",
-  "J1_P31",
   "J1_P32",
   "J1_P33"
  ],
@@ -116,7 +112,8 @@
  ],
  "config": [
   "CLK100M",
-  "/HyperRAM and clock/CLK100M_R"
+  "/HyperRAM and clock/CLK100M_R",
+  "/Configuration/TEST_N"
  ],
  "power_ctl": [
   "/Power/EN_0V95",
@@ -138,7 +135,6 @@
   "/Power/SW_*"
  ],
  "hr_pullups": [
-  "HR_DQ3",
   "HR_RESET_N"
  ],
  "bottom_cfg": [
@@ -159,5 +155,13 @@
   "ADBSEL0",
   "ADBSEL1",
   "ADBSEL2"
+ ],
+ "j1_west_l3": [
+  "J1_P29",
+  "J1_P31"
+ ],
+ "j1_far": [
+  "J1_P17",
+  "HT_SDATA"
  ]
 }

@@ -38,11 +38,11 @@ SOUTH_BAND = (86.0, 118.0, 108.0, 126.0)
 BAND_OK = {f"C{n}" for n in range(158, 166)} | {"R67", "R40", "R41"}
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
 BANK_ORDER = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B"]
-UNUSED_BANKS = {"3B"}                           # no caps (tools/sch_vccio_caps.py)
+UNUSED_BANKS = set()                            # every bank has its caps (3B: tools/sch_rot180.py)
 USED_BANKS = [b for b in BANK_ORDER if b not in UNUSED_BANKS]
 # 47n per VCCIO ball: C166-C177 for the first six banks in use (2 per bank), C178/C179 for 3A, added later
 # (tools/sch_bank3a_caps.py) when translator inputs moved onto it
-BANK_CAP0 = {"1A": 166, "1B": 168, "2A": 170, "2B": 172, "4A": 174, "4B": 176, "3A": 178}
+BANK_CAP0 = {"1A": 166, "1B": 168, "2A": 170, "2B": 172, "4A": 174, "4B": 176, "3A": 178, "3B": 180}
 HVIO_ORDER = ["TL", "TR", "BL", "BR"]
 UNDER_BGA = {"47n", "100n"}                     # 0201s of these values may sit under the ball field (Lattice)
 

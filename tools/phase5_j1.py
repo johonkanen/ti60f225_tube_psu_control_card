@@ -26,12 +26,15 @@ STUB_Y = 125.45
 F_PINS = (4, 6, 8, 10, 14, 16, 18, 20, 28, 30, 32)      # second-row pins reached on F.Cu
 L3_PINS = (12, 22, 24, 26)                               # second-row pins reached on In2.Cu
 POCKET = ()                                                      # east-edge escapes, north to south
-BALL = ("J1_P26", "/Configuration/FLASH_IO2")                    # via in the ball pad
+BALL = ()       # via in the ball pad: now made by tools/phase5_vias.py, before the decoupling is placed
 # bottom-side resistors placed at a through-hole pin by tools/phase5_decaps.py: the EPWM2A/2B pull-downs at J1,
 # the JTAG pull-ups at J2
 PULLDOWNS = (("R40", "J1", 9), ("R41", "J1", 11), ("R60", "J2", 1), ("R62", "J2", 2), ("R61", "J2", 3),
              ("R63", "J2", 4))
 LOOP_PIN, LOOP_GAP_PINS, LOOP_Y = 34, (22, 24), 128.22   # PFC_PWM2: south of row 2, up between pins 22 and 24
+# J1_P17 comes down the east side on L3, CUK_SDATA (pin 15) from the west: pin 17 is reached between the two rows,
+# from the first-row gap east of pin 15, so the two do not cross
+BETWEEN_PIN, BETWEEN_PAST = 17, 15
 
 
 def seg(b, net, layer, a, c):
@@ -163,6 +166,10 @@ def main(src, dst, mode="stubs"):
     c = 0.2
     path(b, pad[LOOP_PIN].GetNet(), pcbnew.F_Cu,
          [(x, y), (x, LOOP_Y - c), (x + c, LOOP_Y), (gx - c, LOOP_Y), (gx, LOOP_Y - c), (gx, STUB_Y)])
+    (x, y), (px, _) = xy[BETWEEN_PIN], xy[BETWEEN_PAST]
+    gx, ym = px + half, y + half
+    path(b, pad[BETWEEN_PIN].GetNet(), b.GetLayerID("In2.Cu"),
+         [(x, y), (x + half, ym), (gx - c, ym), (gx, ym - c), (gx, STUB_Y)])
     direct(b)
     b.Save(dst)
     print(f"phase5_j1: {n} second-row stubs, {pad[LOOP_PIN].GetNetname()} looped south of row 2")

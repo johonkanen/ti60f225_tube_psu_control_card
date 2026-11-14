@@ -35,8 +35,8 @@ def read_netlist(path):
     return nets, by
 
 
-HYPERRAM = {"HR_CK": "C1", "HR_CS_N": "B2", "HR_DQ0": "F1", "HR_DQ1": "G1", "HR_DQ2": "C2", "HR_DQ3": "E2",
-            "HR_DQ4": "D1", "HR_DQ5": "F2", "HR_DQ6": "G2", "HR_DQ7": "H2", "HR_RESET_N": "B1", "HR_RWDS": "E1"}
+HYPERRAM = {"HR_CK": "P11", "HR_CS_N": "R12", "HR_DQ0": "P8", "HR_DQ1": "R9", "HR_DQ2": "R11", "HR_DQ3": "P9",
+            "HR_DQ4": "R10", "HR_DQ5": "R7", "HR_DQ6": "P7", "HR_DQ7": "R8", "HR_RESET_N": "P12", "HR_RWDS": "P10"}
 RENAMES = {"+0V75": "+0V95", "FB_0V75": "FB_0V95", "SW_0V75": "SW_0V95", "EN_0V75": "EN_0V95",
            "PG_0V75": "PG_0V95", "+1V8_HR": "+1V8"}
 INTENDED = {("U12", "4"): "+1V8", ("U15", "4"): "+1V8", ("C59", "1"): "+1V8", ("C64", "1"): "+1V8",
@@ -104,10 +104,10 @@ def main():
     for net, rail in [("FLASH_CS_N", "+1V8"), ("FLASH_IO2", "+1V8"), ("FLASH_IO3", "+1V8"),
                       ("FLASH_RESET_N", "+1V8"), ("CDONE", "+1V8"), ("CSI", "+1V8"), ("CRESET_N", "+1V8"),
                       ("TCK", "+3V3"), ("TMS", "+3V3"), ("TDI", "+3V3"), ("TDO", "+3V3"), ("XLAT_OE_N", "+1V8"),
-                      ("HR_DQ3", "+1V8"), ("REF_RES_2A", "GND"), ("REF_RES_3A", "GND"), ("REF_RES_4A", "GND")]:
+                      ("TEST_N", "+1V8"), ("REF_RES_2A", "GND"), ("REF_RES_3A", "GND"), ("REF_RES_4A", "GND")]:
         chk(len(pulls(net, rail)) == 1, f"pull-up/down {net} to {rail}: {pulls(net, rail)}")
     chk(any(r.startswith("C") for r, _ in A["CRESET_N"]), "CRESET_N has no RC capacitor")
-    for net, bx in (("TCK", "N4"), ("TMS", "N3"), ("TDI", "P3"), ("TDO", "M4"), ("CRESET_N", "J5"),
+    for net, bx in (("TCK", "N4"), ("TMS", "N3"), ("TDI", "P3"), ("TDO", "M4"), ("CRESET_N", "J5"), ("TEST_N", "E2"),
                     ("CDONE", "L3"), ("CSI", "N2"), ("CLK100M", "P2")):
         chk(U1[bx] == net, f"{net} at {bx}: {U1[bx]}")
     for net, p in (("TCK", "1"), ("TDI", "2"), ("TMS", "3"), ("TDO", "4")):

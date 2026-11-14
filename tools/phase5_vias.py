@@ -15,12 +15,19 @@ import sys
 import pcbnew
 
 PLANES = {"GND", "+0V95", "+1V8", "+3V3"}
+# U1 signal balls that go down in their pad instead of an F.Cu escape (left out of the fan-out by
+# tools/phase5_layout.sh): the header nets of HVIO bank TL and of TR's inner balls, which run to J1 on L3, and
+# FLASH_IO2 on its deep ball. Their vias are made here, before the decoupling is placed, so no cap pad lands on one.
+SIGNAL_IN_PAD = {"J1_P19", "J1_P22", "J1_P24", "J1_P26", "J1_P27", "TX", "CUK_SDATA", "J1_P29", "J1_P31",
+                 "/Configuration/FLASH_IO2"}
 b = pcbnew.LoadBoard(sys.argv[1])
 have = {(v.GetPosition().x, v.GetPosition().y) for v in b.GetTracks() if v.Type() == pcbnew.PCB_VIA_T}
 n = 0
 for p in [p for r in ("U1", "U7", "U9") for p in b.FindFootprintByReference(r).Pads()]:
     pos = p.GetPosition()
-    if p.GetNetname() not in PLANES or (pos.x, pos.y) in have:
+    if (pos.x, pos.y) in have:
+        continue
+    if p.GetNetname() not in PLANES and not (p.GetParentFootprint().GetReference() == "U1" and p.GetNetname() in SIGNAL_IN_PAD):
         continue
     v = pcbnew.PCB_VIA(b)
     v.SetPosition(pos)
@@ -31,4 +38,4 @@ for p in [p for r in ("U1", "U7", "U9") for p in b.FindFootprintByReference(r).P
     b.Add(v)
     n += 1
 b.Save(sys.argv[2])
-print("phase5_vias: U1/U7/U9 plane balls with a via in pad:", n)
+print("phase5_vias: U1/U7/U9 plane balls (and U1 signal balls that go down in the pad) with a via in pad:", n)

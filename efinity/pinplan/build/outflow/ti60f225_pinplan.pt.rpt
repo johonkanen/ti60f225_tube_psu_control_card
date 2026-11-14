@@ -1,7 +1,7 @@
 
 Efinity Interface Designer Report
 Version: 2026.1.132.5.14
-Date: 2026-11-13 13:55
+Date: 2026-11-14 08:04
 
 Copyright (C) 2013 - 2026 Efinix Inc. All rights reserved.
 
@@ -37,8 +37,8 @@ Configuration Mode: active (x4)
 clkmux: 4 / 4 (100.0%)
 control: 0 / 1 (0.0%)
 gpio: 22 / 23 (95.65%)
-hsio: 21.0 / 70 (30.0%)
-	gpio: 42
+hsio: 21.5 / 70 (30.71%)
+	gpio: 43
 hsio_bg: 0 / 8 (0.0%)
 hvio_poc: 0 / 4 (0.0%)
 jtag: 0 / 4 (0.0%)
@@ -96,16 +96,16 @@ Option Register File: ti60f225_pinplan_or.ini
 +--------------+----------------+
 | Clock Region | Used/Available |
 +--------------+----------------+
-|      B0      |      0/14      |
-|      B1      |      0/14      |
+|      B0      |      2/14      |
+|      B1      |      3/14      |
 |      L0      |      0/4       |
 |      L1      |      0/4       |
 |      L2      |      0/4       |
 |      L3      |      0/4       |
-|      L4      |      2/4       |
+|      L4      |      0/4       |
 |      L5      |      0/4       |
-|      L6      |      3/4       |
-|      L7      |      1/4       |
+|      L6      |      0/4       |
+|      L7      |      0/4       |
 |      R0      |      0/4       |
 |      R1      |      0/4       |
 |      R2      |      0/4       |
@@ -122,19 +122,22 @@ Option Register File: ti60f225_pinplan_or.ini
 
 ---------- 6. Dual-Function Configuration Pin Usage (begin) ----------
 
-+---------------+--------------+
-| Instance Name |   Function   |
-+---------------+--------------+
-|    adasel0    |    CDI12     |
-|    adasel1    |    CDI13     |
-|    adbsel0    |    CDI17     |
-|    adbsel1    |    CDI16     |
-|   adcb_sclk   |     CDI4     |
-|    adcb_sdo   |     CDI5     |
-|    hbc_dq3    |    TEST_N    |
-|    hbc_dq7    | PCR_READBACK |
-|    hbc_rwds   |   NSTATUS    |
-+---------------+--------------+
++---------------+----------+
+| Instance Name | Function |
++---------------+----------+
+|   adca_cs_n   |  CDI31   |
+|   adca_sclk   |  CDI25   |
+|    adca_sdo   |  CDI30   |
+|    hbc_cs_n   |  CDI18   |
+|    hbc_dq1    |  CDI12   |
+|    hbc_dq2    |  CDI19   |
+|    hbc_dq3    |  CDI13   |
+|    hbc_dq4    |  CDI16   |
+|    hbc_dq5    |   CDI4   |
+|    hbc_dq6    |   CDI5   |
+|    hbc_rwds   |  CDI17   |
+|     test_n    |  TEST_N  |
++---------------+----------+
 
 ---------- Dual-Function Configuration Pin Usage (end) ----------
 
@@ -145,70 +148,71 @@ Global Unused Setting: input with weak pullup
 +---------------------+------------+--------+-----------------+--------------+----------+--------------+--------------------+-------------+
 |    Instance Name    |  Resource  |  Mode  |     Register    | Clock Region | I/O Bank | I/O Standard |      Pad Name      | Package Pin |
 +---------------------+------------+--------+-----------------+--------------+----------+--------------+--------------------+-------------+
-|       adasel0       | GPIOB_P_12 | output |                 |              |    4A    | 1.8 V LVCMOS |  GPIOB_P_12_CDI12  |      R9     |
-|       adasel1       | GPIOB_N_12 | output |                 |              |    4A    | 1.8 V LVCMOS |  GPIOB_N_12_CDI13  |      P9     |
-|       adasel2       | GPIOB_P_07 | output |                 |              |    4B    | 1.8 V LVCMOS | GPIOB_P_07_CLK15_P |      R8     |
-|       adbsel0       | GPIOB_N_14 | output |                 |              |    4A    | 1.8 V LVCMOS |  GPIOB_N_14_CDI17  |     P10     |
-|       adbsel1       | GPIOB_P_14 | output |                 |              |    4A    | 1.8 V LVCMOS |  GPIOB_P_14_CDI16  |     R10     |
-|       adbsel2       | GPIOB_P_17 | output |                 |              |    4A    | 1.8 V LVCMOS | GPIOB_P_17_PLLIN1  |     P11     |
-|      adca_cs_n      | GPIOB_P_00 | output |                 |              |    4B    | 1.8 V LVCMOS | GPIOB_P_00_PLLIN1  |      R5     |
-|      adca_sclk      | GPIOB_N_01 | output |                 |              |    4B    | 1.8 V LVCMOS |     GPIOB_N_01     |      P6     |
-|       adca_sdo      | GPIOB_N_00 | input  |                 |              |    4B    | 1.8 V LVCMOS |     GPIOB_N_00     |      P5     |
-|      adcb_cs_n      | GPIOB_P_01 | output |                 |              |    4B    | 1.8 V LVCMOS |  GPIOB_P_01_EXTFB  |      R6     |
-|      adcb_sclk      | GPIOB_P_02 | output |                 |              |    4B    | 1.8 V LVCMOS |  GPIOB_P_02_CDI4   |      R7     |
-|       adcb_sdo      | GPIOB_N_02 | input  |                 |              |    4B    | 1.8 V LVCMOS |  GPIOB_N_02_CDI5   |      P7     |
+|       adasel0       | GPIOR_P_13 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_13     |     G15     |
+|       adasel1       | GPIOR_N_13 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_N_13     |     F15     |
+|       adasel2       | GPIOR_P_16 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_16     |     E15     |
+|       adbsel0       | GPIOR_N_19 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_N_19     |     C15     |
+|       adbsel1       | GPIOR_P_19 | output |                 |              |    3A    | 1.8 V LVCMOS | GPIOR_P_19_PLLIN0  |     C14     |
+|       adbsel2       | GPIOR_P_18 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_18     |     D15     |
+|      adca_cs_n      | GPIOR_N_05 | output |                 |              |    3B    | 1.8 V LVCMOS |  GPIOR_N_05_CDI31  |     K15     |
+|      adca_sclk      | GPIOR_N_02 | output |                 |              |    3B    | 1.8 V LVCMOS |  GPIOR_N_02_CDI25  |     M15     |
+|       adca_sdo      | GPIOR_P_05 | input  |                 |              |    3B    | 1.8 V LVCMOS |  GPIOR_P_05_CDI30  |     L15     |
+|      adcb_cs_n      | GPIOR_N_07 | output |                 |              |    3B    | 1.8 V LVCMOS |     GPIOR_N_07     |     J14     |
+|      adcb_sclk      | GPIOR_P_09 | output |                 |              |    3B    | 1.8 V LVCMOS | GPIOR_P_09_CLK10_P |     J15     |
+|       adcb_sdo      | GPIOR_N_09 | input  |                 |              |    3B    | 1.8 V LVCMOS | GPIOR_N_09_CLK10_N |     H15     |
 |       clk100m       | GPIOL_P_00 | input  |                 |              |    1A    | 1.8 V LVCMOS | GPIOL_P_00_PLLIN0  |      P2     |
-|     cuk_clk_1v8     | GPIOT_N_14 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_14     |     B10     |
-|      cuk_cs_1v8     | GPIOT_N_06 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_N_06     |      A7     |
-|      cuk_sdata      |  GPIOR_15  | input  |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_15      |     B12     |
-|      epwm1a_1v8     | GPIOR_N_13 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_N_13     |     F15     |
-|      epwm2a_1v8     | GPIOT_N_07 | output |                 |              |    2A    | 1.8 V LVCMOS | GPIOT_N_07_CLK4_N  |      A8     |
-|      epwm2b_1v8     | GPIOT_N_11 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_11     |      A9     |
-|      epwm5a_1v8     | GPIOT_P_06 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_06     |      B7     |
-|      epwm6a_1v8     | GPIOT_P_01 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_01     |      B6     |
-| gpio_bypass_rly_1v8 | GPIOR_P_18 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_18     |     D15     |
-|       hbc_ck_p      | GPIOL_N_16 | output |       O(R)      |      L6      |    1B    | 1.8 V LVCMOS |     GPIOL_N_16     |      C1     |
-|       hbc_cs_n      | GPIOL_P_18 | output |       O(R)      |      L7      |    1B    | 1.8 V LVCMOS | GPIOL_P_18_PLLIN0  |      B2     |
-|       hbc_dq0       | GPIOL_P_14 | inout  | I(R),O(R),OE(R) |      L6      |    1B    | 1.8 V LVCMOS |     GPIOL_P_14     |      F1     |
-|       hbc_dq1       | GPIOL_N_09 | inout  | I(R),O(R),OE(R) |      L4      |    1B    | 1.8 V LVCMOS | GPIOL_N_09_CLK2_N  |      G1     |
-|       hbc_dq2       | GPIOL_N_17 | inout  | I(R),O(R),OE(R) |      L6      |    1B    | 1.8 V LVCMOS |     GPIOL_N_17     |      C2     |
-|       hbc_dq3       | GPIOL_N_15 | inout  | I(R),O(R),OE(R) |      L6      |    1B    | 1.8 V LVCMOS | GPIOL_N_15_TEST_N  |      E2     |
-|       hbc_dq4       | GPIOL_P_16 | inout  | I(R),O(R),OE(R) |      L6      |    1B    | 1.8 V LVCMOS |     GPIOL_P_16     |      D1     |
-|       hbc_dq5       | GPIOL_N_14 | inout  | I(R),O(R),OE(R) |      L6      |    1B    | 1.8 V LVCMOS |     GPIOL_N_14     |      F2     |
-|       hbc_dq6       | GPIOL_N_10 | inout  | I(R),O(R),OE(R) |      L4      |    1B    | 1.8 V LVCMOS | GPIOL_N_10_CLK3_N  |      G2     |
-|       hbc_dq7       | GPIOL_P_10 | inout  | I(R),O(R),OE(R) |      L4      |    1B    | 1.8 V LVCMOS | GPIOL_P_10_CLK3_P  |      H2     |
-|      hbc_rst_n      | GPIOL_P_17 | output |                 |              |    1B    | 1.8 V LVCMOS |  GPIOL_P_17_EXTFB  |      B1     |
-|       hbc_rwds      | GPIOL_P_15 | inout  | I(R),O(R),OE(R) |      L6      |    1B    | 1.8 V LVCMOS | GPIOL_P_15_NSTATUS |      E1     |
-|      ht_clk_1v8     | GPIOT_N_17 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_17     |     B11     |
-|      ht_cs_1v8      | GPIOT_P_07 | output |                 |              |    2A    | 1.8 V LVCMOS | GPIOT_P_07_CLK4_P  |      B8     |
-|       ht_sdata      |  GPIOL_11  | input  |                 |              |    TL    | 3.3 V LVCMOS |  GPIOL_11_PLLIN2   |      C5     |
-|        j1_p17       |  GPIOR_13  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_13      |     A12     |
-|        j1_p19       |  GPIOR_12  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_12      |     A13     |
-|        j1_p22       |  GPIOR_16  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_16      |     C12     |
-|        j1_p24       |  GPIOR_19  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_19      |     A14     |
-|        j1_p26       |  GPIOR_20  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_20      |     D12     |
-|        j1_p27       |  GPIOR_21  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_21      |     N14     |
-|        j1_p28       |  GPIOR_25  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_25      |     P15     |
-|        j1_p29       |  GPIOR_28  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_28      |     R14     |
-|        j1_p30       |  GPIOR_22  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_22      |     P14     |
-|        j1_p31       |  GPIOR_29  | output |                 |              |    BR    | 3.3 V LVCMOS |  GPIOR_29_PLLIN2   |     R13     |
-|        j1_p32       |  GPIOR_27  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_27      |     P13     |
-|        j1_p33       |  GPIOL_01  | output |                 |              |    BL    | 3.3 V LVCMOS |      GPIOL_01      |      R3     |
-|        led1_b       |  GPIOL_09  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_09      |      A4     |
-|        led1_g       |  GPIOL_06  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_06      |      C3     |
-|        led1_r       |  GPIOL_10  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_10      |      B5     |
-|        led2_b       |  GPIOL_04  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_04      |      B3     |
-|        led2_g       |  GPIOL_07  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_07      |      C4     |
-|        led2_r       |  GPIOL_03  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_03      |      A3     |
-|     pfc_pwm1_1v8    | GPIOR_P_16 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_16     |     E15     |
-|     pfc_pwm2_1v8    | GPIOR_P_13 | output |                 |              |    3A    | 1.8 V LVCMOS |     GPIOR_P_13     |     G15     |
-|    pri_dhb_hi_1v8   | GPIOT_P_03 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_03     |      A5     |
-|    pri_dhb_lo_1v8   | GPIOT_N_03 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_N_03     |      A6     |
-|          rx         |  GPIOR_24  | input  |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_24      |     N13     |
-|     synch_1_1v8     | GPIOT_P_14 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_P_14     |     A10     |
-|     synch_2_1v8     | GPIOT_P_11 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_P_11     |      B9     |
-|          tx         |  GPIOR_18  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_18      |     B14     |
-|      xlat_oe_n      | GPIOR_P_11 | output |                 |              |    3A    | 1.8 V LVCMOS | GPIOR_P_11_CLK8_P  |     H14     |
+|     cuk_clk_1v8     | GPIOT_P_07 | output |                 |              |    2A    | 1.8 V LVCMOS | GPIOT_P_07_CLK4_P  |      B8     |
+|      cuk_cs_1v8     | GPIOT_N_03 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_N_03     |      A6     |
+|      cuk_sdata      |  GPIOL_04  | input  |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_04      |      B3     |
+|      epwm1a_1v8     | GPIOT_P_17 | output |                 |              |    2B    | 1.8 V LVCMOS | GPIOT_P_17_PLLIN1  |     A11     |
+|      epwm2a_1v8     | GPIOT_N_06 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_N_06     |      A7     |
+|      epwm2b_1v8     | GPIOT_N_07 | output |                 |              |    2A    | 1.8 V LVCMOS | GPIOT_N_07_CLK4_N  |      A8     |
+|      epwm5a_1v8     | GPIOT_P_03 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_03     |      A5     |
+|      epwm6a_1v8     | GPIOL_P_17 | output |                 |              |    1B    | 1.8 V LVCMOS |  GPIOL_P_17_EXTFB  |      B1     |
+| gpio_bypass_rly_1v8 | GPIOT_P_14 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_P_14     |     A10     |
+|       hbc_ck_p      | GPIOB_P_17 | output |       O(R)      |      B1      |    4A    | 1.8 V LVCMOS | GPIOB_P_17_PLLIN1  |     P11     |
+|       hbc_cs_n      | GPIOB_P_15 | output |       O(R)      |      B1      |    4A    | 1.8 V LVCMOS |  GPIOB_P_15_CDI18  |     R12     |
+|       hbc_dq0       | GPIOB_N_07 | inout  | I(R),O(R),OE(R) |      B0      |    4B    | 1.8 V LVCMOS | GPIOB_N_07_CLK15_N |      P8     |
+|       hbc_dq1       | GPIOB_P_12 | inout  | I(R),O(R),OE(R) |      B1      |    4A    | 1.8 V LVCMOS |  GPIOB_P_12_CDI12  |      R9     |
+|       hbc_dq2       | GPIOB_N_15 | inout  | I(R),O(R),OE(R) |      B1      |    4A    | 1.8 V LVCMOS |  GPIOB_N_15_CDI19  |     R11     |
+|       hbc_dq3       | GPIOB_N_12 | inout  | I(R),O(R),OE(R) |      B1      |    4A    | 1.8 V LVCMOS |  GPIOB_N_12_CDI13  |      P9     |
+|       hbc_dq4       | GPIOB_P_14 | inout  | I(R),O(R),OE(R) |      B1      |    4A    | 1.8 V LVCMOS |  GPIOB_P_14_CDI16  |     R10     |
+|       hbc_dq5       | GPIOB_P_02 | inout  | I(R),O(R),OE(R) |      B0      |    4B    | 1.8 V LVCMOS |  GPIOB_P_02_CDI4   |      R7     |
+|       hbc_dq6       | GPIOB_N_02 | inout  | I(R),O(R),OE(R) |      B0      |    4B    | 1.8 V LVCMOS |  GPIOB_N_02_CDI5   |      P7     |
+|       hbc_dq7       | GPIOB_P_07 | inout  | I(R),O(R),OE(R) |      B0      |    4B    | 1.8 V LVCMOS | GPIOB_P_07_CLK15_P |      R8     |
+|      hbc_rst_n      | GPIOB_N_17 | output |                 |              |    4A    | 1.8 V LVCMOS |     GPIOB_N_17     |     P12     |
+|       hbc_rwds      | GPIOB_N_14 | inout  | I(R),O(R),OE(R) |      B1      |    4A    | 1.8 V LVCMOS |  GPIOB_N_14_CDI17  |     P10     |
+|      ht_clk_1v8     | GPIOT_P_11 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_P_11     |      B9     |
+|      ht_cs_1v8      | GPIOT_P_01 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_01     |      B6     |
+|       ht_sdata      |  GPIOL_02  | input  |                 |              |    BL    | 3.3 V LVCMOS |      GPIOL_02      |      R4     |
+|        j1_p17       |  GPIOL_01  | output |                 |              |    BL    | 3.3 V LVCMOS |      GPIOL_01      |      R3     |
+|        j1_p19       |  GPIOL_03  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_03      |      A3     |
+|        j1_p22       |  GPIOL_06  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_06      |      C3     |
+|        j1_p24       |  GPIOL_09  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_09      |      A4     |
+|        j1_p26       |  GPIOL_10  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_10      |      B5     |
+|        j1_p27       |  GPIOL_11  | output |                 |              |    TL    | 3.3 V LVCMOS |  GPIOL_11_PLLIN2   |      C5     |
+|        j1_p28       |  GPIOR_15  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_15      |     B12     |
+|        j1_p29       |  GPIOR_16  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_16      |     C12     |
+|        j1_p30       |  GPIOR_12  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_12      |     A13     |
+|        j1_p31       |  GPIOR_20  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_20      |     D12     |
+|        j1_p32       |  GPIOR_19  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_19      |     A14     |
+|        j1_p33       |  GPIOR_18  | output |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_18      |     B14     |
+|        led1_b       |  GPIOR_25  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_25      |     P15     |
+|        led1_g       |  GPIOR_22  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_22      |     P14     |
+|        led1_r       |  GPIOR_21  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_21      |     N14     |
+|        led2_b       |  GPIOR_27  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_27      |     P13     |
+|        led2_g       |  GPIOR_29  | output |                 |              |    BR    | 3.3 V LVCMOS |  GPIOR_29_PLLIN2   |     R13     |
+|        led2_r       |  GPIOR_28  | output |                 |              |    BR    | 3.3 V LVCMOS |      GPIOR_28      |     R14     |
+|     pfc_pwm1_1v8    | GPIOT_N_14 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_14     |     B10     |
+|     pfc_pwm2_1v8    | GPIOT_N_17 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_17     |     B11     |
+|    pri_dhb_hi_1v8   | GPIOL_N_16 | output |                 |              |    1B    | 1.8 V LVCMOS |     GPIOL_N_16     |      C1     |
+|    pri_dhb_lo_1v8   | GPIOL_N_18 | output |                 |              |    1B    | 1.8 V LVCMOS |     GPIOL_N_18     |      A2     |
+|          rx         |  GPIOR_13  | input  |                 |              |    TR    | 3.3 V LVCMOS |      GPIOR_13      |     A12     |
+|     synch_1_1v8     | GPIOT_N_11 | output |                 |              |    2B    | 1.8 V LVCMOS |     GPIOT_N_11     |      A9     |
+|     synch_2_1v8     | GPIOT_P_06 | output |                 |              |    2A    | 1.8 V LVCMOS |     GPIOT_P_06     |      B7     |
+|        test_n       | GPIOL_N_15 | output |                 |              |    1B    | 1.8 V LVCMOS | GPIOL_N_15_TEST_N  |      E2     |
+|          tx         |  GPIOL_07  | output |                 |              |    TL    | 3.3 V LVCMOS |      GPIOL_07      |      C4     |
+|      xlat_oe_n      | GPIOL_P_16 | output |                 |              |    1B    | 1.8 V LVCMOS |     GPIOL_P_16     |      D1     |
 +---------------------+------------+--------+-----------------+--------------+----------+--------------+--------------------+-------------+
 
 *NOTE
@@ -282,6 +286,7 @@ Output GPIO Configuration:
 |    pri_dhb_lo_1v8   |      pri_dhb_lo_1v8     |                  |        |    Disable    |       4        |  Disable  |   0   |
 |     synch_1_1v8     |       synch_1_1v8       |                  |        |    Disable    |       4        |  Disable  |   0   |
 |     synch_2_1v8     |       synch_2_1v8       |                  |        |    Disable    |       4        |  Disable  |   0   |
+|        test_n       |          test_n         |                  |        |    Disable    |       4        |  Disable  |   0   |
 |          tx         |            tx           |                  |        |    Disable    |       4        |  Disable  |   0   |
 |      xlat_oe_n      |        xlat_oe_n        |                  |        |    Disable    |       4        |  Disable  |   0   |
 +---------------------+-------------------------+------------------+--------+---------------+----------------+-----------+-------+

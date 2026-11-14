@@ -26,7 +26,7 @@ RENAMES = {"+0V75": "+0V95", "/Power/FB_0V75": "/Power/FB_0V95", "/Power/SW_0V75
            "/Power/EN_0V75": "/Power/EN_0V95", "/Power/PG_0V75": "/Power/PG_0V95", "+1V8_HR": "+1V8"}
 POWER = {"GND", "+5V", "+3V3", "+1V8", "+0V95", "+3V3A"}
 U1_POS = (92.0, 113.0)
-U1_ROT = -90.0
+U1_ROT = 180.0     # 90 deg clockwise from the earlier -90: flash and JTAG balls (rows L-P, columns 1-5) north-east, at J2
 MM = pcbnew.FromMM
 
 

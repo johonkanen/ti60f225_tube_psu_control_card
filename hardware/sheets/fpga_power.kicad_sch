@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "ad07ae58-b9ff-52c9-9030-e74c427bdd2f")
-	(paper "A3")
+	(paper "A2")
 	(title_block
 		(title "Ti60F225 power and decoupling")
 		(rev "0.1")
@@ -13175,6 +13175,334 @@
 		(uuid "c1df6833-d36f-59c0-b93e-637889e2fe55")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 43.18 232.41 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 30.48 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d89024a8-98ca-50a6-acdf-ca0bca7fea71")
+		(property "Reference" "C180"
+			(at 33.02 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47n"
+			(at 33.02 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+			(at 30.48 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" ""
+			(at 30.48 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" ""
+			(at 30.48 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "LCSC" "C85925"
+			(at 30.48 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "MPN" "GRM033R60J473KE19D"
+			(at 30.48 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Group" ""
+			(at 30.48 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "1"
+			(uuid "8e1819e8-7af2-5072-b02b-e7374a1af3b4")
+		)
+		(pin "2"
+			(uuid "a668e74c-5b53-511e-aca4-aea99fd77e92")
+		)
+		(instances
+			(project "control_card"
+				(path "/02cf0cd1-c66b-5c4c-858e-ca84c1bbaba4/157c2c3f-44ba-5dad-bac0-d1255297af1a"
+					(reference "C180")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 30.48 262.89) (xy 30.48 260.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd3d3e85-de05-5e58-8f0b-329ee0a3f262")
+	)
+	(global_label "+1V8"
+		(shape passive)
+		(at 30.48 260.35 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c9f3d810-aae3-5f95-9a87-08f7fd7ad7ac")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 30.48 260.35 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 30.48 270.51) (xy 30.48 273.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "211af4da-d615-5641-8d70-4367e6e3c54c")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 30.48 273.05 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1347207e-1b94-5a52-b486-1f51a01b9f0b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 30.48 273.05 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 43.18 266.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cb798771-c766-547c-a36a-0e8bc05fdf16")
+		(property "Reference" "C181"
+			(at 45.72 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47n"
+			(at 45.72 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+			(at 43.18 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" ""
+			(at 43.18 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" ""
+			(at 43.18 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "LCSC" "C85925"
+			(at 43.18 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "MPN" "GRM033R60J473KE19D"
+			(at 43.18 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Group" ""
+			(at 43.18 266.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "1"
+			(uuid "5bb5096a-4b25-587f-b8f4-faaf596d6c49")
+		)
+		(pin "2"
+			(uuid "bd276479-cf38-5ac4-b8c8-4886d2b815ce")
+		)
+		(instances
+			(project "control_card"
+				(path "/02cf0cd1-c66b-5c4c-858e-ca84c1bbaba4/157c2c3f-44ba-5dad-bac0-d1255297af1a"
+					(reference "C181")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 262.89) (xy 43.18 260.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d69e991c-e631-5af1-b947-c1ca2d8fe8d2")
+	)
+	(global_label "+1V8"
+		(shape passive)
+		(at 43.18 260.35 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c1e369e3-b83c-5599-8743-68aadb9b536c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 260.35 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 270.51) (xy 43.18 273.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8cd54a4-16e0-51d7-9f84-3768c0665af4")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 43.18 273.05 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b079c8d0-f86b-5076-896c-cf3e1685a260")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 273.05 0)
 			(hide yes)
 			(effects
 				(font
