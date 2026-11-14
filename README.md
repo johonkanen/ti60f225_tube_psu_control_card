@@ -10,6 +10,14 @@ check and a stub compile with SPI active x4 (`efinity/pinplan/run.sh --compile`,
 (`hardware/control_card.kicad_pcb`) is still the Agilex 3 layout. Plan, decisions and remaining steps:
 [`CONVERSION_PLAN.md`](CONVERSION_PLAN.md); device requirements: [`docs/ti60_requirements.md`](docs/ti60_requirements.md).
 
+## Board
+
+Copper layers of `hardware/control_card.kicad_pcb`, plotted by GitHub Actions on every board change
+([kicad-board-plots](https://github.com/johonkanen/kicad-board-plots)).
+
+<!-- board-plots:start -->
+<!-- board-plots:end -->
+
 ## Repository layout
 
 | Path | Contents |
