@@ -113,6 +113,11 @@ kpy "$R/tools/phase5_lock_tracks.py" "$CUR" unlock | tail -1
 # L4: a signal via placed by the router can cut the channel that joins a +3V3 ball via inside the +0V95 island to the
 # +3V3 plane (the HVIO corner balls): the notch step again, on the vias as they are now
 kpy "$R/tools/phase5_planes.py" notch "$CUR" "$CUR" | grep -E "NO NOTCH|notch" || true
+# the user's hand fixes (7962419): C15 at J1 pin 1, +5V to U6 as a 0.8 mm B.Cu trunk; XLAT_OE_N, which crossed the
+# trunk on B.Cu, routed again around it
+N=$((N + 1)); P="$W/$(printf %02d "$N")_5v.kicad_pcb"
+kpy "$R/tools/phase5_5v.py" "$CUR" "$P"; CUR="$P"; sib "$CUR"
+step xlat_oe_5v xlat_oe "${BOT[@]}" --force-reroute
 # manufacturing fixes: undersized vias to 0.30/0.15, three fiducials per side (tools/phase5_fab.py)
 kpy "$R/tools/phase5_fab.py" "$CUR" "$OUT"
 echo "wrote $OUT"
