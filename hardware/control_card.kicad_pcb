@@ -19085,7 +19085,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "AP61102Z6-7"
+		(property "Value" "AP61203Z6-7"
 			(at 0 -1.65 0)
 			(layer "B.Fab")
 			(uuid "63c52d54-9f63-4195-8f7f-87a31eb00719")
@@ -19097,7 +19097,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP61100_AP61102.pdf"
+		(property "Datasheet" "https://www.diodes.com/datasheet/download/AP61200+AP61201+AP61202+AP61203.pdf"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -19121,7 +19121,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C5224055"
+		(property "LCSC" "C5244557"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -19135,7 +19135,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "AP61102Z6-7"
+		(property "MPN" "AP61203Z6-7"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -38415,7 +38415,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "AP61102Z6-7"
+		(property "Value" "AP61203Z6-7"
 			(at 0 -1.65 180)
 			(layer "B.Fab")
 			(uuid "e77206cf-ea9d-410a-9f7f-16311e4b54a4")
@@ -38427,7 +38427,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP61100_AP61102.pdf"
+		(property "Datasheet" "https://www.diodes.com/datasheet/download/AP61200+AP61201+AP61202+AP61203.pdf"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
@@ -38451,7 +38451,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C5224055"
+		(property "LCSC" "C5244557"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -38464,7 +38464,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "AP61102Z6-7"
+		(property "MPN" "AP61203Z6-7"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
