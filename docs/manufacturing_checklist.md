@@ -32,7 +32,7 @@ Hand-soldered by the user: J1, J2, U12/U15 (ADS7056, own stock), so JLC assemble
 | [x] | Track width ≥ 0.09 mm | board stats | min 0.09 (246 segments, J1 area), mostly 0.1 |
 | [x] | Copper clearance ≥ 0.1 mm (routing used 0.125) | DRC | passes |
 | [x] | Via hole to other copper ≥ 0.2 mm | DRC `hole_clearance` | passes |
-| [x] | Via sizes within JLC limits (min drill 0.15, ring per capability page) | board stats | 265 × 0.30/0.15, 20 × 0.35/0.20, 17 × 0.45/0.25 (`tools/phase5_fab.py` enlarges any smaller one) |
+| [x] | Via sizes within JLC limits (min drill 0.15, ring per capability page) | board stats | 267 × 0.30/0.15, 20 × 0.35/0.20, 17 × 0.45/0.25 (`tools/phase5_fab.py` enlarges any smaller one) |
 | [ ] | Via-in-pad ordered as filled and capped (POFV) | order option | U1 plane balls, caps under the BGA, memory pull-ups on ball vias: must be filled + capped, else solder wicks |
 | [x] | PTH hole to copper ≥ 0.28 mm, PTH hole to hole ≥ 0.45 mm | DRC (project rules) | passes |
 | [x] | Copper to board edge ≥ 0.3 mm | DRC `copper_edge_clearance` | passes |
@@ -79,7 +79,7 @@ Hand-soldered by the user: J1, J2, U12/U15 (ADS7056, own stock), so JLC assemble
 | [ ] | Board outline, size and any keep-outs against the power board / enclosure | 3D view | check |
 | [ ] | No mounting holes: the card is held by J1 only (intended?) | | **none on the board**: confirm |
 | [ ] | Bottom-side part heights clear the power board under the card | 3D view, J1 stacking height | check |
-| [ ] | JTAG J2 reachable with the cable when mounted | 3D view | check |
+| [ ] | JTAG J2 reachable with the cable when mounted | 3D view | check; pin order 1 TDI, 2 TCK, 3 TMS, 4 TDO, 5 GND (as on the other boards) |
 | [ ] | 3D view: no overlapping bodies, all models present | KiCad 3D viewer | check |
 
 ## 6. Electrical sanity (last look)

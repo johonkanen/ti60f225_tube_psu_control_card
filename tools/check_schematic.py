@@ -110,7 +110,7 @@ def main():
     for net, bx in (("TCK", "N4"), ("TMS", "N3"), ("TDI", "P3"), ("TDO", "M4"), ("CRESET_N", "J5"), ("TEST_N", "E2"),
                     ("CDONE", "L3"), ("CSI", "N2"), ("CLK100M", "P2")):
         chk(U1[bx] == net, f"{net} at {bx}: {U1[bx]}")
-    for net, p in (("TCK", "1"), ("TDI", "2"), ("TMS", "3"), ("TDO", "4")):
+    for net, p in (("TDI", "1"), ("TCK", "2"), ("TMS", "3"), ("TDO", "4")):    # pin order of the user's other boards
         chk(a["J2"][p] == net, f"J2.{p}: {a['J2'][p]}")
 
     # header: through a translator (HSIO side) or straight to HVIO
