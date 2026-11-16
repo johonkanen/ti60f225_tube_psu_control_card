@@ -15839,7 +15839,7 @@
 				)
 			)
 		)
-		(property "Description" "To FTDI mini-module on flying leads; order is free"
+		(property "Description" "To FTDI mini-module on flying leads; pin order TDI, TCK, TMS, TDO, GND as on the other boards"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
